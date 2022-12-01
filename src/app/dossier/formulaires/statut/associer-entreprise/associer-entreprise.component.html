@@ -1,0 +1,213 @@
+<div class="modal-header">
+    <p class="h2 my-1" style="color:#1D458C;">Associer une Entreprise</p>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.close('Cross click')">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+
+<div class="container"
+     [style.display]="(!nouvelleEntreprise) ? 'block' : 'none'">
+    <div class="row mt-2 mb-2">
+        <!-- <div class="row flex-nowrap"> -->
+        <!-- Buton pour ajouter un individu -->
+        <div class="card border-info mb-1 ms-2" style="width: 16rem;">
+
+            <div class="card-body d-flex flex-column px-0">
+                <!-- <h5 class="card-title mb-10" *ngIf="!individu.nom || !individu.prenom">
+                    <img src="../assets/id.svg" class="" alt="" width="25" height="25" display="flex">
+                    Ajouter un individu
+                </h5> -->
+
+                <div class="d-flex justify-content-center p-2">
+                    <img src="../assets/ajouterEnt.svg" alt="img associer" width="100" height="100">
+                </div>
+                <p class="card-text" style="color:#0D5A5E; text-align:center">Ajoutez autant d'entreprises que
+                    nécessaire.
+                    <br>Vous pourrez les lier; aux entreprises contrôlées, pas la suite
+                </p>
+                <a class="btn btn-primary mt-auto" (click)="ajouterEntreprise()">Ajouter Entreprise</a>
+            </div>
+        </div>
+
+        <!-- Buton pour consulter/ editer et effacer un individu -->
+
+        <div class="card mb-1 ms-2 pl-0" style="width: 16rem;" *ngFor="let entreprise of entreprises">
+
+            <!-- <div class="card-header">
+                <div class="row">
+                    <div class="col-3">
+                        <img src="../assets/id.svg" class="card-img-top" alt="" width="25" height="25" display="flex">
+                    </div>
+                    <div class="col-9">
+                        <h5 class="card-title">{{individu.nom}} {{individu.prenom}}</h5>
+
+                    </div>
+                </div>
+            </div> -->
+
+            <div class="card-body d-flex flex-column px-0">
+                <div class="d-flex flex-row mb-4">
+                    <h5 class="card-title mb-2" *ngIf="entreprise.denomination">
+                        <img src="../assets/entreprise.png" class="" alt="" width="30" height="25" display="flex">
+                        {{entreprise.denomination}}
+                    </h5>
+                    <h5 class="card-title mb-2" *ngIf="!entreprise.denomination">
+                        <img src="../assets/entreprise.png" class="" alt="" width="30" height="25" display="flex">
+                        Nom entreprise
+                    </h5>
+                </div>
+
+                <p>
+                    <img class="me-2" src="../assets/calendrier.svg" alt="" width="25" height="25">
+                    Date
+                </p>
+                <p>
+                    <img class="me-2" src="../assets/heure.svg" alt="" width="25" height="25">
+                    Heure
+                </p>
+                <p>
+                    <img class="me-1" src="../assets/entreprise.png" alt="" width="30" height="25">
+                    Nom du dirigeant
+                </p>
+                <p>
+                    <img class="me-2" src="../assets/check.svg" alt="" width="25" height="25">
+                    Siren/siret
+                </p>
+                <div class="row mt-auto">
+                    <div class="d-flex flex-row ">
+                        <a class="btn btn-success mx-auto" (click)="associerEntreprise(entreprise)">Associer
+                            Entreprise</a>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+
+
+    </div>
+</div>
+
+<div class="container my-3"
+     [style.display]="(nouvelleEntreprise) ? 'block' : 'none'"   >
+    <div id="formulaireEntite">
+        <form class="formulaire" autocomplete="off" [formGroup]="monFormulaire">
+
+            <div class="row">
+                <p class="h5" style="color:#1D458C;">Complétion SIREN/SIRET</p>
+            </div>
+
+            <div class="row">
+                <p class="fst-italic" style="color:#417de3; font-size: 12px;">si vous avez le SIREN ou SIRET,
+                    les autres informations
+                    se
+                    compléteront automatiquement</p>
+                <!-- lettre italique et pluspetite -->
+            </div>
+
+            <div class="row">
+                <div class="col-lg-12 mb">
+                    <div class="form-floating">
+                    <input type="text" class="form-control" formControlName="siren_fiche" id="ff_siren_fiche"
+                        placeholder="Insérer Siren ou Siret de la société contrôlée" (change)="changeVal()">
+                    <label for="ff_siren_fiche">Siren ou Siret de la société</label>
+                    </div>
+                </div>
+            </div>  
+
+            <div class="row">
+
+                <p class="h5 mt-2" style="color:#1D458C;">Complétion manuelle</p>
+
+                <!-- Champ denomination sociale -->
+
+                <div class="col-lg-12 mb-2">
+                    <div class="form-floating">                    
+                    <input type="text" class="form-control" formControlName="denomination" id="ff_denomination"
+                        placeholder="Dénomination sociale" (change)="changeVal()">
+                    <label for="ff_denomination">Dénomination sociale</label>
+                    </div>
+                </div>
+                <!-- Champ adresse siege -->
+
+                <div class="col-lg-12 mb-2">
+                    <div class="form-floating"> 
+                    <input type="text" class="form-control" formControlName="adresse_siege" id="ff_adresse_siege"
+                        placeholder="Adresse du siège" (change)="changeVal()">
+                        <label for="ff_adresse_siege">Adresse du siège</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Champ nom prénom dirigeant -->
+            <div class="row">
+
+                <div class="col-lg-4 mb-2">
+                    <div class="form-floating">
+                    <input type="text" class="form-control" formControlName="dirigent" id="ff_dirigent"
+                        placeholder="Nom & Prénom du Dirigeant" (change)="changeVal()">
+                    <label for="ff_dirigent">Nom & Prénom du Dirigeant</label>
+                    </div>
+                </div>
+
+                <!-- Champ date de naissance dirigeant -->
+
+                <div class="col-lg-4 mb-2">
+                    <div class="form-floating">
+                    <input type="date" class="form-control" formControlName="date_dirigeant" id="ff_date_dirigeant"
+                        placeholder="Date de naissance" (change)="changeVal()">
+                    <label for="ff_date_dirigeant">Date de naissance</label>
+                    </div>
+                </div>
+
+                <!-- Champ lieu de naissance dirigeant -->
+
+                <div class="col-lg-4 mb-2">
+                    <div class="form-floating">
+                    <input type="text" class="form-control" formControlName="lieu_dirigeant"
+                        placeholder="Lieu de naissance" (change)="changeVal()">
+                    <label for="ff_lieu_dirigeant">Lieu de naissance</label>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+                <!-- Champ NOTES su la société -->
+
+                <div class="col-lg mb-2">
+                    <div class="form-floating">
+                        <textarea placeholder="Indiquer ici toute information aidant votre dossier" class="form-control"
+                            rows="3" formControlName="notes_societe" (change)="changeVal()" id="ff_notes_societe" style="height: 100px"></textarea>
+                        <label for="ff_notes_societe">Indiquer ici toute information aidant votre dossier</label>
+                    </div>
+                </div>
+            </div>
+
+
+        </form>
+        <br>
+        <div class="d-grid">
+            <button type="button" class="btn btn-primary" (click)="creerEntreprise()">
+                Créer et associer cette entreprise
+            </button>
+        </div>
+    </div>
+</div>
+<!-- <span style="font-weight: bold;">Entreprises Filtrées</span>
+<pre>{{entreprises}}</pre>
+<span style="font-weight: bold;">Service Data</span>
+<pre>{{individu  | json}}</pre>
+<span style="font-weight: bold;">Formulaire</span>
+<pre>{{monFormulaire.value  | json}}</pre>
+<span style="font-weight: bold;">Service entreprise</span>
+<pre>{{entreprise  | json}}</pre>
+<span style="font-weight: bold;">Service Contrôle</span>
+<pre>{{controle  | json}}</pre> -->
+
+<!-- <span style = "font-weight: bold">Contrôle : </span>
+<pre>{{ monFormulaire.value | json }}</pre>
+<span style = "font-weight: bold">Entreprise : </span>
+{{entreprise |json}}
+<span style = "font-weight: bold">individu : </span>
+{{dataIndividu |json}} -->

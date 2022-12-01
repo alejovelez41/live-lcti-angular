@@ -1,0 +1,94 @@
+<p class="h5 mb-3" style="color:#1D458C;">Description des tâches</p>
+
+<div>
+  <form class="row g-1" autocomplete="off" [formGroup]="monFormulaire">
+
+    <!-- Champ Description -->
+    <textarea placeholder="Décrire les tâches effectuées par l'individu contrôlé" class="form-control mb-4" rows="9"
+      formControlName="description" style="background-color: #DBE7FF" (change)="changeVal()">
+    </textarea>
+
+
+
+    <!-- Button lancer modal -->
+    <div class="col text-center">
+      <button type="button" class="btn btn-primary" (click)="ouvrirModal()"
+        [disabled]="individu.consentement ? 'disabled' : ''">
+        Justificatif d'identité
+      </button>
+    </div>
+
+    <!-- [checked]="!monFormulaire.formControlName['consentement'].value" (change)="value= !value" -->
+
+    <!-- Case à cocher -->
+    <div class="row">
+      <div class="col-sm">
+        <div class="d-flex justify-content-center">
+          <div class="form-check">
+            <input type="checkbox" value="" formControlName="refus" id="flexCheckDisabled"
+              (change)="changeVal(); alerteRefus()" class="form-check-input">
+
+            <label class="form-check-label h6" for="flexCheckDisabled"
+              style="color:black; font-size: 12px;font-style:italic">
+              L'individu refuse le principe du contrôle
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  </form>
+
+  <ngb-alert #selfClosingAlert *ngIf="individu.refus" type="success" (closed)="successMessage = ''">
+    Vous pouvez quand même saisir des informations...
+  </ngb-alert>
+
+</div>
+
+<!-- <span style="font-weight: bold;">Service Data</span>
+<pre>{{individu | json}}</pre>
+<span style="font-weight: bold;">Formulaire</span>
+<pre>{{monFormulaire.value | json}}</pre> -->
+
+<!-- <span>Value</span>
+        <pre>{{ monFormulaire.value | json }}</pre> -->
+
+<!-- <span>Service Data</span>
+        <pre>{{ dataIndividu | json}}</pre> -->
+<!-- <div class="row">
+    <div class="col">
+
+        <span>Valid</span>
+        <pre>{{ monFormulaire.valid }}</pre>
+
+        <span>Pristine</span>
+        <pre>{{ monFormulaire.pristine }}</pre>
+
+        <span>Touched</span>
+        <pre>{{ monFormulaire.touched }}</pre>
+
+        <span>Value</span>
+        <pre>{{ monFormulaire.value | json }}</pre>
+
+
+    </div>
+</div> -->
+
+
+<style>
+  .bd-example {
+    background-color: #DBE7FF;
+  }
+
+  canvas {
+    display: block;
+    border: 1px solid rgb(187, 178, 178);
+    background-color: var(--ion-color-success);
+  }
+
+  button {
+    margin: 10px;
+    margin-left: 10px;
+  }
+</style>

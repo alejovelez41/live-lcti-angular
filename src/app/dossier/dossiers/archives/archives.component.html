@@ -1,0 +1,114 @@
+<div class="div">
+    <div class="row">
+
+        <!-- Cards evenements -->
+        <div class="card mb-2 ms-2 p-0 " style="width: 16rem;" *ngFor="let controle of controles">
+
+            <div class="card-header p-2 text-center" *ngIf="!controle.newControle && controle.etat == 'archive'"
+                style="background-color: #ffdde1; color:#1B7279">
+
+                <div class="d-flex justify-content-center align-items-center">
+                    <h5 class="card-title mt-2">
+                        {{controle.nomControle}}
+                    </h5>
+                </div>
+            </div>
+
+            <!-- <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
+                    data-bs-toggle="dropdown" aria-expanded="false">
+                    Dropdown button
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" *ngFor="let ent of entreprises">
+                    <li *ngIf="controle.entreprises_controle.includes(ent.id)"><a class="dropdown-item"
+                            href="#">{{ent.denomination}}</a></li>
+                </ul>
+            </div> -->
+
+            <div class="card-body d-flex flex-column px-2">
+
+                <div ngbDropdown class="d-inline-block w-100 py-2 ">
+                    <button type="button" class="btn btn-light" id="dropdownBasic1"
+                        style="background-color: #E0FDFF; border-color: #20BFC8;"
+                        ngbDropdownToggle>
+                        <span *ngIf="controle.entreprises_controle.length == 1">{{controle.entreprises_controle.length}} entreprise archivée</span>
+                        <span *ngIf="controle.entreprises_controle.length != 1">{{controle.entreprises_controle.length}} entreprises archivées</span>
+                    </button>
+                    <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                        <div class="div" *ngFor="let ent of entreprises">
+                            <button ngbDropdownItem *ngIf="controle.entreprises_controle.includes(ent.id)" (click)="setEntreprise(ent); setControle(controle)" [routerLink]="['/entreprise/pdfControle', ent.id]">
+                                <span>Récapitulatif {{ent.denomination}}</span>
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- <ngb-accordion #acc="ngbAccordion">
+                    <ngb-panel title="{{controle.entreprises_controle.length}} entreprises contrôlées">
+                        <ng-template ngbPanelContent>
+                            <ul class="list-group list-group-flush" *ngFor="let ent of entreprises">
+                                <li class="list-group-item" *ngIf="controle.entreprises_controle.includes(ent.id)">
+                                    {{ent.denomination}}
+                                </li>
+                            </ul>
+                        </ng-template>
+                    </ngb-panel>
+                </ngb-accordion> -->
+
+                <div class="card border-info my-2 mx-0 p-0">
+                    <div class="card-body px-3">
+                        <!-- Date -->
+                        <div class="d-flex flex-row mb-4">
+                            <h6 class="card-title mb-2" *ngIf="controle.dt_controle">
+                                <img src="../assets/calendrier.svg" class="" alt="" width="30" height="25"
+                                    display="flex">
+                                {{controle.dt_controle | date : 'd-M-y'}}
+                            </h6>
+                            <h6 class="card-title mb-2" *ngIf="!controle.dt_controle">
+                                <img src="../assets/calendrier.svg" class="" alt="" width="30" height="25"
+                                    display="flex">
+                                Date du contrôle
+                            </h6>
+                        </div>
+                        <!-- Heure -->
+                        <div class="d-flex flex-row mb-4">
+                            <h6 class="card-title mb-2" *ngIf="controle.hr_controle">
+                                <img src="../assets/heure.svg" class="" alt="" width="30" height="25" display="flex">
+                                {{controle.hr_controle}}
+                            </h6>
+                            <h6 class="card-title mb-2" *ngIf="!controle.hr_controle">
+                                <img src="../assets/heure.svg" class="" alt="" width="30" height="25" display="flex">
+                                Heure du contrôle
+                            </h6>
+                        </div>
+                        <!-- Adresse -->
+                        <div class="d-flex flex-row mb-2">
+                            <h6 class="card-title mb-2" *ngIf="controle.lieu_controle">
+                                <img src="../assets/location.svg" class="" alt="" width="30" height="25" display="flex">
+                                {{controle.lieu_controle}}
+                            </h6>
+                            <h6 class="card-title mb-2" *ngIf="!controle.lieu_controle">
+                                <img src="../assets/location.svg" class="" alt="" width="30" height="25" display="flex">
+                                Adresse du contrôle
+                            </h6>
+                        </div>
+
+                    </div>
+                </div>
+                <a class="btn btn-info mt-auto">
+                    <img src="../assets/pdf.svg" class="me-1" alt="" width="20" height="20" display="flex">Télécharger</a>            
+
+            </div>
+        </div>
+
+
+
+    </div>
+</div>
+<!-- <span>This controle</span>
+{{controle | json}} -->
+<!-- <span>Data Controles</span>
+{{controles | json}}
+<span>Data entreprise</span>
+{{entreprises | json}} -->

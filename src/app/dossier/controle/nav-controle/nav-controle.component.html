@@ -1,0 +1,47 @@
+<div class="d-flex flex-row justify-content-between mb-2">
+    <a class="align-self-center me-2" style="color: #122F62;font-weight: bold;"
+       (click)="enregistrerDossier(controle)" routerLink="/dossiers/en-cours">
+        <img src="../assets/fleche.svg" alt="" width="18" height="18" display="flex">
+        <U class="ms-2">Revenir à mes dossiers</U>
+    </a>
+    <span class="align-self-center me-4">
+        <img src="../assets/calendrier.svg" alt="" width="18" height="18" display="flex" style="font-size: 10px">
+        {{controle.dt_controle | date : 'd-M-y'}}
+    </span>
+    <span class="align-self-center me-4">
+        <img src="../assets/location.svg" alt="" width="18" height="18" display="flex" style="font-size: 10px">
+        {{controle.lieu_controle}}
+    </span>
+    <span class="align-self-center me-4">
+        <img src="../assets/inspecteurs.svg" alt="" width="18" height="18" display="flex" style="font-size: 10px">
+        <span *ngFor="let item of controle.inspecteurs_controle "> {{data_inspecteurs[item].nom}}<span>, </span> </span>
+    </span>
+    <span class="align-self-center me-4">
+        <img src="../assets/partenaires.svg" alt="" width="18" height="18" display="flex" style="font-size: 10px">
+        <span *ngFor="let item of controle.partenaires_controle "> {{data_partenaires[item].nom}}<span>, </span> </span>
+        
+    </span>
+    <button class="btn btn-outline-info align-self-center " type="submit" (click)="enregistrerDossier(controle)" [routerLink]="['/parametres/edition', controle.id]" >
+        <img class="me-1" src="../assets/modifier.svg" alt="" width="18" height="18" display="flex">
+        <span style="color: #122F62;">
+            Modifier
+        </span>
+    </button>
+    
+</div>
+<ul class="list-group list-group-horizontal mb-3">
+
+    <li *ngFor="let item of formulaireMenu"
+        class="list-group-item flex-fill"
+        [routerLink]="[ item.route , controle.id]"
+        routerLinkActive="active"
+        >
+        {{ item.texte}}
+    </li>
+    
+</ul>
+<!-- <span>id du contrôle</span>
+{{controle|json}} -->
+<!-- <div class="div" style="background-color: coral"> -->
+<router-outlet></router-outlet>
+<!-- </div> -->

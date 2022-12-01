@@ -17,6 +17,12 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "allowedCommonJsDependencies": [
+              "core-js",
+              "raf",
+              "xlsx",
+              "@babel/runtime"
+            ],
             "outputPath": "dist/live_lcti",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -27,7 +33,8 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.css",
+              "node_modules/bootstrap/dist/css/bootstrap.min.css"
             ],
             "scripts": []
           },

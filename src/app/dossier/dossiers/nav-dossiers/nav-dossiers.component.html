@@ -1,0 +1,13 @@
+<h2 class="text-center">Contrôles</h2>
+<ul class="list-group list-group-horizontal mb-3">
+
+    <li *ngFor="let item of formulaireMenu"
+        class="list-group-item flex-fill"
+        [routerLink]="[ item.route ]"
+        routerLinkActive="active"
+        >
+        {{ item.texte}}
+    </li>
+    
+</ul>
+<router-outlet></router-outlet>

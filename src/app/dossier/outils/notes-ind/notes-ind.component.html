@@ -1,0 +1,61 @@
+<div class="d-flex flex-row mb-3 align-items-center justify-content-between">
+    <a class="align-self-center me-2" style="color: #122F62;font-weight: bold;" [routerLink]="['/formulaires/description', individu.id]">
+        <img src="../assets/fleche.svg" alt="" width="18" height="18" display="flex">
+        <U class="ms-2">Revenir à l'individu</U>
+    </a>
+    <p class="h3"> Notes sur <span *ngIf="individu.civilite">{{individu.civilite}} </span> <span *ngIf="individu.nom">{{individu.nom }} </span> <span *ngIf="individu.prenom">{{individu.prenom}}</span></p>
+    <span class="h3 text-center mx-5" >      </span>
+</div>
+
+<form class="row g-1" autocomplete="off" [formGroup]="monFormulaire">
+
+    <div class="d-flex flex-row">
+        <!-- Button effacer note -->
+        <div class="col-lg mb-2">
+            <div class="d-grid">
+                <button type="button" class="btn btn-danger mx-2" (click)="efffacerNote()">
+                    Effacer ce note
+                </button>
+            </div>
+        </div>
+        <!-- Button enregistre note -->
+        <div class="col-lg mb-2">
+            <div class="d-grid">
+                <button type="button" class="btn btn-info mx-2" (click)="enregistrer()">
+                    Enregistrer ce note
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Champ saisie des notes -->
+    <div class="d-flex flex-row mb-3 align-items-center">
+        <textarea placeholder="Écrivez vos annotations ici" class="form-control mb-4" rows="5"
+            formControlName="note" style="background-color: #DBE7FF">
+        </textarea>
+    </div>
+
+    <!-- Tableau historique prise des notes -->
+
+    <div class="d-flex flex-column">
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Date</th>
+                        <th scope="col">Annotation</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of individu.notesInd">
+                        <th scope="row">{{item.heure}}</th>
+                        <td>{{item.note}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</form>
+<pre>{{this.individu |json }}</pre>

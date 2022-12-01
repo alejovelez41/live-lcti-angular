@@ -1,0 +1,36 @@
+<!-- Modal --> 
+<div class="container-fluid px-0 pb-0" style="background-color: #FFF4D2;">
+    <div class="d-flex flex-column px-0" >
+        <div class="d-flex flex-row justify-content-center">
+            <div class="d-flex my-3">
+                <img src="../assets/alert.svg" alt="" width="60" height="60" display="flex">
+            </div>
+        </div>
+        <div class="d-flex flex-row justify-content-center">
+            <div class="d-flex  mb-3">
+                <h4 class="modal-title">
+                    Attention, vous n’avez pas enregistré votre saisie.
+                </h4>
+            </div>
+        </div>
+        <div class="d-flex flex-row justify-content-center">
+            <div class="d-flex mb-4">
+                <h4 class="modal-title ">
+                    Voulez-vous vraiment continuer ?
+                </h4>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row mt-auto pb-4">
+        <div class="d-flex flex-row ">
+            <a class="btn btn-outline-info mx-auto" style="background: white;" (click)="sortir()">Non, annuler</a>
+            <a class="btn btn-info mx-auto " (click)="retournerControles()">Oui, continuer</a>
+
+
+        </div>
+    </div>
+
+
+</div>

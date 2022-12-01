@@ -1,0 +1,65 @@
+<div class="modal-header">
+    <h4 class="modal-title">
+        Prise de notes
+    </h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modalService.dismiss('Cross click')"></button>
+</div>
+
+<form class="row g-1" autocomplete="off" [formGroup]="monFormulaire">
+
+    
+
+    <!-- Champ  ref note -->
+
+    <div class="h5 col-lg-5 mt-4 mb-2 px-4 text-end" style="color:#1D458C;"><label for="floatingInputnom">Nouvelle note pour :</label></div>
+    <div class="col-lg-7 mt-4 mb-2 px-4" style="font-weight: bold;"><label for="floatingInputnom">{{note.nom}}</label></div>
+    
+    <!-- Champ  nom -->
+    <div class="col-lg-12 mt-4 mb-2 px-4">
+        <div class="form-floating">
+            <select class="form-select" formControlName="nom" id="floatingInputnom" (change)="changeNom()">
+                <option value=""></option>
+                <option *ngFor="let nom of allNoms" [value]="nom.id">{{nom.nom}}</option>                    
+            </select>
+            <label for="floatingInputnom">Modifier l'affectation de la note ? </label>
+        </div>
+    </div>         
+
+    <!-- Champ titre note -->
+    <div class="col-lg-12 my-2 px-4">
+        <div class="form-floating">
+            <input type="text" class="form-control" formControlName="titre_note" (change)="changeVal()"  id="floatingInputtitre" placeholder="Titre de ma note">
+            <label for="floatingInputtitre">Titre de ma note</label>
+        </div>
+    </div>       
+
+    <!-- Champ saisie des notes -->
+    <div class="col-lg-12 mt-2 px-4">
+        
+        <textarea placeholder="Écrivez vos annotations ici" class="form-control mb-4" rows="5" (change)="changeVal()"
+            formControlName="note" style="border: 1px solid #7AEEF4 !important;"></textarea>
+    </div>           
+
+    <div class="d-flex flex-row">
+        <!-- Button effacer note -->
+        <div class="col-lg mb-4">
+            <div class="d-grid">
+                <button type="button" class="btn btn-outline-danger ms-4 me-2" (click)="efffacerNote()">
+                    Effacer la note
+                </button>
+            </div>
+        </div>
+        <!-- Button enregistre note -->
+        <div class="col-lg mb-4">
+            <div class="d-grid">
+                <button type="button" class="btn btn-info ms-2 me-4" (click)="enregistrer()">
+                    <img src="../assets/enregistrer.svg" class="me-2" alt="" width="20" height="20" display="flex">
+                    Enregistrer
+                </button>
+            </div>
+        </div>
+    </div>
+
+</form>
+<!-- {{monFormulaire.value  | json}}
+{{ note | json }} -->

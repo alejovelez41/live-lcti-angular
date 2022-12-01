@@ -1,0 +1,59 @@
+<!-- Modal -->
+<div class="container-fluid px-0 pb-0" style="background-color: #FFF4D2;">
+    <div class="modal-header d-flex justify-content-end">
+        <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+
+    <div class="d-flex flex-column ">
+        <div class="d-flex flex-row justify-content-center">
+            <div class="d-flex my-3">
+                <img src="../assets/alert.svg" alt="" width="60" height="60" display="flex">
+            </div>
+        </div>
+
+        <div class="d-flex flex-row justify-content-center mt-2" *ngIf="entreprise.denomination">
+            <div class="d-flex">
+                <p class="h4 mb-3" style="color:black; text-align: center;">
+                    Attention, vous allez archiver la société "{{entreprise.denomination}}".
+                    Vous ne pourrez plus modifier votre saisie.
+                </p>
+            </div>
+        </div>
+
+        <div class="d-flex flex-row justify-content-center mt-2" *ngIf="!entreprise.denomination">
+            <div class="d-flex">
+                <p class="h4 mb-3" style="color:black; text-align: center;">
+                    Attention, vous allez archiver la société "Nom société".
+                    Vous ne pourrez plus modifier votre saisie.
+                </p>
+            </div>
+        </div>
+
+        <div class="d-flex flex-row justify-content-center my-4">
+            <div class="d-flex">
+                <p class="h4 mb-3" style="color:black; text-align: center;">
+                    Voulez-vous vraiment continuer ?
+                </p>
+            </div>
+        </div>
+
+    </div>
+    <div class="d-flex p-4" >
+        <div class="col">
+            <div class="d-grid mx-2">
+            <button type="button" class="btn btn-outline-info" style="background: white;"
+                (click)="activeModal.dismiss('Cross click')">
+                Non, annuler</button>
+            </div>
+        </div>
+        <div class="col">
+            <div class="d-grid mx-2">
+            <button type="button" class="btn btn-info" (click)="cloturerEntreprise()">
+                Oui, continuer</button>
+            </div>
+        </div>
+    </div>
+
+</div>

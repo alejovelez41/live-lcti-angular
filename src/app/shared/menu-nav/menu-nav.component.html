@@ -1,0 +1,145 @@
+<ng-template #content let-offcanvas>
+
+    <div class="offcanvas-header" style="background-color: #20BFC8; color: white;">
+        <h4 class="offcanvas-title">Boite à outils</h4>
+        <button type="button" class="btn-close btn-close-white" aria-label="Close" (click)="offcanvas.dismiss('Cross click')"></button>
+    </div>
+    <div class="offcanvas-body" style="background-color: #008088; color: white;">
+        <ul class="list-group list-group-flush flex-column mb-auto">
+            <li class="list-group-item" style="background-color: #008088; border-color: white">
+                <a href="#" class="nav-link link-dark" aria-current="page" style="color: white; ">
+                    <img src="../assets/infos.svg" alt="" width="25" height="25" display="flex">
+                    Consultation des informations
+                </a>
+            </li>
+            <li class="list-group-item" style="background-color: #008088; border-color: white">
+                <a href="['../outils/notesInd', 'individu.id']" class="nav-link link-dark" style="color: white; ">
+                    <img src="../assets/camera.svg" alt="" width="25" height="25" display="flex">
+                    Mes photos
+                </a>
+            </li>
+            <li class="list-group-item" style="background-color: #008088; border-color: white">
+                <a routerLink="/outils/notesInd" class="nav-link link-dark" style="color: white; " (click)="offcanvas.dismiss('Cross click')">
+                    <img src="../assets/notes.svg"  alt="" width="25" height="25" display="flex">
+                    Mes notes
+                </a>
+
+                <!-- <button [routerLink]="['/outils/notesInd', idInd]" type="button" class="btn btn-link link-dark ms-3" (click)="offcanvas.dismiss('Cross click')"
+                        [disabled]=" idInd != '' ? '' : 'disabled'">
+                            <img src="../assets/id.svg" class="me-2" alt="" width="25" height="25" display="flex">
+                            Individu contrôlé
+                </button> -->
+
+                <!-- <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <button [routerLink]="['/outils/notesInd', idInd]" type="button" class="btn btn-link link-dark ms-3" (click)="offcanvas.dismiss('Cross click')"
+                        [disabled]=" idInd != '' ? '' : 'disabled'">
+                            <img src="../assets/id.svg" class="me-2" alt="" width="25" height="25" display="flex">
+                            Individu contrôlé
+                    </button>
+                    </li>
+                    <li class="list-group-item">
+                        <button [routerLink]="['/outils/notesEnt', idEnt]" type="button" class="btn btn-link link-dark ms-3" (click)="offcanvas.dismiss('Cross click')"
+                        [disabled]=" idEnt != '' ? '' : 'disabled'">
+                            <img src="../assets/entrepriseBlack.svg" alt="" width="35" height="35" display="flex">
+                            Entreprise contrôlé
+                        </button>
+                    </li>
+                    <li class="list-group-item">
+                        <button [routerLink]="['/outils/notesEvent', idCont]" type="button" class="btn btn-link link-dark ms-3" (click)="offcanvas.dismiss('Cross click')"
+                        [disabled]=" idCont != '' ? '' : 'disabled'">
+                            <img src="../assets/evenement.svg" class="me-2" alt="" width="25" height="25" display="flex">
+                            Évènement contrôlé
+                        </button>
+                    </li>
+                </ul>       -->
+            </li>
+        </ul>
+    </div>
+</ng-template>
+
+
+
+
+<nav class="navbar navbar-expand" style="background-color: #ffffff;">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+            <img src="../assets/Logo.png" alt="" width="212" height="46" display="flex">
+        </a>
+
+        <ul class="navbar-nav navbar-right">
+            <li class="nav-item">
+                <a class="nav-link h5" style="color: #000000" href="#">Franck CHAUSSON</a>
+            </li>
+            <li class="nav-item">
+                <a class="navbar-brand"><img src="../assets/user.png" alt="User image" width="50" height="50"
+                        class="d-inline-block align-text-top"></a>
+            </li>
+            <li class="nav-item" class="sidenav">
+                <button class="btn btn-lg btn-warning ms-1" (click)="openEnd(content)">
+                    <span class="navbar-toggler-icon">
+                        <div class="text-center">
+                            <img src="../assets/tools.svg" alt="" width="25" height="25" display="flex">
+                        </div>    
+                        
+                    </span>
+                </button>
+
+            </li>
+
+        </ul>
+
+        <!-- <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav align-middle">
+                <a class="nav-link h5" style="color: #000000" href="#">Utilisateur A</a>
+                <a class="navbar-brand"><img src="../assets/user.png" alt="User image" width="50" height="50" class="d-inline-block align-text-top"></a>
+
+            </div>
+        </div> -->
+    </div>
+</nav>
+
+<!-- <span>info individu</span>
+<span>{{individu | json}}</span>
+<span>{{entreprise | json}}</span> -->
+
+<style>
+    .btn-warning {
+        width: 52px;
+		height: 52px;
+		padding: 0px;
+		border-radius: 80px;
+		font-size: 15px;
+		text-align: center;
+    }
+    .btn-link {
+        text-decoration:none;
+    }
+</style>
+
+
+
+<!-- new menu de navigation -->
+<!-- 
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-4 align-self-center">
+            <div class="col-sm-3">
+                <img src="../assets/Logo.png" alt="logo Urssaf" width="212" height="46" display="flex">
+            </div>
+
+
+        </div>
+        <div class="col-5 align-self-center">
+            <h1 style="color: #1D458C">Live LCTI</h1>
+
+        </div>
+        <div class="col-2 align-self-center">
+            <h5>Utilisateur A</h5>
+        </div>
+        <div class="col-1 align-self-center">
+            <img src="../assets/user.png" alt="User image" width="50" height="50">
+        </div>
+    </div>
+</div>
+<hr /> -->

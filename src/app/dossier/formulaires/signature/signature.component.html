@@ -1,0 +1,64 @@
+<!-- Modal -->
+<div class="modal-header">
+  <h4 class="modal-title">Signature de l'individu contrôlé</h4>
+  <button type="button" class="close" aria-label="Close" (click)="modalService.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+<div class="modal-body text-center">
+  <div class="d-flex justify-content-center">
+    <p class="h5 mb-3" style="color:#1D458C;">Je soussigné {{individu.nom}} {{individu.prenom}},</p>
+  </div>
+
+  <form class="row g-1" autocomplete="off" [formGroup]="monFormulaire">
+    <p class="h5 mb-3" style="color:#1D458C;">confirme la teneur des éléments portés sur ce relevé d'informations.</p>
+
+    <!-- Modale -->
+    <div class="col-2"></div>
+
+    <div class="col-8">
+      <div class="wrapper text-center">
+
+        <canvas #canvas (touchstart)="startDrawing($event)" (touchmove)="moved($event)" (change)="changeVal()"></canvas>
+
+
+      </div>
+    </div>
+    <div class="col-2">
+      <button class="btn btn-secondary" (click)="clearPad()">Effacer</button>
+    </div>
+
+
+
+
+  </form>
+
+
+  <!-- ; activeModal.dismiss('Cross click') -->
+
+</div>
+<div class="modal-footer">
+
+  <div class="d-grid gap-3 col-8 mx-auto">
+    <button type="button" class="btn btn-primary" (click)="modalService.dismiss('Cross click');savePad()"
+      [routerLink]="['/controle/individus', controle.id]">Valider</button>
+  </div>
+</div>
+<!-- <span style="font-weight: bold;">Service Data</span>
+<pre>{{individu | json}}</pre>
+<span style="font-weight: bold;">Formulaire</span>
+<pre>{{monFormulaire.value  | json}}</pre> -->
+
+
+<style>
+  canvas {
+    padding-left: 0;
+    padding-right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    border: 1px solid rgb(187, 178, 178);
+    background-color: var(--ion-color-success);
+  }
+</style>

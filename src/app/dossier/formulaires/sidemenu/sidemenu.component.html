@@ -1,0 +1,55 @@
+<div class="d-flex flex-row mb-3 align-items-center justify-content-between">
+    <a class="align-self-center me-2" style="color: #122F62;font-weight: bold;"
+       (click)="enregistrerIndividu()">
+        <img src="../assets/fleche.svg" alt="" width="18" height="18" display="flex">
+        <U class="ms-2">Revenir au contrôle</U>
+    </a>
+    <p class="h3"> <span *ngIf="individu.civilite">{{individu.civilite}} </span> <span *ngIf="individu.nom">{{individu.nom }} </span> <span *ngIf="individu.prenom">{{individu.prenom}}</span></p>
+    <span class="h3 text-center mx-5" >      </span>
+</div>
+<ul class="list-group list-group-horizontal mb-3">
+
+    <li *ngFor="let item of formulaireMenu"
+        class="list-group-item flex-fill"
+        [class.disabled]="!individu.refus && !individu.consentement"
+        [routerLink]="[ item.route, individu.id ]"
+        routerLinkActive="active"
+        >
+        {{ item.texte}}
+    </li>
+</ul>
+<router-outlet></router-outlet>
+
+
+<!-- <span style = "font-weight: bold">condition : </span>
+{{!(consentementIndividu && refusIndividu)}}
+<span style = "font-weight: bold">consentementIndividu : </span>
+{{consentementIndividu }}
+<span style = "font-weight: bold">refusIndividu : </span>
+{{refusIndividu}}
+<span style = "font-weight: bold">BlockNav : </span>
+{{blockNavigation}}
+<span style = "font-weight: bold">Tests getter : </span>
+{{navigation}} -->
+<!-- <span style = "font-weight: bold">Contrôle : </span>
+{{controle}} -->
+
+
+
+
+<style>
+    .disabled {
+     pointer-events: none;
+     cursor:default;
+     background-color: rgba(245, 245, 245, 0.861);
+     color: rgba(0, 0, 0, 0.3);
+ }
+    .list-group-item.active{
+        z-index: 2;
+        color: #fff;
+        background-color: #0d6efd;
+        border-color: #0d6efd;
+    }
+</style>
+
+<!-- [class.disabled]="(consentementIndividu) ? false : null" -->

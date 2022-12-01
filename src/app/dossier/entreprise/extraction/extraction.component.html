@@ -1,0 +1,432 @@
+<div class="d-flex flex-row mb-3 align-items-center justify-content-start">
+    <a class="align-self-center me-2" style="color: #122F62;font-weight: bold;" [routerLink]="['/controle/societes', controle.id]">
+        <img src="../assets/fleche.svg" alt="" width="18" height="18" display="flex">
+        <U class="ms-2">Revenir aux entreprises</U>
+    </a>
+</div> 
+
+<div class="container" id="dataControle">
+    <div class="col-md-4 text-right">
+        <button class="btn btn-success btn-block" (click)="downloadPDF()">Télécharger PDF</button>
+    </div>
+    
+    <div class="d-flex flex-column">
+
+        <!-- Entête des information de l'entreprise -->
+        <div class="d-flex justify-content-center mb-4" *ngIf="controle.id != ''">
+            <p class="h3">Informations sur le contrôle {{controle.nomControle}} : </p>
+        </div>
+
+        <div class="d-flex justify-content-center" *ngIf="controle.id == ''">
+            <p class="h3">Informations sur le contrôle :</p>
+        </div>
+
+
+        <div class="d-flex flex-column">
+            <ul class="list-group list-group-flush">
+
+                <!-- dt_controle -->
+                <li class="list-group-item" *ngIf="controle.dt_controle">
+                    Date du contrôle : {{controle.dt_controle | date : 'd-M-y'}}
+                </li>
+                <!-- hr_controle -->
+                <li class="list-group-item" *ngIf="controle.hr_controle">
+                    Heure du début du contrôle : {{controle.hr_controle}}
+                </li>
+                <!-- lieu_controle -->
+                <li class="list-group-item" *ngIf="controle.lieu_controle">
+                    Adresse du contrôle : {{controle.lieu_controle}}
+                </li>
+                <!-- inspecteurs_controle -->
+                <li class="list-group-item" *ngIf="controle.inspecteurs_controle.length != 0">
+                    Inspecteurs présents lors du contrôle :
+                    <ul>
+                        <li *ngFor="let inspecteur of controle.inspecteurs_controle">
+                            {{data_inspecteurs[inspecteur].nom}}
+                        </li>
+                    </ul>
+                </li>
+                <!-- partenaires_controle -->
+                <li class="list-group-item" *ngIf="controle.partenaires_controle.length != 0">
+                    Partenaires présents lors du contrôle :
+                    <ul>
+                        <li *ngFor="let partenaire of controle.partenaires_controle">
+                            {{data_partenaires[partenaire].nom}}
+                        </li>
+                    </ul>
+                </li>
+
+                
+
+
+            </ul>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="container" id="dataSociete">
+    <div class="d-flex flex-column">
+
+        <!-- Entête des information de l'entreprise -->
+        <div class="d-flex justify-content-center" *ngIf="entreprise.denomination != ''">
+            <p class="h3">Informations sur la société : {{entreprise.denomination}} </p>
+        </div>
+
+        <div class="d-flex justify-content-center" *ngIf="entreprise.denomination == ''">
+            <p class="h3">Informations sur la société :</p>
+        </div>
+
+
+        <div class="d-flex flex-column">
+            <ul class="list-group list-group-flush">
+
+                <!-- Denomination -->
+                <li class="list-group-item" *ngIf="entreprise.denomination">
+                    Dénomination de la societé : {{entreprise.denomination}}
+                </li>
+                <!-- Date du contrôle -->
+                <li class="list-group-item" *ngIf="entreprise.date">
+                    Date du contrôle : {{entreprise.date | date : 'd-M-y'}}
+                </li>
+                <!-- statut siren_fiche -->
+                <li class="list-group-item" *ngIf="entreprise.siren_fiche">
+                    Siren de l'entreprise : {{entreprise.siren_fiche}}
+                </li>
+                <!-- statut adresse_siege -->
+                <li class="list-group-item" *ngIf="entreprise.adresse_siege">
+                    Adresse du siège : {{entreprise.adresse_siege}}
+                </li>
+                <!-- statut dirigent -->
+                <li class="list-group-item" *ngIf="entreprise.dirigent">
+                    Dirigeant : {{entreprise.dirigent}}
+                </li>
+                <!-- statut date_dirigeant -->
+                <li class="list-group-item" *ngIf="entreprise.date_dirigeant">
+                    Date de naissance du dirigeant : {{entreprise.date_dirigeant | date : 'd-M-y'}}
+                </li>
+                <!-- statut lieu_dirigeant -->
+                <li class="list-group-item" *ngIf="entreprise.lieu_dirigeant">
+                    Lieu de naissance du dirigeant : {{entreprise.lieu_dirigeant}}
+                </li>
+                <!-- statut notes_societe -->
+                <li class="list-group-item" *ngIf="entreprise.notes_societe">
+                    Notes sur la societé :
+                    <pre>{{entreprise.notes_societe}}</pre>
+                </li>
+
+            </ul>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="container" id="dataIndividus">
+
+    <div class="d-flex flex-column" *ngFor="let individu of individus ">
+        <div class="d-flex justify-content-center"
+            *ngIf="individu.nom != '' || individu.prenom != '' || individu.civilite != ''">
+            <p class="h3">Informations sur : <span *ngIf="individu.civilite">{{individu.civilite}} </span> <span
+                    *ngIf="individu.nom">{{individu.nom }} </span> <span
+                    *ngIf="individu.prenom">{{individu.prenom}}</span></p>
+        </div>
+        <div class="d-flex justify-content-center"
+            *ngIf="individu.nom == '' && individu.prenom == '' && individu.civilite == ''">
+            <p class="h3">Informations sur l'individu :</p>
+        </div>
+
+        <!-- description Individu -->
+        <div class="d-flex flex-column" *ngIf="individu.description != ''">
+            <p class="h5">Description :</p>
+
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">{{individu.description}}</li>
+            </ul>
+
+        </div>
+
+        <!-- Consentement Individu -->
+        <div class="d-flex flex-column">
+            <p class="h5">Consentement :</p>
+
+            <ul class="list-group list-group-flush" *ngIf="individu.refus">
+                <li class="list-group-item">Le contrôle a été refusé</li>
+            </ul>
+
+            <ul class="list-group list-group-flush" *ngIf="individu.consentement">
+                <li class="list-group-item" *ngIf="individu.consentement">L'individu a consenti au contrôle avec les
+                    informations suivantes : </li>
+                <li class="list-group-item" *ngIf="individu.nom">Nom : {{individu.nom}} </li>
+                <li class="list-group-item" *ngIf="individu.prenom">Prénom : {{individu.prenom}} </li>
+                <li class="list-group-item" *ngIf="individu.typePI">Type de pièce d'identité : {{individu.typePI}} </li>
+                <li class="list-group-item" *ngIf="individu.numeroPI">Numéro de pièce d'identité : {{individu.numeroPI}}
+                </li>
+                <li class="list-group-item" *ngIf="individu.signature">Signature : <img
+                        src='{{ individu.signature }}' /></li>
+
+            </ul>
+
+        </div>
+
+        <!-- statut Individu -->
+        <div class="d-flex flex-column">
+            <p class="h5">Statut :</p>
+
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item" *ngIf="individu.statut == 'salarie'">Statut : salarié</li>
+                <li class="list-group-item" *ngIf="individu.statut == 'ti'">Statut : travailleur indépendant</li>
+                <li class="list-group-item" *ngIf="individu.statut == 'me'">Statut : micro-entrepreneur</li>
+                <li class="list-group-item" *ngIf="individu.statut == 'autre'">Statut : autre</li>
+
+                <li class="list-group-item" *ngIf="individu.fonction">Fonction : {{individu.fonction}}</li>
+                <li class="list-group-item" *ngIf="individu.nir">NIR : {{individu.nir}}</li>
+                <li class="list-group-item" *ngIf="individu.siret">Siret : {{individu.siret}}</li>
+                <li class="list-group-item" *ngIf="individu.siren">Siren : {{individu.siren}}</li>
+            </ul>
+
+        </div>
+
+        <!-- Indetité individu -->
+        <div class="d-flex flex-column">
+            <p class="h5">Identité :</p>
+
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item" *ngIf="individu.civilite">Civilité : {{individu.civilite}}</li>
+                <li class="list-group-item" *ngIf="individu.nom">Nom : {{individu.nom}}</li>
+                <li class="list-group-item" *ngIf="individu.prenom">Prénom : {{individu.prenom}}</li>
+                <li class="list-group-item" *ngIf="individu.dt_naissance">Date de naissance : {{individu.dt_naissance |
+                    date : 'd-M-y'}}</li>
+                <li class="list-group-item" *ngIf="individu.lieu_naissance">Lieu de naissance :
+                    {{individu.lieu_naissance}}</li>
+
+                <li class="list-group-item" *ngIf="individu.nationalite_fr  == 'oui'">Nationalité française</li>
+                <li class="list-group-item" *ngIf="individu.nationalite_fr  == 'non'">Nationalité étrangère</li>
+                <li class="list-group-item" *ngIf="individu.pays_naissance">Pays de naissance :
+                    {{individu.pays_naissance | json}}</li>
+                <li class="list-group-item" *ngIf="individu.tel">Téléphone : {{individu.tel}}</li>
+                <li class="list-group-item"
+                    *ngIf="individu.n_voie != '' || individu.bis != '' || individu.libelle != '' ">
+                    Adresse : {{individu.n_voie}} {{individu.bis}} {{individu.libelle}}
+                </li>
+                <li class="list-group-item" *ngIf="individu.complement">Complement d'adresse : {{individu.complement}}
+                </li>
+                <li class="list-group-item" *ngIf="individu.cp">Code postal : {{individu.cp}}</li>
+                <li class="list-group-item" *ngIf="individu.ville">Ville : {{individu.ville}}</li>
+                <li class="list-group-item" *ngIf="individu.dt_creation">Code postal : {{individu.dt_creation}}</li>
+                <li class="list-group-item" *ngIf="individu.type_statut">Type de statut : {{individu.type_statut}}</li>
+                <li class="list-group-item" *ngIf="individu.autre_statut">Détail de l'autre statut :
+                    {{individu.autre_statut}}</li>
+            </ul>
+
+        </div>
+
+        <!-- remuneration individu -->
+        <div class="d-flex flex-column">
+            <p class="h5">Rémunération :</p>
+
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item" *ngIf="individu.emploi">Emploi occupé : {{individu.emploi}}</li>
+                <li class="list-group-item" *ngIf="individu.contrat">Type de contrat : {{individu.contrat}}</li>
+                <li class="list-group-item" *ngIf="individu.dt_embauche">Date d'embauche : {{individu.dt_embauche | date
+                    : 'd-M-y'}}</li>
+                <li class="list-group-item" *ngIf="individu.duree">Durée de travail hebdomadaire : {{individu.duree}} h
+                </li>
+                <li class="list-group-item" *ngIf="individu.bullentins">Réception de bulletins de salaires ? :
+                    {{individu.bullentins}}</li>
+                <li class="list-group-item" *ngIf="individu.hsup">Heures supplémentaires ? : {{individu.hsup}}</li>
+                <li class="list-group-item" *ngIf="individu.sbrut">Montant du salaire brut : {{individu.sbrut |
+                    currency:'EUR'}}</li>
+                <li class="list-group-item" *ngIf="individu.fsalaire">Type de salaire : {{individu.fsalaire}}</li>
+                <li class="list-group-item" *ngIf="individu.montant">Montant du salaire net : {{individu.montant |
+                    currency:'EUR'}}</li>
+                <li class="list-group-item" *ngIf="individu.remunere">Est l'idividu rémunéré ? : {{individu.remunere}}
+                </li>
+                <li class="list-group-item" *ngIf="individu.ca">Chiffre d'affaires déclaré sur l'année en cours :
+                    {{individu.ca}}</li>
+                <li class="list-group-item" *ngIf="individu.rmensuelle">Rémunération mensuelle : {{individu.rmensuelle}}
+                </li>
+                <li class="list-group-item" *ngIf="individu.snombre">Nombre de salariés présents lors du contrôle :
+                    {{individu.snombre}}</li>
+                <li class="list-group-item" *ngIf="individu.total">Nombre de salariés au total : {{individu.total}}</li>
+                <li class="list-group-item" *ngIf="individu.identites">Identité des salariés présents lors du contrôle :
+                    {{individu.identites}}</li>
+            </ul>
+        </div>
+
+        <!-- Autres iniformations individu -->
+        <div class="d-flex flex-column" *ngIf="individu.totalSem != ''">
+            <p class="h5">Détail des horaires :</p>
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Jour</th>
+                            <th scope="col">Début</th>
+                            <th scope="col">Fin</th>
+                            <th scope="col">Pause</th>
+                            <th scope="col">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr [style.display]="individu.lundi.active ? '' : 'none'">
+                            <th scope="row">Lundi</th>
+                            <td>{{individu.lundi.debut}}</td>
+                            <td>{{individu.lundi.fin}}</td>
+                            <td>{{individu.lundi.pause}}</td>
+                            <td>{{individu.lundi.total}}</td>
+                        </tr>
+                        <tr [style.display]="individu.mardi.active ? '' : 'none'">
+                            <th scope="row">Mardi</th>
+                            <td>{{individu.mardi.debut}}</td>
+                            <td>{{individu.mardi.fin}}</td>
+                            <td>{{individu.mardi.pause}}</td>
+                            <td>{{individu.mardi.total}}</td>
+                        </tr>
+                        <tr [style.display]="individu.mercredi.active ? '' : 'none'">
+                            <th scope="row">Mercredi</th>
+                            <td>{{individu.mercredi.debut}}</td>
+                            <td>{{individu.mercredi.fin}}</td>
+                            <td>{{individu.mercredi.pause}}</td>
+                            <td>{{individu.mercredi.total}}</td>
+                        </tr>
+                        <tr [style.display]="individu.jeudi.active ? '' : 'none'">
+                            <th scope="row">Jeudi</th>
+                            <td>{{individu.jeudi.debut}}</td>
+                            <td>{{individu.jeudi.fin}}</td>
+                            <td>{{individu.jeudi.pause}}</td>
+                            <td>{{individu.jeudi.total}}</td>
+                        </tr>
+                        <tr [style.display]="individu.vendredi.active ? '' : 'none'">
+                            <th scope="row">Vendredi</th>
+                            <td>{{individu.vendredi.debut}}</td>
+                            <td>{{individu.vendredi.fin}}</td>
+                            <td>{{individu.vendredi.pause}}</td>
+                            <td>{{individu.vendredi.total}}</td>
+                        </tr>
+                        <tr [style.display]="individu.samedi.active ? '' : 'none'">
+                            <th scope="row">Samedi</th>
+                            <td>{{individu.samedi.debut}}</td>
+                            <td>{{individu.samedi.fin}}</td>
+                            <td>{{individu.samedi.pause}}</td>
+                            <td>{{individu.samedi.total}}</td>
+                        </tr>
+                        <tr [style.display]="individu.dimanche.active ? '' : 'none'">
+                            <th scope="row">Dimanche</th>
+                            <td>{{individu.dimanche.debut}}</td>
+                            <td>{{individu.dimanche.fin}}</td>
+                            <td>{{individu.dimanche.pause}}</td>
+                            <td>{{individu.dimanche.total}}</td>
+                        </tr>
+                        <tr [style.display]="individu.lundiSup.active ? '' : 'none'">
+                            <th scope="row">Lun Sup.</th>
+                            <td>{{individu.lundiSup.debut}}</td>
+                            <td>{{individu.lundiSup.fin}}</td>
+                            <td>{{individu.lundiSup.pause}}</td>
+                            <td>{{individu.lundiSup.total}}</td>
+                        </tr>
+                        <tr [style.display]="individu.mardiSup.active ? '' : 'none'">
+                            <th scope="row">Mar Sup.</th>
+                            <td>{{individu.mardiSup.debut}}</td>
+                            <td>{{individu.mardiSup.fin}}</td>
+                            <td>{{individu.mardiSup.pause}}</td>
+                            <td>{{individu.mardiSup.total}}</td>
+                        </tr>
+                        <tr [style.display]="individu.mercrediSup.active ? '' : 'none'">
+                            <th scope="row">Mer Sup.</th>
+                            <td>{{individu.mercrediSup.debut}}</td>
+                            <td>{{individu.mercrediSup.fin}}</td>
+                            <td>{{individu.mercrediSup.pause}}</td>
+                            <td>{{individu.mercrediSup.total}}</td>
+                        </tr>
+                        <tr [style.display]="individu.jeudiSup.active ? '' : 'none'">
+                            <th scope="row">Jeu Sup.</th>
+                            <td>{{individu.jeudiSup.debut}}</td>
+                            <td>{{individu.jeudiSup.fin}}</td>
+                            <td>{{individu.jeudiSup.pause}}</td>
+                            <td>{{individu.jeudiSup.total}}</td>
+                        </tr>
+                        <tr [style.display]="individu.vendrediSup.active ? '' : 'none'">
+                            <th scope="row">Ven Sup.</th>
+                            <td>{{individu.vendrediSup.debut}}</td>
+                            <td>{{individu.vendrediSup.fin}}</td>
+                            <td>{{individu.vendrediSup.pause}}</td>
+                            <td>{{individu.vendrediSup.total}}</td>
+                        </tr>
+                        <tr [style.display]="individu.samediSup.active ? '' : 'none'">
+                            <th scope="row">Sam Sup.</th>
+                            <td>{{individu.samediSup.debut}}</td>
+                            <td>{{individu.samediSup.fin}}</td>
+                            <td>{{individu.samediSup.pause}}</td>
+                            <td>{{individu.samediSup.total}}</td>
+                        </tr>
+                        <tr [style.display]="individu.dimancheSup.active ? '' : 'none'">
+                            <th scope="row">Dim Sup.</th>
+                            <td>{{individu.dimancheSup.debut}}</td>
+                            <td>{{individu.dimancheSup.fin}}</td>
+                            <td>{{individu.dimancheSup.pause}}</td>
+                            <td>{{individu.dimancheSup.total}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="d-flex flex-column" *ngIf=" individu.statut == 'ti' || individu.statut == 'me' ">
+            <p class="h5">Détail sous-traitance :</p>
+            <li class="list-group-item" *ngIf="individu.soustraitant">L'individu est-il un sous-traitant sur le site contrôlé ? : {{individu.soustraitant}}</li>
+            <li class="list-group-item" *ngIf="individu.identite_do">Identité du donneur d'ordre de l'individu : {{individu.identite_do}}</li>
+            <li class="list-group-item" *ngIf="individu.s_partie_activite">L'individu sous-traite une partie de son activité sur ce site ? : {{individu.s_partie_activite}}</li>
+            <li class="list-group-item" *ngIf="individu.id_soustraitants">Identité des sous-traitants de l'individu : {{individu.id_soustraitants}}</li>
+        </div>
+
+        <!-- Signature Clôture Individu -->
+        <div class="d-flex flex-column">
+            <p class="h5">Clôture de l'individu :</p>
+
+            <ul class="list-group list-group-flush" *ngIf="individu.refus">
+                <li class="list-group-item">Le contrôle a été refusé</li>
+            </ul>
+
+            <ul class="list-group list-group-flush" *ngIf="individu.consentement">
+                <li class="list-group-item" *ngIf="individu.consentement">Signature de l'individu après avoir pris
+                    connaissance des informations saisies dans le PV : </li>
+                <li class="list-group-item" *ngIf="individu.signature"><img src='{{ individu.signature_cloture }}' />
+                </li>
+
+            </ul>
+
+        </div>
+    </div>
+
+</div>
+
+
+<style>
+    .list-group-flush>.list-group-item {
+        border-width: 0 0 1px;
+        border-top-width: 0px;
+        border-right-width: 0px;
+        border-bottom-width: 0px;
+        border-left-width: 0px;
+    }
+</style>
+
+<!-- <span style="font-weight: bold;">Service Data</span>
+<pre>{{individus | json}}</pre>
+<span style="font-weight: bold;">Service Data</span>
+<pre>{{entreprise | json}}</pre>
+<span style="font-weight: bold;">Service Data</span>
+<pre>{{controle | json}}</pre> -->
+
+<!-- <ul class="list-group mb-3">
+
+    <li *ngFor="let item of dataIndividu" class="list-group-item flex-fill">
+        {{ item.titre}} : {{ item.valeur}}
+    </li>
+
+</ul> -->
+<!-- <span style = "font-weight: bold">Contrôle : </span>
+{{controle |json}} -->

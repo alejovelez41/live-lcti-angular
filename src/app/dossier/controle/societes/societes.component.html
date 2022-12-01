@@ -1,0 +1,170 @@
+<div class="div">
+    <div class="row">
+        <!-- <div class="row flex-nowrap"> -->
+        <!-- Buton pour ajouter un individu -->
+        <div class="card border-info mb-1 ms-2" style="width: 16rem;">
+
+            <div class="card-body d-flex flex-column px-0">
+                <!-- <h5 class="card-title mb-10" *ngIf="!individu.nom || !individu.prenom">
+                    <img src="../assets/id.svg" class="" alt="" width="25" height="25" display="flex">
+                    Ajouter un individu
+                </h5> -->
+
+                <div class="d-flex justify-content-center p-2">
+                    <img src="../assets/ajouterEnt.png" alt="img associer" width="140" height="130">
+                </div>
+                <p class="card-text mt-4" style="color:#008088; text-align:center; font-size: 14px">Ajoutez autant
+                    d'entreprises que nécessaire.
+                    <br>Vous pourrez ensuite les associer avec les individus contrôlés à tout moment.
+                </p>
+                <a class="btn btn-info mt-auto" (click)="ajouterEntreprise()">Ajouter</a>
+            </div>
+        </div>
+
+        <!-- Buton pour consulter/ editer et effacer un individu -->
+
+        <div class="card mb-1 ms-2 pl-0" style="width: 16rem;" *ngFor="let entreprise of entreprises">
+
+            <div class="card-body d-flex flex-column px-0">
+                <div class="d-flex flex-row mb-4" *ngIf="entreprise.denomination">
+                    <div class="d-flex justify-content-start">
+                        <img src="../assets/entreprise.png" class="" alt="" width="30" height="25" display="flex">
+                    </div>
+                    <div class="d-flex flex-grow-1 justify-content-center">
+                        <h5 class="card-title mb-2">{{entreprise.denomination}}</h5>
+                    </div>
+                </div>
+
+                <div class="d-flex flex-row mb-4" *ngIf="!entreprise.denomination">
+                    <div class="d-flex justify-content-start">
+                        <img src="../assets/entreprise.png" class="" alt="" width="30" height="25" display="flex">
+                    </div>
+                    <div class="d-flex flex-grow-1 justify-content-center" style="color:#80bfc3;">
+                        <h5 class="card-title mb-2">Pas renseigné</h5>
+                    </div>
+                </div>
+
+                <div class="d-flex flex-row" *ngIf="entreprise.date==''">
+                    <p>
+                        <img class="me-2" src="../assets/calendrier.svg" alt="" width="25" height="25">
+                        Date
+                    </p>
+                </div>
+                <div class="d-flex flex-row" *ngIf="entreprise.date!=''">
+                    <p>
+                        <img class="me-2" src="../assets/calendrier.svg" alt="" width="25" height="25">
+                        {{entreprise.date | date : 'd-M-y' }}
+                    </p>
+                </div>
+
+                <div class="d-flex flex-row" *ngIf="entreprise.dirigent!=''">
+                    <p>
+                        <img class="me-1" src="../assets/dirigeant.svg" alt="" width="25" height="25">
+                        {{entreprise.dirigent }}
+                    </p>
+                </div>
+                <div class="d-flex flex-row" *ngIf="entreprise.dirigent==''">
+                    <p>
+                        <img class="me-1" src="../assets/dirigeant.svg" alt="" width="25" height="25">
+                        Nom du dirigeant
+                    </p>
+                </div>
+
+                <div class="d-flex flex-row" *ngIf="entreprise.siren_fiche">
+                    <p>
+                        <img class="me-2" src="../assets/siren.svg" alt="" width="25" height="25">
+                        {{entreprise.siren_fiche }}
+                    </p>
+                </div>
+                <div class="d-flex flex-row" *ngIf="!entreprise.siren_fiche">
+                    <p>
+                        <img class="me-2" src="../assets/siren.svg" alt="" width="25" height="25">
+                        Siren/siret
+                    </p>
+                </div>
+
+                <div class="card border-info my-2 mx-0 p-0" *ngIf="!entreprise.archive">
+                    <div class="card-body px-3">
+                        <!-- logo -->
+                        <div class="d-flex flex-row justify-content-center mb-2">
+                            <img src="../assets/individusControle.svg" class="" alt="" width="35" height="30"
+                                display="flex">
+                        </div>
+                        <!-- Individus contrôle -->
+                        <div class="d-flex flex-row mb-4 flex-wrap">
+                            <div class="d-flex flex-wrap" *ngIf="entreprise.id_individus.length != 0">
+                                <div class="d-flex flex-wrap" *ngFor="let indEnt of entreprise.id_individus">
+                                    <div class="d-flex flex-wrap" *ngFor="let ind of individus">
+                                        <div style="color:#008088; text-align:center; font-size: 12px"
+                                            *ngIf="ind.id == indEnt">
+                                            <span> - </span> {{ind.nom }} {{ind.prenom}} 
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="d-flex " *ngIf="entreprise.id_individus.length == 0">
+                                <p class="card-text" style="color:#008088; text-align:center; font-size: 12px; ">
+                                    Nom et prénom des individus contrôlés
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Clotured societé -->
+                <div class="card border-info my-2 mx-0 p-0" *ngIf="entreprise.archive">
+                    <div class="card-body px-3" style="background-color: #E0FDFF;">
+                        <!-- logo -->
+                        <div class="d-flex flex-row justify-content-center mb-2">
+                            <img src="../assets/bravo.svg" class="" alt="" width="40" height="35" display="flex">
+                        </div>
+                        <!-- Individus contrôle -->
+                        <div class="d-flex flex-row mb-4 justify-content-center">
+                            <div style="color:#008088; text-align:center; font-size: 12px">
+                                Bravo !<br>Votre entreprise a été archivée avec succès !
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-auto" *ngIf="!entreprise.archive">
+                    <div class="d-flex flex-row ">
+                        <a class="btn btn-outline-danger mx-auto"
+                            (click)="modaleSupression(entreprise.id)">Supprimer</a>
+                        <a [routerLink]="['/entreprise/societe', entreprise.id]" class="btn btn-info mx-auto"
+                            (click)="setEntreprise(entreprise)">Continuer ></a>
+                    </div>
+
+
+                    <div class="d-grid mt-2">
+                        <button class="btn btn-warning  ps-0" (click)="modaleCloture(entreprise)">
+                            <img src="../assets/folder.svg" class="me-2" alt="" width="35" height="30" display="flex">
+                            Clôturer le dossier
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Buttons Clotured societé -->
+                <div class="row mt-auto" *ngIf="entreprise.archive">
+                    <div class="d-flex flex-row ">
+                        <a class="btn btn-outline-danger mx-auto"
+                            (click)="modaleSupression(entreprise.id)">Supprimer</a>
+                        <a [routerLink]="['/entreprise/extraction', entreprise.id]" class="btn btn-info mx-auto"
+                            (click)="setEntreprise(entreprise)">
+                            <img src="../assets/detail.svg" class="me-2" alt="" width="20" height="20" display="flex">
+                            Détails</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+
+    </div>
+</div>
+<!-- <span style="font-weight: bold">Contrôle : </span>
+{{controle |json}}
+<span>Data entreprises</span>
+<pre>{{this.entreprises | json}}</pre> -->

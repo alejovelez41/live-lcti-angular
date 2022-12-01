@@ -1,0 +1,200 @@
+<div class="bd-example">
+    <form class="row g-1" autocomplete="off" [formGroup]="monFormulaire">
+
+        <!-- Radio Statuts -->
+        <p class="h5 my-1" style="color:#1D458C;">Statut de l'individu</p>
+
+        <!-- Champ Salarié -->
+        <div class="col-md-3">
+            <div class="form-check py-3 ps-5 mx-1">
+                <input class="form-check-input" (change)="changeStatut()" type="radio" value="salarie"
+                    formControlName="statut" id="flexCheckStatutsalarie">
+                <label class="form-check-label" for="flexCheckStatutsalarie">
+                    Salarié
+                </label>
+            </div>
+        </div>
+        <!-- Champ TI -->
+        <div class="col-md-3">
+            <div class="form-check py-3 ps-5 mx-1">
+                <input class="form-check-input" (change)="changeStatut()" type="radio" value="ti"
+                    formControlName="statut" id="flexCheckStatutti">
+                <label class="form-check-label" for="flexCheckStatutti">
+                    TI
+                </label>
+            </div>
+        </div>
+        <!-- Champ ME -->
+        <div class="col-md-3">
+            <div class="form-check py-3 ps-5 mx-1">
+                <input class="form-check-input" (change)="changeStatut()" type="radio" value="me"
+                    formControlName="statut" id="flexCheckStatutme">
+                <label class="form-check-label" for="flexCheckStatutme">
+                    ME
+                </label>
+            </div>
+        </div>
+        <!-- Champ Autre -->
+        <div class="col-md-3">
+            <div class="form-check py-3 ps-5 mx-1">
+                <input class="form-check-input" (change)="changeStatut()" type="radio" value="autre"
+                    formControlName="statut" id="flexCheckStatutautre">
+                <label class="form-check-label" for="flexCheckStatutautre">
+                    Autre
+                </label>
+            </div>
+        </div>
+
+        <!-- Champ Fonction - statut autre -->
+        <div class="col-md-12">
+            <div class="form-floating mt-2 mx-1">
+                <input type="text" class="form-control" formControlName="fonction" (change)="changeVal()"
+                    placeholder="Fonction (ex : bénévole, stagiaire..)" id="floatingInput_fonction">
+                <label for="floatingInput_fonction">Fonction</label>
+            </div>
+
+        </div>
+
+
+
+        <p class="h5 mb-2 mt-3" style="color:#1D458C;">Identification de l'individu</p>
+        <div class="d-flex justify-content-start px-3">
+            <p style="color:black; background-color: #FFF4D2;font-style:italic;font-size: 12px;">Si l'individu n'a pas
+                son
+                Nir ou
+                Siren/Siret, alors vous pourrez compléter son profil manuellement sur les pages suivantes</p>
+        </div>
+
+
+        <!-- Champ Nir -->
+        <div class="col-md-12 mb-1">
+            <div class="form-floating mx-1">
+                <input type="text" class="form-control" formControlName="nir" placeholder="Insérer NIR"
+                    (change)="changeVal()" id="floatingInput_nir">
+                <label for="floatingInput_nir">NIR</label>
+                <span class="form-text text-danger" *ngIf="isValid('nir')">
+                    Le Nir doit contenir 13 chiffres
+                </span>
+            </div>
+
+        </div>
+
+        <!-- Champ siren -->
+        <div class="col-md-6">
+            <div class="form-floating mx-1">
+                <input type="text" class="form-control" formControlName="siren" placeholder="Insérer Siren"
+                    (change)="changeVal()" id="floatingInput_siren">
+                <label for="floatingInput_siren">Siren</label>
+                <span class="form-text text-danger" *ngIf="isValid('siren')">
+                    Le Siren doit contenir 9 chiffres
+                </span>
+            </div>
+
+        </div>
+        <!-- Champ siret -->
+        <div class="col-md-6">
+            <div class="form-floating mx-1">
+                <input type="text" class="form-control" formControlName="siret" placeholder="Insérer Siret"
+                    (change)="changeSiret()" id="floatingInput_siret">
+                <label for="floatingInput_siret">Siret</label>
+                <span class="form-text text-danger" *ngIf="isValid('siret')">
+                    Le Siret doit contenir 14 chiffres
+                </span>
+            </div>
+
+        </div>
+
+        <p class="h5 mb-3 mt-3" style="color:#1D458C;">Identification de sa société</p>
+
+
+
+
+
+        <!-- Button trigger modal -->
+        <div class="div" [style.display]="(individu.idEnt == '') ? 'block' : 'none'">
+            <div class="d-grid">
+                <button type="button" class="btn btn-outline-secondary" (click)="ouvrirModal()">
+                    <img src="../assets/ajouterEnt.svg" alt="img associer" width="80" height="80">
+                    Associer à une entreprise
+                </button>
+            </div>
+        </div>
+        <div class="div" [style.display]="(individu.idEnt != '') ? 'block' : 'none'">
+            <div class="d-grid">
+                <button type="button" class="btn btn-outline-secondary" (click)="ouvrirModal()">
+                    <div class="d-flex justify-content-center align-items-center">
+                        <img src="../assets/entreprise.png" alt="img associer" width="80" height="60">
+                        <div class="d-flex flex-column">
+                            <span [style.display]="(individu.siren_fiche) ? 'block' : 'none'">
+                                SIREN : {{individu.siren_fiche}}
+                            </span>
+                            <span [style.display]="(individu.denominationEnt) ? 'block' : 'none'">
+                                {{individu.denominationEnt}}
+                            </span>
+                            <span [style.display]="(individu.adresse_siege) ? 'block' : 'none'">
+                                {{individu.adresse_siege}}
+                            </span>
+                        </div>
+                    </div>
+
+                </button>
+            </div>
+        </div>
+
+        <br>
+        <!-- <span style="font-weight: bold;">Service Data</span>
+        <pre>{{individu | json}}</pre>
+        <span style="font-weight: bold;">Service Ent</span>
+        <pre>{{entreprise | json}}</pre>
+        <span style="font-weight: bold;">Formulaire</span>
+        <pre>{{monFormulaire.value | json}}</pre> -->
+
+        <!-- <span style="font-weight: bold">Contrôle : </span>
+        {{controle |json}}
+        <span style="font-weight: bold">Entreprise : </span>
+        {{entreprise |json}}
+        <span style="font-weight: bold">individu : </span>
+        {{dataIndividu |json}} -->
+        <!-- <span style = "font-weight: bold">Contrôle : </span>
+            {{controle |json}}
+        <span>
+            {{date|date}}
+            {{entreprise | json}}
+            <br>
+            {{entreprise.id == ''}}
+            <br>
+            {{dataIndividu | json}}
+
+        </span> -->
+
+
+
+        <!-- <span>Service Data</span>
+        <pre>{{ dataIndividu | json}}</pre> -->
+        <!-- <span>Value</span>
+        <pre>{{ monFormulaire.value | json }}</pre>
+
+        <span>Statut</span>
+        {{statInd | json}} -->
+
+        <style>
+            .form-check {
+                display: block;
+                min-height: 1.5rem;
+                padding-left: 1.5em;
+                margin-bottom: 0.125rem;
+                background-color: white;
+                border: 1px solid #ced4da;
+                border-radius: 0.25rem;
+            }
+
+            .bd-example {
+                background-color: #DBE7FF;
+            }
+
+            .btn-outline-secondary {
+                border: 4px;
+                border-color: #1D458C;
+                border-style: dashed;
+            }
+        </style>

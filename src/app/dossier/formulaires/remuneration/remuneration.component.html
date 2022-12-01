@@ -1,0 +1,438 @@
+<div id="formulaireSalarie">
+    <form class="formulaire" autocomplete="off" [formGroup]="monFormulaire"
+        [style.display]="((individu.statut == 'salarie') || (individu.statut == 'autre')) ? 'block' : 'none'">
+        <div class="row g-1">
+            <p class="h5 mb-3" style="color:#1D458C;">Détails sur l'emploi</p>
+
+            <div class="container-fluid">
+                <div class="row align-items-center">
+                    <div class="col-lg-8 mb-2">
+
+                        <div class="row">
+                            <!-- Champ Emploi occupé -->
+                            <div class="col-lg mb-2">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" formControlName="emploi" placeholder="Emploi occupé"
+                                        id="floatingInputEmploiOccupe" (change)="changeVal()">
+                                    <label for="floatingInputEmploiOccupe">Emploi occupé</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <!-- Champ dt_emabuche -->
+                            <div class="col-lg mb-2">
+                                <div class="form-floating">
+                                    <input type="date" class="form-control" formControlName="dt_embauche"
+                                        placeholder="Date d'embauche" id="floatingInputValue" (change)="changeVal()">
+                                    <label for="floatingInputValue">Date d'embauche</label>
+                                </div>
+                            </div>
+
+                            <!-- Champ Type de contrat -->
+                            <div class="col-lg mb-2">
+                                <div class="form-floating">
+                                    <select class="form-select" (change)="changeVal()"
+                                        formControlName="contrat" id="floatingInput_type_contrat">
+                                        <option value="">Sélectionner le type de contrat</option>
+                                        <option *ngFor="let contrat of contrats" [value]="contrat">
+                                            {{contrat}}
+                                        </option>
+                                    </select>
+                                    <label for="floatingInput_type_contrat">Type de contrat</label>
+                                </div>
+                            </div>
+                            
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg mb-2">
+                            <!-- Champ dure de travail -->
+                                <div class="form-floating">
+                                    <input type="number" class="form-control" formControlName="duree"
+                                    placeholder="Durée de travail hebdomadaire" id="floatingInput_dure"
+                                    (change)="changeVal()">
+                                    <label for="floatingInput_dure">Durée de travail hebdomadaire</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg mb-2">
+                                <!-- Bulletins de salaires ? -->
+                                <div class="form-floating">
+                                    <select class="form-select" (change)="changeVal()"
+                                        formControlName="bullentins" id="floatingInput_bullentins">
+                                        <option value="">Réception Bulletins de salaires ?</option>
+                                        <option *ngFor="let bulletin of bulletins" [value]="bulletin">
+                                            {{bulletin}}
+                                        </option>
+                                    </select>
+                                    <label for="floatingInput_bullentins">Réception Bulletins de salaires ?</label>
+                                </div>
+                            </div>
+
+                            <div class="col-lg mb-2">
+                                <!-- Heures Sup/+ -->
+                                <div class="form-floating">
+                                    <select class="form-select" (change)="changeVal()"
+                                        formControlName="hsup" id="floatingInput_heures">
+                                        <option value="">Heures supplémentaires ?</option>
+                                        <option *ngFor="let heures of heuresSup" [value]="heures">
+                                            {{heures}}
+                                        </option>
+                                    </select>
+                                    <label for="floatingInput_heures">Heures supplémentaires ?</label>
+                                </div>                                
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                    <div class="col-lg-4 mb-2">
+
+                        <div class="row">
+                            <div class="col-lg mb-2">
+                                <div class="form-check">
+                                    <input type="checkbox" value="" formControlName="interimaire" id="flexCheckDisabled"
+                                        class="form-check-input" (change)="changeVal()">
+        
+                                    <label class="form-check-label h6" for="flexCheckDisabled" style="color:black; font-size: 12px;font-style:italic">
+                                        Cliquer ici si l'individu contrôlé est un salarié intérimaire
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Siren/ siret societe interim -->
+                        <div class="row">
+                            <div class="col-lg mb-2">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" formControlName="sirenI"
+                                        placeholder="Siren/Siret de la société intérimaire" id="floatingSociete_interim"
+                                        (change)="changeVal()">
+                                    <label for="floatingSociete_interim">Siren/Siret de la société intérimaire</label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Siren/ siret societe interim -->
+                        <div class="row">
+                            <div class="col-lg mb-2">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" formControlName="denominationI"
+                                        placeholder="Dénomination société intérimaire" id="floatingDenomination_I"
+                                        (change)="changeVal()">
+                                    <label for="floatingDenomination_I">Dénomination société intérimaire</label>
+                                </div>
+                            </div>  
+                        </div>
+
+                        
+                        <!-- Adresse societe interim -->
+                        <div class="row">
+                            <div class="col-lg mb-2">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" formControlName="adresse_siegeI"
+                                        placeholder="Adresse société intérimaire" id="floatingAdresse_I"
+                                        (change)="changeVal()">
+                                    <label for="floatingAdresse_I">Adresse société intérimaire</label>
+                                </div>
+                            </div> 
+                        </div>
+                    
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <p class="h5 mb-3 mt-2" style="color:#1D458C;">Salaires</p>
+
+        <!-- <p class="h6 mb-3" style="color:#2a9ca4;">Sélectionner type salaire déclaré</p> -->
+
+        <div class="row">
+            <!-- Select type de salaire  -->
+            <div class="col-lg-4 mb-3">
+                <div class="form-floating">
+                    <select class="form-select" (change)="changeVal()" formControlName="fsalaire"
+                        id="floatingInput_type_salaire">
+                        <option value="">Type de salaire</option>
+                        <option *ngFor="let type of typeSalaire" [value]="type">
+                            {{type}}
+                        </option>
+                    </select>
+                    <label for="floatingInput_type_salaire">Type de salaire</label>
+                </div>
+            </div>
+
+            <!-- Champ Montant salaire brut-->
+            <div class="col-lg-4 mb-3">
+                <div class="form-floating">
+                    <input type="text" class="form-control h-100" formControlName="sbrut"
+                        placeholder="Montant du salaire brut" (change)="changeVal()" id="floatingInput_montant">
+                    <label for="floatingInput_montant">Montant du salaire brut</label>
+                </div>
+            </div>
+
+            <!-- Champ Montant salaire net-->
+            <div class="col-lg-4 mb-3">
+                <div class="form-floating">
+                    <input type="text" class="form-control h-100" formControlName="montant"
+                        placeholder="Montant du salaire net" (change)="changeVal()" id="floatingInput_net">
+                    <label for="floatingInput_net">Montant du salaire net</label>
+                </div>
+            </div>
+        </div>
+
+    </form>
+</div>
+
+<div id="formulaireMe">
+
+
+    <form class="row g-1" autocomplete="off" [formGroup]="monFormulaire"
+        [style.display]="individu.statut == 'me' ? 'block' : 'none'">
+
+        <div class="row g-1">
+            <p class="h5 mb-3" style="color:#1D458C;">Rémunération</p>
+
+            <!-- Input Radio -Remuneration ME -->
+
+            <div class="col-lg-4">
+                <label class="fs-6 col-form-label">Déclarez-vous du CA sur l'année en cours ?</label>
+            </div>
+
+            <div class="col-lg-1">
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" value="Oui" formControlName="ca" id="flexCheckOui"
+                        (change)="changeVal()">
+                    <label class="form-check-label" for="flexCheckOui">
+                        Oui
+                    </label>
+                </div>
+            </div>
+
+            <div class="col-lg-1">
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" value="Non" formControlName="ca" id="flexCheckNon"
+                        (change)="changeVal()">
+                    <label class="form-check-label" for="flexCheckNon">
+                        Non
+                    </label>
+                </div>
+            </div>
+
+
+
+
+            <!-- Champ Remuneration mensuelle -->
+            <div class="col-lg-6">
+                <div class="form-floating">
+                    <input type="text" class="form-control" formControlName="rmensuelle"
+                        placeholder="CA déclaré sur l'année en cours" (change)="changeVal()" id="floatingInput_ca">
+                        <label for="floatingInput_ca">Montant du salaire net</label>
+                </div>
+            </div>
+
+            <p class="h5 mb-3" style="color:#1D458C;">Salariat</p>
+
+            <!-- Champ nombre de salaries -->
+
+            <div class="col-lg-6">
+                <div class="form-floating">
+                    <textarea placeholder="Nombre de salariés présents lors du contrôle" class="form-control mb-4"
+                        rows="3" formControlName="snombre" (change)="changeVal()" id="ff_nSalaries" style="height: 100px"></textarea>
+                    <label for="ff_nSalaries">Nombre de salariés présents lors du contrôle</label>
+                </div>
+            </div>
+
+            <!-- Champ nombre de salaries au total -->
+
+            <div class="col-lg-6">
+                <div class="form-floating">
+                    <textarea placeholder="Nombre de salariés au total" class="form-control mb-4" rows="3"
+                        formControlName="total" (change)="changeVal()" id="ff_totalSalaries" style="height: 100px"></textarea>
+                    <label for="ff_totalSalaries">Nombre de salariés au total</label>
+                </div>
+            </div>
+
+            <!-- Champ nombre de salaries -->
+
+            <div class="col-lg-12">
+                <div class="form-floating">
+                    <textarea placeholder="Identité des salariés présents lors du contrôle" class="form-control mb-4"
+                        rows="3" formControlName="identites" (change)="changeVal()" id="ff_idSalaries" style="height: 100px"></textarea>
+                    <label for="ff_idSalaries">Identité des salariés présents lors du contrôle</label>
+                </div>
+            </div>
+        </div>
+
+
+    </form>
+
+</div>
+
+<div id="formulaireTi">
+
+
+    <form class="row g-1" autocomplete="off" [formGroup]="monFormulaire"
+        [style.display]="individu.statut == 'ti' ? 'block' : 'none'">
+
+        <div class="row g-1">
+            <p class="h5 mb-3" style="color:#1D458C;">Rémunération</p>
+            <!-- Input Radio -Remuneration TI -->
+
+            <div class="col-lg-4">
+                <label class="fs-6 col-form-label">Etes-vous rémunéré ?</label>
+            </div>
+
+            <div class="col-lg-1">
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" value="Oui" formControlName="remunere"
+                        id="flexCheckOui" (change)="changeVal()">
+                    <label class="form-check-label" for="flexCheckOui">
+                        Oui
+                    </label>
+                </div>
+            </div>
+
+            <div class="col-lg-1">
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" value="Non" formControlName="remunere"
+                        id="flexCheckNon" (change)="changeVal()">
+                    <label class="form-check-label" for="flexCheckNon">
+                        Non
+                    </label>
+                </div>
+            </div>
+
+            <!-- Champ Remuneration mensuelle -->
+            <div class="col-lg-6">
+                <div class="form-floating">
+                    <input type="text" class="form-control" formControlName="rmensuelle"
+                        placeholder="Rémunération mensuelle" (change)="changeVal()" is="ff_NSalariesAUtOT">
+                <label for="ff_NSalariesAUtOT">Rémunération mensuelle</label>
+                </div>
+            </div>
+
+            <p class="h5 mb-3" style="color:#1D458C;">Salariat</p>
+
+            <!-- Champ nombre de salaries -->
+
+            <div class="col-lg-6">
+                <div class="form-floating">
+                    <textarea placeholder="Nombre de salariés présents lors du contrôle" class="form-control mb-4"
+                        rows="3" formControlName="snombre" (change)="changeVal()" id="ff_NSalariesPres" style="height: 100px"></textarea>
+                    <label for="ff_NSalariesPres">Nombre de salariés présents lors du contrôle</label>
+
+                </div>
+                </div>
+
+                <!-- Champ nombre de salaries -->
+
+                <div class="col-lg-6">
+                    <div class="form-floating">
+                        <textarea placeholder="Nombre de salariés au total" class="form-control mb-4" rows="3"
+                            formControlName="total" (change)="changeVal()" id="ff_NSalariesTot" style="height: 100px"></textarea>
+                        <label for="ff_NSalariesTot">Nombre de salariés au total</label>
+                    </div>
+                </div>
+
+                    <!-- Champ nombre de salaries -->
+
+                    <div class="col-lg-12">
+                        <div class="form-floating">
+                            <textarea placeholder="Identité des salariés présents lors du contrôle" style="height: 100px"
+                                class="form-control mb-4" rows="3" formControlName="identites" (change)="changeVal()" id="ff_idSalariesPres"></textarea>
+                            <label for="ff_idSalariesPres">Identité des salariés présents lors du contrôle</label>
+                        </div>
+                    </div>
+                </div>
+
+
+    </form>
+
+</div>
+
+<div class="row">
+    <div class="col-lg mb-2">
+        <div class="d-grid">
+            <button type="button" class="btn btn-warning" (click)="ouvrirRecap()"
+                [routerLink]="['/entreprise/recapIndividu', individu.id]">
+                Sommaire des informations
+            </button>
+        </div>
+    </div>
+    <div class="col-lg mb-2">
+        <div class="d-grid">
+            <button type="button" class="btn btn-primary" (click)="ouvrirModal()"
+                [disabled]="this.individu.nom && this.individu.prenom && this.individu.dt_naissance != '' ? '' : 'disabled'">
+                Signer pour finaliser le contrôle
+            </button>
+        </div>
+    </div>
+</div>
+
+
+<style>
+    .btn-associer {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 10px;
+        gap: 1px;
+
+        width: 247.25px;
+        height: 131px;
+
+        background: #1D458C;
+        border-radius: 12px;
+    }
+
+    .ng-autocomplete {
+        width: 300px;
+    }
+
+    /* .form-check:disabled {
+        display: none;
+    }
+
+    .form-check-input {
+        display: none;
+    }
+
+    .form-control:disabled {
+        display: none;
+    }
+
+    .formulaire:disabled {
+        display: none;
+    } */
+</style>
+<!-- 
+<span style="font-weight: bold;">Service Data</span>
+<pre>{{individu | json}}</pre>
+<span style="font-weight: bold;">Formulaire</span>
+<pre>{{monFormulaire.value  | json}}</pre> -->
+
+
+<!-- <span>variable</span>
+{{interimaire}}
+
+<div class="row">
+    <div class="col">
+        <span>Value</span>
+        <pre>{{ monFormulaire.value | json }}</pre>
+
+    </div>
+    <div class="col">
+        <span>Service Data</span>
+        <pre>{{ dataIndividu | json}}</pre>
+    </div>
+</div> -->

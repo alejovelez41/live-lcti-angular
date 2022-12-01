@@ -1,0 +1,130 @@
+<!-- Modal -->
+<div class="modal-header">
+  <h4 class="modal-title">Validation de l'identité de l'individu recensé</h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+<div class="modal-body text-center">
+  <div class="d-flex justify-content-center">
+    <p class="h5 mb-3" style="color:#1D458C;">Je soussigné</p>
+  </div>
+
+  <form class="row g-1" autocomplete="off" [formGroup]="monFormulaire">
+
+    <div class="d-flex flex-column justify-content-center">
+
+      <div class="row justify-content-center">
+
+        <div class="col-lg-5 mb-2">
+          <div class="form-floating">
+            <input type="text" class="form-control" formControlName="nom" placeholder="Nom" (change)="changeVal()" id="floatingInput_Nom">
+            <label for="floatingInput_Nom"  >Nom<span style="color : red">*</span></label>
+            <span class="form-text text-danger" *ngIf="isValid('nom')">
+                Le nom est une information obligatoire
+            </span>
+          </div>
+        </div>
+
+        <div class="col-lg-5 mb-2">
+          <div class="form-floating">
+            <input type="text" class="form-control" formControlName="prenom" placeholder="Prénom"
+            (change)="changeVal()" id="floatingInput_prenom">
+            <label for="floatingInput_prenom" >Prénom<span style="color : red">*</span></label>
+            <span class="form-text text-danger" *ngIf="isValid('prenom')">
+                Le prénom est une information obligatoire
+            </span>
+          </div>
+
+        </div>
+
+      </div>
+      
+      <div class="row">
+        <div class="col-lg-4 mb-2">
+          <div class="form-floating">
+            <input type="date" class="form-control" formControlName="dt_naissance" id="floatingInputdt_naissance"
+                (change)="changeVal()">
+            <label for="floatingInputdt_naissance">Date de naissance<span style="color : red">*</span></label>
+            <span class="form-text text-danger" *ngIf="isValid('dt_naissance')">
+                La date de naissance est une information obligatoire
+            </span>
+          </div>
+        </div>
+        <div class="col-lg-4 mb-2">
+          <div class="form-floating">
+            <input type="text" class="form-control" formControlName="typePI" id="floatingInputtypePI"
+              (change)="changeVal()">
+            <label for="floatingInputtypePI">Type de pièce d'identité</label>
+          </div>
+        </div>
+        <div class="col-lg-4 mb-2">
+          <div class="form-floating">
+            <input type="text" class="form-control" formControlName="numeroPI" id="floatingInputnumeroPI"
+              (change)="changeVal()">
+            <label for="floatingInputnumeroPI">Numéro de pièce d'identité</label>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br>
+    <p class="h5 mb-3" style="color:#1D458C;">certifie l'exactitude de mon identité.</p>
+
+    <!-- Modale -->
+    <div class="col-2"></div>
+
+    <div class="col-8">
+      <div class="wrapper text-center">
+
+        <canvas #canvas (touchstart)="startDrawing($event)" (touchmove)="moved($event)" (beginStroke)="verifSignature()"
+          (change)="changeVal()"></canvas>
+
+
+      </div>
+    </div>
+    <div class="col-2">
+      <button class="btn btn-secondary" (click)="clearPad(); changeVal()">Effacer</button>
+    </div>
+
+
+
+
+  </form>
+
+
+  <!-- ; activeModal.dismiss('Cross click') -->
+
+</div>
+<div class="modal-footer">
+
+  <div class="d-grid gap-3 col-8 mx-auto">
+    <button type="button" class="btn btn-primary" (click)="savePad()">
+      <!-- [routerLink]="[routeDebut, idIndividu]" -->
+      <!-- [disabled]="signature == true ? '' : 'disabled'" -->
+      Commencer le contrôle
+    </button>
+  </div>
+  <img src='{{ signatureImg }}' />
+
+</div>
+<!-- <span style="font-weight: bold;">Service Data</span>
+<pre>{{individu | json}}</pre>
+<span style="font-weight: bold;">Formulaire</span>
+<pre>{{monFormulaire.value | json}}</pre> -->
+<!-- <span>Service Data</span>
+{{idIndividu}}
+        <pre>{{ dataIndividu | json}}</pre> -->
+
+
+<style>
+  canvas {
+    padding-left: 0;
+    padding-right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    border: 1px solid rgb(187, 178, 178);
+    background-color: var(--ion-color-success);
+  }
+</style>

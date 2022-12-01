@@ -1,0 +1,189 @@
+<!-- <div class="div" [style.display]="(individus.length == 0) ? 'initial' : 'none'">
+    <div class="container">
+        <div class="d-flex justify-content-center">
+            <img src="../assets/ajouter.svg" alt="img associer" width="150" height="150">
+        </div>
+        <div class="d-flex justify-content-center">
+            <p class="h5 mb-3" style="color:#20BFC8;">Pas d'individus recensés pour le moment</p>
+        </div>
+        <div class="d-flex justify-content-center">
+            <p style="color:#0D5A5E; text-align:center">Ajouter autant d'individus que nécessaire. <br>Vous pourrez ensuite les lier aux entreprises contrôlées. </p>
+        </div>
+        <div class="d-flex justify-content-center">
+            <form class="row g-1" autocomplete="off" [formGroup]="monFormulaire">
+                <div class="row">
+                    <div class="col">
+                        <div class="d-flex justify-content-center">
+                            <button type="button" class="btn btn-info" (click)="ajouterIndividus()">Ajouter</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div> -->
+
+<div class="div">
+    <div class="row">
+    <!-- <div class="row flex-nowrap"> -->
+        <!-- Buton pour ajouter un individu -->
+        <div class="card border-info mb-1 ms-2" style="width: 16rem;">
+
+            <div class="card-body d-flex flex-column px-0">
+                <!-- <h5 class="card-title mb-10" *ngIf="!individu.nom || !individu.prenom">
+                    <img src="../assets/id.svg" class="" alt="" width="25" height="25" display="flex">
+                    Ajouter un individu
+                </h5> -->
+
+                <div class="d-flex justify-content-center">
+                    <img src="../assets/ajouter.svg" alt="img associer" width="150" height="150">
+                </div>
+
+                <p class="card-text my-4" style="color:#0D5A5E; text-align:center">Ajoutez autant d'individus que nécessaire.
+                    <br>Vous pourrez ensuite les lier aux entreprises contrôlées.
+                </p>
+                <a class="btn btn-primary mt-auto my-3" (click)="ajouterIndividus()">Ajouter Individu</a>
+            </div>
+        </div>
+
+        <!-- Buton pour consulter/ editer et effacer un individu -->
+
+        <div class="card mb-1 ms-2 pl-0" style="width: 16rem;" *ngFor="let individu of individus">
+
+            <div class="card-body d-flex flex-column px-0">
+                <div class="d-flex flex-row mb-4">
+                    <h5 class="card-title mb-2" *ngIf="individu.nom || individu.prenom">
+                        <img src="../assets/id.svg" class="" alt="" width="25" height="25" display="flex">
+                        {{individu.nom}} {{individu.prenom}}
+                    </h5>
+                    <h5 class="card-title mb-2" *ngIf="!individu.nom && !individu.prenom">
+                        <img src="../assets/id.svg" class="" alt="" width="25" height="25" display="flex">
+                        Nom & Prénom
+                    </h5>
+                </div>
+              
+                <p *ngIf="!individu.date">
+                    <img class="me-2" src="../assets/calendrier.svg" alt="" width="25" height="25">
+                    Date
+                </p>
+                <p *ngIf="individu.date">
+                    <img class="me-2" src="../assets/calendrier.svg" alt="" width="25" height="25">
+                    {{individu.date | date : 'd-M-y'}}
+                </p>
+                <p *ngIf="!individu.heure">
+                    <img class="me-2" src="../assets/heure.svg" alt="" width="25" height="25">
+                    Heure
+                </p>
+                <p *ngIf="individu.heure">
+                    <img class="me-2" src="../assets/heure.svg" alt="" width="25" height="25">
+                    {{individu.heure}}
+                </p>
+                <div class="d-flex flex-row" *ngIf="individu.denominationEnt!=''">
+                <p>
+                    <img class="me-1" src="../assets/entreprise.png" alt="" width="30" height="25">
+                    {{individu.denominationEnt}}
+                </p>
+                </div>
+                <div class="d-flex flex-row" *ngIf="individu.denominationEnt==''">
+                    <p>
+                        <img class="me-1" src="../assets/entreprise.png" alt="" width="30" height="25">
+                        Affiliation entreprise
+                    </p>
+                    </div>
+                <p *ngIf="individu.consentement && !individu.refus">
+                    <img class="me-2" src="../assets/check.svg" alt="" width="25" height="25">
+                    Identité
+                </p>
+                <p *ngIf="!individu.consentement && !individu.refus" style="color:#20BFC8; font-size: 12px">
+                    <img class="me-2" src="../assets/check.svg" alt="" width="25" height="25">
+                    Identité non demandé
+                </p>
+                <p *ngIf="!individu.consentement && individu.refus" style="color:red">
+                    <img class="me-2" src="../assets/refus.svg" alt="" width="20" height="20">
+                    Identité refusé
+                </p>
+
+                
+
+                <!-- individu en cours -->
+                <div class="card border-info my-2 mx-0 p-0" *ngIf="individu.signature_cloture==''">
+                    <div class="card-body px-3" >
+                        <!-- logo -->
+                        <div class="d-flex flex-row justify-content-center mb-2">
+                            <img src="../assets/controle.svg" class="" alt="" width="40" height="35" display="flex">
+                        </div>
+                        <!-- Inspecteurs contrôle -->
+                        <div class="d-flex flex-row mb-4 justify-content-center">
+                            <div style="color:#008088; text-align:center; font-size: 12px">
+                                Contrôle en cours par :<br><span *ngFor="let item of controle.inspecteurs_controle "> <span>-</span> {{data_inspecteurs[item].nom}} </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-auto" *ngIf="individu.signature_cloture==''">
+                    <div class="d-flex flex-row ">
+                        <a class="btn btn-danger mx-auto" (click)="modaleSupression(individu.id)">Supprimer</a>
+                        <!-- <span class="spacer"></span> -->
+                        <a [routerLink]="['/formulaires/description', individu.id]" class="btn btn-info mx-auto" (click)="setIndividu(individu)">Continuer ></a>
+                    </div>
+
+                </div>
+
+                <!-- Individu Clotured -->
+                <div class="card border-info my-2 mx-0 p-0" *ngIf="individu.signature_cloture!=''">
+                    <div class="card-body px-3" style="background-color: #E0FDFF;">
+                        <!-- logo -->
+                        <div class="d-flex flex-row justify-content-center mb-2">
+                            <img src="../assets/bravo.svg" class="" alt="" width="40" height="35" display="flex">
+                        </div>
+                        <!-- Individus contrôle -->
+                        <div class="d-flex flex-row mb-4 justify-content-center">
+                            <div style="color:#008088; text-align:center; font-size: 12px">
+                                Contrôle effectué par :<br><span *ngFor="let item of controle.inspecteurs_controle "> <span>-</span> {{data_inspecteurs[item].nom}} </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-auto" *ngIf="individu.signature_cloture !=''">
+                    <div class="d-flex flex-row ">
+                        <a class="btn btn-danger mx-auto" (click)="modaleSupression(individu.id)">Supprimer</a>
+                        <!-- <span class="spacer"></span> -->
+                        <a [routerLink]="['/entreprise/recapIndividu', individu.id]" class="btn btn-info mx-auto"
+                        (click)="setIndividu(individu)">
+                            <img src="../assets/detail.svg" class="me-2" alt="" width="20" height="20" display="flex">
+                            Détails</a>
+                    </div>
+
+                </div>
+
+                
+
+            </div>
+        </div>
+
+
+
+    </div>
+</div>
+
+<!-- <span style="font-weight: bold;">Filtrage individu</span>
+<pre>{{individus  | json}}</pre>
+<span style="font-weight: bold;">Service Inspecteurs</span>
+<pre>{{data_inspecteurs  | json}}</pre>
+<span style="font-weight: bold;">Service Contrôle</span>
+<pre>{{controle  | json}}</pre> -->
+
+<!-- <div class="row">
+    <span style = "font-weight: bold">Individus : </span>
+{{individus|json}}
+</div>
+<div class="col">
+<span style = "font-weight: bold">Contrôle : </span>
+{{controle |json}}
+<span style = "font-weight: bold">ID du Contrôle : </span>
+{{idControle }}
+</div> -->
+<!-- <div class="col" *ngFor="let individu of individus">
+    {{individu | json}}
+</div> -->

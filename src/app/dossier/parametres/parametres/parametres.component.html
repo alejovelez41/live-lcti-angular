@@ -1,0 +1,105 @@
+<p class="h3 text-center mb-4" style="color:#1D458C;">Paramétrage du contrôle</p>
+
+<div>
+
+    <form class="row g-1" autocomplete="off" [formGroup]="monFormulaire">
+        <div class="row">
+
+            <div class="col">
+                <!-- Champ Date du contrôle -->
+                <div class="row mb-3">
+                    <div class="form-floating">
+                        <input type="date" class="form-control" formControlName="dt_controle"
+                            id="floatingInputdt_controle" (change)="changeVal()">
+                        <label for="floatingInputdt_controle">Date du contrôle</label>
+                    </div>
+                </div>
+
+                <!-- Champ Heure debut du contrôle -->
+                <div class="row mb-3">
+                    <div class="form-floating">
+                        <input type="time" class="form-control" formControlName="hr_controle"
+                            id="floatingInputhr_controle" (change)="changeVal()">
+                        <label for="floatingInputhr_controle">Heure début contrôle</label>
+                    </div>
+                </div>
+                <!-- Champ lieu du contrôle -->
+                <div class="row mb-3">
+                    <div class="form-floating">
+                        <input type="text" class="form-control" formControlName="lieu_controle"
+                            id="floatingInputdt_controle" (change)="changeVal()">
+                        <label for="floatingInputdt_controle">Lieu du contrôle</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <!-- Champ lieu du contrôle -->
+                <div class="row mb-3">
+                    <div class="form-floating">
+                        <input type="text" class="form-control" formControlName="nomControle"
+                            id="floatingInputnomControle" (change)="changeVal()">
+                        <label for="floatingInputnomControle">Nom du contrôle</label>
+                    </div>
+                </div>
+                <!-- Card saisie des inspecteurs -->
+                <div class="card mb-2">
+                    <div class="card-body py-1">
+                        <h6 class="card-title">{{controle.inspecteurs_controle.length}} Inspecteurs associés au contrôle</h6>
+                        <!-- <div > -->
+                            <span class="badge bg-secondary rounded-pill mx-1" *ngFor="let item of controle.inspecteurs_controle ">{{data_inspecteurs[item].nom}}</span>
+                        <!-- </div> -->
+                        <div class="d-grid mt-1">
+                            <button type="button" class="btn btn-primary btn-sm" (click)="ouvrirModalInspecteurs()">
+                                <img class="me-1" src="../assets/associer.png" alt="img associer" width="15" height="15"
+                                    display="flex">
+                                    Ajouter/modifier des inspecteurs
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card saisie des partenaires -->
+                <div class="card">
+                    <div class="card-body py-1">
+                        <h6 class="card-title">{{controle.partenaires_controle.length}} Partenaires associés au contrôle</h6>
+                            <span class="badge bg-secondary rounded-pill mx-1" *ngFor="let item of controle.partenaires_controle ">{{data_partenaires[item].nom}}</span>
+                        <div class="d-grid mt-1">
+                            <button type="button" class="btn btn-primary btn-sm" (click)="ouvrirModalPartenaires()">
+                                <img class="me-1" src="../assets/associer.png" alt="img associer" width="15" height="15"
+                                    display="flex">
+                                    Ajouter/modifier des partenaires
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </form>
+
+    <div class="row">
+        <div class="d-grid mt-1" *ngIf="controle.newControle">
+            <button type="button" class="btn btn-info" (click)="creerControle()">
+                Commencer le contrôle
+            </button>
+        </div>
+        <div class="d-grid mt-1" *ngIf="!controle.newControle">
+            <button type="button" class="btn btn-info" (click)="creerControle()">
+                Revenir au contrôle
+            </button>
+        </div>
+    </div>
+
+</div>
+
+
+<!-- <span>Date</span>
+<pre>{{ date }}</pre>
+<span>Time</span>
+<pre>{{ time }}</pre>
+<span>Value Formulaire</span>
+<pre>{{ monFormulaire.value | json }}</pre>
+<span>Value Controle property</span>
+<pre>{{ controle | json}}</pre>
+<span>Value Data inspecteurs</span>
+<pre>{{ data_inspecteurs | json}}</pre> -->
