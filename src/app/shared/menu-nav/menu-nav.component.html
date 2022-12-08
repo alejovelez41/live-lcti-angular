@@ -7,7 +7,7 @@
     <div class="offcanvas-body" style="background-color: #008088; color: white;">
         <ul class="list-group list-group-flush flex-column mb-auto">
             <li class="list-group-item" style="background-color: #008088; border-color: white">
-                <a href="#" class="nav-link link-dark" aria-current="page" style="color: white; ">
+                <a routerLink="/outils/informations" class="nav-link link-dark" aria-current="page" style="color: white;" (click)="offcanvas.dismiss('Cross click')">
                     <img src="../assets/infos.svg" alt="" width="25" height="25" display="flex">
                     Consultation des informations
                 </a>
@@ -19,7 +19,7 @@
                 </a>
             </li>
             <li class="list-group-item" style="background-color: #008088; border-color: white">
-                <a routerLink="/outils/notesInd" class="nav-link link-dark" style="color: white; " (click)="offcanvas.dismiss('Cross click')">
+                <a routerLink="/outils/notes" class="nav-link link-dark" style="color: white; " (click)="offcanvas.dismiss('Cross click')">
                     <img src="../assets/notes.svg"  alt="" width="25" height="25" display="flex">
                     Mes notes
                 </a>
@@ -78,8 +78,8 @@
             <li class="nav-item" class="sidenav">
                 <button class="btn btn-lg btn-warning ms-1" (click)="openEnd(content)">
                     <span class="navbar-toggler-icon">
-                        <div class="text-center">
-                            <img src="../assets/tools.svg" alt="" width="25" height="25" display="flex">
+                        <div class="text-center m-0">
+                            <img src="../assets/tools.svg" alt="" width="22" height="22" display="flex">
                         </div>    
                         
                     </span>

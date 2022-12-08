@@ -46,15 +46,21 @@
                         </li>
                     </ul>
                 </li>
-                <!-- partenaires_controle -->
-                <li class="list-group-item" *ngIf="controle.partenaires_controle.length != 0">
-                    Partenaires présents lors du contrôle :
-                    <ul>
-                        <li *ngFor="let partenaire of controle.partenaires_controle">
-                            {{data_partenaires[partenaire].nom}}
-                        </li>
-                    </ul>
-                </li>
+
+                
+                <!-- notes_controle -->
+                <div class="d-flex flex-column" *ngIf="controle.partenaires_controle.length != 0">
+                    <p class="h5">Notes associés au contrôle :</p>
+        
+                    <li class="list-group-item" *ngFor="let note of controle.notesCont">
+                        {{note.titre}} - {{note.heure}}
+                        <ul>
+                            <li >
+                                {{note.note}}
+                            </li>
+                        </ul>
+                    </li>
+                </div>
 
                 
 
@@ -116,6 +122,20 @@
                     Notes sur la societé :
                     <pre>{{entreprise.notes_societe}}</pre>
                 </li>
+
+                <!-- notes_controle -->
+                <div class="d-flex flex-column" *ngIf="controle.partenaires_controle.length != 0">
+                    <p class="h5">Notes associés à la societé :</p>
+        
+                    <li class="list-group-item" *ngFor="let note of entreprise.notes_outils">
+                        {{note.titre}} - {{note.heure}}
+                        <ul>
+                            <li >
+                                {{note.note}}
+                            </li>
+                        </ul>
+                    </li>
+                </div>
 
             </ul>
 
@@ -258,7 +278,7 @@
         </div>
 
         <!-- Autres iniformations individu -->
-        <div class="d-flex flex-column" *ngIf="individu.totalSem != ''">
+        <div class="d-flex flex-column" *ngIf="individu.totalSem != '00:00'">
             <p class="h5">Détail des horaires :</p>
             <div class="table-responsive">
                 <table class="table table-striped">
@@ -376,10 +396,13 @@
         </div>
         <div class="d-flex flex-column" *ngIf=" individu.statut == 'ti' || individu.statut == 'me' ">
             <p class="h5">Détail sous-traitance :</p>
-            <li class="list-group-item" *ngIf="individu.soustraitant">L'individu est-il un sous-traitant sur le site contrôlé ? : {{individu.soustraitant}}</li>
-            <li class="list-group-item" *ngIf="individu.identite_do">Identité du donneur d'ordre de l'individu : {{individu.identite_do}}</li>
-            <li class="list-group-item" *ngIf="individu.s_partie_activite">L'individu sous-traite une partie de son activité sur ce site ? : {{individu.s_partie_activite}}</li>
-            <li class="list-group-item" *ngIf="individu.id_soustraitants">Identité des sous-traitants de l'individu : {{individu.id_soustraitants}}</li>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item" *ngIf="individu.soustraitant">L'individu est-il un sous-traitant sur le site contrôlé ? : {{individu.soustraitant}}</li>
+                <li class="list-group-item" *ngIf="individu.identite_do">Identité du donneur d'ordre de l'individu : {{individu.identite_do}}</li>
+                <li class="list-group-item" *ngIf="individu.s_partie_activite">L'individu sous-traite une partie de son activité sur ce site ? : {{individu.s_partie_activite}}</li>
+                <li class="list-group-item" *ngIf="individu.id_soustraitants">Identité des sous-traitants de l'individu : {{individu.id_soustraitants}}</li>
+            </ul>
+            
         </div>
 
         <!-- Signature Clôture Individu -->
@@ -399,6 +422,21 @@
             </ul>
 
         </div>
+
+        <!-- notes individu -->
+        <div class="d-flex flex-column" *ngIf="controle.partenaires_controle.length != 0">
+            <p class="h5">Notes associés à l'individu :</p>
+
+            <li class="list-group-item" *ngFor="let note of individu.notesInd">
+                {{note.titre}} - {{note.heure}}
+                <ul>
+                    <li >
+                        {{note.note}}
+                    </li>
+                </ul>
+            </li>
+        </div>
+                        
     </div>
 
 </div>

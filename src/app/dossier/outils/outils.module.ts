@@ -7,6 +7,7 @@ import { NotesComponent } from './notes/notes.component';
 import { NewNoteComponent } from './new-note/new-note.component';
 import { EditNoteComponent } from './edit-note/edit-note.component';
 import { DeleteNoteComponent } from './delete-note/delete-note.component';
+import { InformationsComponent } from './informations/informations.component';
 
 
 
@@ -16,8 +17,9 @@ import { DeleteNoteComponent } from './delete-note/delete-note.component';
     NotesComponent,
     NewNoteComponent,
     EditNoteComponent,
-    DeleteNoteComponent
-  ],
+    DeleteNoteComponent,
+    InformationsComponent
+  ],  
   imports: [
     CommonModule,
     OutilsRoutingModule,

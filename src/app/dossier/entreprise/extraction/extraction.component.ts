@@ -90,6 +90,7 @@ export class ExtractionComponent implements OnInit {
         var dWidth  = 900 ;
         var dHeight = 980;
 
+
         let onePageCanvas = document.createElement("canvas");
         onePageCanvas.width = 900;
         onePageCanvas.height = 980;

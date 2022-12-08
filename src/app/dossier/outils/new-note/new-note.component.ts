@@ -8,6 +8,8 @@ import { Controle } from '../../../shared/interfaces/controle.interface';
 import { Entreprise } from '../../../shared/interfaces/entreprises.interface';
 import { Ind } from '../../../shared/interfaces/individu.interface';
 import { DataService } from '../../services/data.service';
+import { EntrepriseService } from '../../services/entreprise.service';
+import { ControleService } from '../../services/controle.service';
 
 @Component({
   selector: 'app-new-note',
@@ -35,6 +37,8 @@ export class NewNoteComponent implements OnInit {
     private fb: FormBuilder,
     private router : Router,
     public dataService : DataService,
+    public entrepriseService : EntrepriseService,
+    public controleService : ControleService
   ) { }
 
   changeNom(){
@@ -62,15 +66,17 @@ export class NewNoteComponent implements OnInit {
         console.log('edited controle with note',cont);
         this.outilsService.editerControle(cont).subscribe(controle => {
           console.log('controle enregistré', controle);
+          this.controleService.setControle(controle);
           this.modalService.close('succes');
         }); 
       });
     } else if(note.type == 'entreprise'){
       this.outilsService.getEntrepriseById(note.id).subscribe(ent =>{
         ent.notes_outils.push(note);
-        console.log('edited controle with note',ent);
+        console.log('edited Ent with note',ent);
         this.outilsService.editerEntreprise(ent).subscribe(entreprise => {
-          console.log('controle enregistré', entreprise);
+          console.log('Entreprise enregistré', entreprise);
+          this.entrepriseService.setEntreprise(entreprise);
           this.modalService.close('succes');
         }); 
       });
@@ -78,7 +84,7 @@ export class NewNoteComponent implements OnInit {
       console.log('tESTS 1ST IF INDIVIDU');
       this.outilsService.getIndividuById(note.id).subscribe(ind =>{
         ind.notesInd.push(note);
-        console.log('edited controle with note',ind);
+        console.log('edited Ind with note',ind);
         this.outilsService.editerIndividu(ind).subscribe(individu => {
           console.log('ind enregistré', individu);
           this.dataService.setIndividu(individu);
