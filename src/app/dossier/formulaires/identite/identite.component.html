@@ -44,7 +44,7 @@
         </div>
 
         <!-- Champ dt naissance -->
-        <div class="col-lg-6 mb-1">
+        <div class="col-lg-6 ">
             <div class="form-floating">
                 <input type="date" class="form-control" formControlName="dt_naissance" id="floatingInputdt_naissance"
                     (change)="changeVal()">
@@ -55,7 +55,7 @@
             </div>
         </div>
 
-        <div class="col-lg-6 mb-1">
+        <div class="col-lg-6 ">
             <div class="form-floating">
                 <input type="text" class="form-control" formControlName="lieu_naissance" placeholder="Lieu de naissance"
                     id="floatingInput_lieu_naissance" (change)="changeVal()">
@@ -305,12 +305,12 @@
 <!-- <span>Tyoe de statut for;ulaire</span>
 <pre>{{monFormulaire.value.type_statut }}</pre>
 <span>Check == Autre</span>
-<pre>{{monFormulaire.value.type_statut == 'Autre'}}</pre>
+<pre>{{monFormulaire.value.type_statut == 'Autre'}}</pre> -->
 
 <span style="font-weight: bold;">Service Data</span>
 <pre>{{individu | json}}</pre>
 <span style="font-weight: bold;">Formulaire</span>
-<pre>{{monFormulaire.value | json}}</pre> -->
+<pre>{{monFormulaire.value | json}}</pre>
 
 
 

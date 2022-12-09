@@ -1,3 +1,4 @@
+import { ThisReceiver } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -94,14 +95,21 @@ export class ParametresComponent implements OnInit {
   }
 
   creerControle() {
-    console.log('MaJ du controle')
-    this.controle.newControle = false;
-    this.controle.etat = "created";
-    this.controleService.editerControle(this.controle)
+    console.log('MaJ du controle');
+    let auxCont :Controle = this.controle;
+
+    auxCont.newControle = false;
+    auxCont.etat = "created";
+
+    // this.controle.newControle = false;
+    // this.controle.etat = "created";
+    this.controleService.editerControle(auxCont)
       .subscribe(resp => {
         console.log('reponse', resp);
+        this.router.navigate(['/controle/individus', resp.id]);
+        this.controle = resp;
         this.controleService.setControle(resp);
-        this.router.navigate(['/controle/individus', resp.id])
+
       });
   }
 

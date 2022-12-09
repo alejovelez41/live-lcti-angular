@@ -69,7 +69,7 @@
                 </p>
                 <p *ngIf="individu.date">
                     <img class="me-2" src="../assets/calendrier.svg" alt="" width="25" height="25">
-                    {{individu.date | date : 'd-M-y'}}
+                    {{individu.date | date : 'dd-M-y'}}
                 </p>
                 <p *ngIf="!individu.heure">
                     <img class="me-2" src="../assets/heure.svg" alt="" width="25" height="25">

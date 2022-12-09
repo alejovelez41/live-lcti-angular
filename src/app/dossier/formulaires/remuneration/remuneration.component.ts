@@ -65,6 +65,7 @@ export class RemunerationComponent implements OnInit {
     this.individu.dt_embauche = this.monFormulaire.controls['dt_embauche'].value;
     this.individu.duree = this.monFormulaire.controls['duree'].value;
     this.individu.bullentins = this.monFormulaire.controls['bullentins'].value;
+    this.individu.hsup = this.monFormulaire.controls['hsup'].value;
     this.individu.sbrut = this.monFormulaire.controls['sbrut'].value;
     this.individu.fsalaire = this.monFormulaire.controls['fsalaire'].value;
     this.individu.montant = this.monFormulaire.controls['montant'].value;

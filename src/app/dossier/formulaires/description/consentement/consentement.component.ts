@@ -1,11 +1,12 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbAlert } from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import SignaturePad from 'signature_pad';
 import { SharedStatutService } from '../../../shared-statut.service';
 import { Router } from '@angular/router';
 import { Ind } from 'src/app/shared/interfaces/individu.interface';
 import { DataService } from 'src/app/dossier/services/data.service';
+import { debounceTime, Subject } from 'rxjs';
 
 interface DataItem {
   titre: string;
@@ -20,6 +21,8 @@ interface DataItem {
 })
 
 export class ConsentementComponent implements OnInit {
+  private _success = new Subject<string>();
+  successMessage = '';
 
   individu!: Ind;
 
@@ -52,7 +55,10 @@ export class ConsentementComponent implements OnInit {
 
   constructor(public statutIndividu: SharedStatutService, public activeModal: NgbActiveModal, private fb: FormBuilder, private router: Router, private dataService: DataService) { }
 
-
+  alerteSignature() { 
+    this._success.next(`${new Date()} - Message successfully changed.`); 
+  }
+  @ViewChild('selfClosingAlert', {static: false}) selfClosingAlert: NgbAlert | undefined;
 
   // modale methodes 
   ngAfterViewInit() {
@@ -89,7 +95,7 @@ export class ConsentementComponent implements OnInit {
 
   savePad() {
     if (this.signaturePad.isEmpty()) {
-      alert("Veuillez d'abord fournir une signature.");
+      alert("Merci de faire signer l'individu recensé");
     } else {
       // capturer la signature de l'individu
       this.changeVal();
@@ -132,6 +138,12 @@ export class ConsentementComponent implements OnInit {
     this.monFormulaire.controls['typePI'].setValue(this.individu.typePI);
     this.monFormulaire.controls['numeroPI'].setValue(this.individu.numeroPI);
     this.monFormulaire.controls['dt_naissance'].setValue(this.individu.dt_naissance);
+
+    this._success.pipe(debounceTime(5000)).subscribe(() => {
+      if (this.selfClosingAlert) {
+        this.selfClosingAlert.close();
+      }
+    });
 
   }
 

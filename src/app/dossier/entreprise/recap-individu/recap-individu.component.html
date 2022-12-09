@@ -10,11 +10,11 @@
 
         <!-- Entête des information de l'entreprise -->
         <div class="d-flex justify-content-center" *ngIf="entreprise.denomination != ''">
-            <p class="h3">Informations sur la société : {{entreprise.denomination}} </p>
+            <p class="h3 my-4">Informations sur la société : {{entreprise.denomination}} </p>
         </div>
 
-        <div class="d-flex justify-content-center" *ngIf="entreprise.denomination == ''">
-            <p class="h3">Informations sur la société :</p>
+        <div class="d-flex justify-content-center " *ngIf="entreprise.denomination == ''">
+            <p class="h3 my-4">Informations sur la société :</p>
         </div>
 
 
@@ -27,7 +27,7 @@
                 </li>
                 <!-- Date du contrôle -->
                 <li class="list-group-item" *ngIf="entreprise.date">
-                    Date du contrôle : {{entreprise.date | date : 'd-M-y'}}
+                    Date du contrôle : {{entreprise.date | date : 'dd-M-y'}}
                 </li>
                 <!-- statut siren_fiche -->
                 <li class="list-group-item" *ngIf="entreprise.siren_fiche">
@@ -43,7 +43,7 @@
                 </li>
                 <!-- statut date_dirigeant -->
                 <li class="list-group-item" *ngIf="entreprise.date_dirigeant">
-                    Date de naissance du dirigeant : {{entreprise.date_dirigeant | date : 'd-M-y'}}
+                    Date de naissance du dirigeant : {{entreprise.date_dirigeant | date : 'dd-M-y'}}
                 </li>
                 <!-- statut lieu_dirigeant -->
                 <li class="list-group-item" *ngIf="entreprise.lieu_dirigeant">
@@ -56,8 +56,8 @@
                 </li>
 
                 <!-- notes_controle -->
-                <div class="d-flex flex-column" *ngIf="controle.partenaires_controle.length != 0">
-                    <p class="h5">Notes associés à la societé :</p>
+                <div class="d-flex flex-column " *ngIf="entreprise.notes_outils.length != 0">
+                    <p class="h5 my-2">Notes associés à la societé :</p>
         
                     <li class="list-group-item" *ngFor="let note of entreprise.notes_outils">
                         {{note.titre}} - {{note.heure}}
@@ -80,21 +80,20 @@
 
 <div class="container" id="dataIndividus">
 
-    <div class="d-flex flex-column">
-        <div class="d-flex justify-content-center"
+    <div class="d-flex justify-content-center my-4"
             *ngIf="individu.nom != '' || individu.prenom != '' || individu.civilite != ''">
             <p class="h3">Informations sur : <span *ngIf="individu.civilite">{{individu.civilite}} </span> <span
                     *ngIf="individu.nom">{{individu.nom }} </span> <span
                     *ngIf="individu.prenom">{{individu.prenom}}</span></p>
         </div>
-        <div class="d-flex justify-content-center"
+        <div class="d-flex justify-content-center my-4"
             *ngIf="individu.nom == '' && individu.prenom == '' && individu.civilite == ''">
             <p class="h3">Informations sur l'individu :</p>
         </div>
 
         <!-- description Individu -->
-        <div class="d-flex flex-column" *ngIf="individu.description != ''">
-            <p class="h5">Description :</p>
+        <div class="d-flex flex-column " *ngIf="individu.description != ''">
+            <p class="h5 mb-2">Description :</p>
 
             <ul class="list-group list-group-flush">
                 <li class="list-group-item">{{individu.description}}</li>
@@ -104,7 +103,7 @@
 
         <!-- Consentement Individu -->
         <div class="d-flex flex-column">
-            <p class="h5">Consentement :</p>
+            <p class="h5 my-2">Consentement :</p>
 
             <ul class="list-group list-group-flush" *ngIf="individu.refus">
                 <li class="list-group-item">Le contrôle a été refusé</li>
@@ -127,7 +126,7 @@
 
         <!-- statut Individu -->
         <div class="d-flex flex-column">
-            <p class="h5">Statut :</p>
+            <p class="h5 my-2">Statut :</p>
 
             <ul class="list-group list-group-flush">
                 <li class="list-group-item" *ngIf="individu.statut == 'salarie'">Statut : salarié</li>
@@ -145,14 +144,14 @@
 
         <!-- Indetité individu -->
         <div class="d-flex flex-column">
-            <p class="h5">Identité :</p>
+            <p class="h5 my-2">Identité :</p>
 
             <ul class="list-group list-group-flush">
                 <li class="list-group-item" *ngIf="individu.civilite">Civilité : {{individu.civilite}}</li>
                 <li class="list-group-item" *ngIf="individu.nom">Nom : {{individu.nom}}</li>
                 <li class="list-group-item" *ngIf="individu.prenom">Prénom : {{individu.prenom}}</li>
                 <li class="list-group-item" *ngIf="individu.dt_naissance">Date de naissance : {{individu.dt_naissance |
-                    date : 'd-M-y'}}</li>
+                    date : 'dd-M-y'}}</li>
                 <li class="list-group-item" *ngIf="individu.lieu_naissance">Lieu de naissance :
                     {{individu.lieu_naissance}}</li>
 
@@ -165,7 +164,7 @@
                     *ngIf="individu.n_voie != '' || individu.bis != '' || individu.libelle != '' ">
                     Adresse : {{individu.n_voie}} {{individu.bis}} {{individu.libelle}}
                 </li>
-                <li class="list-group-item" *ngIf="individu.complement">Complement d'adresse : {{individu.complement}}
+                <li class="list-group-item" *ngIf="individu.complement">dresse : {{individu.complement}}
                 </li>
                 <li class="list-group-item" *ngIf="individu.cp">Code postal : {{individu.cp}}</li>
                 <li class="list-group-item" *ngIf="individu.ville">Ville : {{individu.ville}}</li>
@@ -179,28 +178,28 @@
 
         <!-- remuneration individu -->
         <div class="d-flex flex-column">
-            <p class="h5">Rémunération :</p>
+            <p class="h5 my-2">Rémunération :</p>
 
             <ul class="list-group list-group-flush">
                 <li class="list-group-item" *ngIf="individu.emploi">Emploi occupé : {{individu.emploi}}</li>
                 <li class="list-group-item" *ngIf="individu.contrat">Type de contrat : {{individu.contrat}}</li>
                 <li class="list-group-item" *ngIf="individu.dt_embauche">Date d'embauche : {{individu.dt_embauche | date
-                    : 'd-M-y'}}</li>
+                    : 'dd-M-y'}}</li>
                 <li class="list-group-item" *ngIf="individu.duree">Durée de travail hebdomadaire : {{individu.duree}} h
                 </li>
                 <li class="list-group-item" *ngIf="individu.bullentins">Réception de bulletins de salaires ? :
                     {{individu.bullentins}}</li>
                 <li class="list-group-item" *ngIf="individu.hsup">Heures supplémentaires ? : {{individu.hsup}}</li>
                 <li class="list-group-item" *ngIf="individu.sbrut">Montant du salaire brut : {{individu.sbrut |
-                    currency:'EUR'}}</li>
+                    number:'1.2-2'}} €</li>
                 <li class="list-group-item" *ngIf="individu.fsalaire">Type de salaire : {{individu.fsalaire}}</li>
                 <li class="list-group-item" *ngIf="individu.montant">Montant du salaire net : {{individu.montant |
-                    currency:'EUR'}}</li>
+                    number:'1.2-2'}} €</li>
                 <li class="list-group-item" *ngIf="individu.remunere">Est l'idividu rémunéré ? : {{individu.remunere}}
                 </li>
                 <li class="list-group-item" *ngIf="individu.ca">Chiffre d'affaires déclaré sur l'année en cours :
                     {{individu.ca}}</li>
-                <li class="list-group-item" *ngIf="individu.rmensuelle">Rémunération mensuelle : {{individu.rmensuelle}}
+                <li class="list-group-item" *ngIf="individu.rmensuelle">Rémunération mensuelle : {{individu.rmensuelle | number:'1.2-2'}} €
                 </li>
                 <li class="list-group-item" *ngIf="individu.snombre">Nombre de salariés présents lors du contrôle :
                     {{individu.snombre}}</li>
@@ -212,7 +211,12 @@
 
         <!-- Autres iniformations individu -->
         <div class="d-flex flex-column" *ngIf="individu.totalSem != '00:00'">
-            <p class="h5">Détail des horaires :</p>
+            <p class="h5 my-2">Détail des horaires :</p>
+
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item" *ngIf="individu.totalSem">Total des heures : {{individu.totalSem}}</li>
+            </ul>
+
             <div class="table-responsive">
                 <table class="table table-striped">
                     <thead>
@@ -328,7 +332,7 @@
             </div>
         </div>
         <div class="d-flex flex-column" *ngIf=" individu.statut == 'ti' || individu.statut == 'me' ">
-            <p class="h5">Détail sous-traitance :</p>
+            <p class="h5 my-2">Détail sous-traitance :</p>
             <ul class="list-group list-group-flush">
                 <li class="list-group-item" *ngIf="individu.soustraitant">L'individu est-il un sous-traitant sur le site contrôlé ? : {{individu.soustraitant}}</li>
                 <li class="list-group-item" *ngIf="individu.identite_do">Identité du donneur d'ordre de l'individu : {{individu.identite_do}}</li>
@@ -340,7 +344,7 @@
 
         <!-- Signature Clôture Individu -->
         <div class="d-flex flex-column">
-            <p class="h5">Clôture de l'individu :</p>
+            <p class="h5 my-2">Clôture de l'individu :</p>
 
             <ul class="list-group list-group-flush" *ngIf="individu.refus">
                 <li class="list-group-item">Le contrôle a été refusé</li>
@@ -357,8 +361,8 @@
         </div>
 
         <!-- notes individu -->
-        <div class="d-flex flex-column" *ngIf="controle.partenaires_controle.length != 0">
-            <p class="h5">Notes associés à l'individu :</p>
+        <div class="d-flex flex-column" *ngIf="individu.notesInd.length != 0">
+            <p class="h5 my-2">Notes associés à l'individu :</p>
 
             <li class="list-group-item" *ngFor="let note of individu.notesInd">
                 {{note.titre}} - {{note.heure}}
@@ -370,7 +374,7 @@
             </li>
         </div>
         
-    </div>
+
 
 </div>
 
