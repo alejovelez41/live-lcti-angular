@@ -79,30 +79,30 @@
 
         </div>
 
-        <!-- Champ siren -->
-        <div class="col-md-6">
+        <!-- Champ siren / SIRET -->
+        <div class="col-md-12">
             <div class="form-floating mx-1">
                 <input type="text" class="form-control" formControlName="siren" placeholder="Insérer Siren"
                     (change)="changeVal()" id="floatingInput_siren">
                 <label for="floatingInput_siren">Siren</label>
-                <span class="form-text text-danger" *ngIf="isValid('siren')">
-                    Le Siren doit contenir 9 chiffres
+                <span class="form-text text-info" *ngIf="isValid('siren')">
+                    Le Siren doit contenir 9 chiffres ou 14 chiffres pour le Siret
                 </span>
             </div>
 
         </div>
         <!-- Champ siret -->
-        <div class="col-md-6">
+        <!-- <div class="col-md-6">
             <div class="form-floating mx-1">
                 <input type="text" class="form-control" formControlName="siret" placeholder="Insérer Siret"
                     (change)="changeSiret()" id="floatingInput_siret">
                 <label for="floatingInput_siret">Siret</label>
-                <span class="form-text text-danger" *ngIf="isValid('siret')">
+                <span class="form-text text-info" *ngIf="isValid('siret')">
                     Le Siret doit contenir 14 chiffres
                 </span>
             </div>
 
-        </div>
+        </div> -->
 
         <p class="h5 mb-3 mt-3" style="color:#1D458C;">Identification de sa société</p>
 

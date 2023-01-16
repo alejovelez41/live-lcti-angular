@@ -49,7 +49,7 @@ export class StatutComponent implements OnInit {
     fonction: [ '', [ Validators.required]],
     nir: [ '', [ Validators.required, Validators.minLength(13), Validators.maxLength(13) ]],
     siret: [ '', [ Validators.required, Validators.minLength(14), Validators.maxLength(14) ]],
-    siren: [ '', [ Validators.required, Validators.minLength(9), Validators.maxLength(9) ]],
+    siren: [ '', [ Validators.required, Validators.minLength(9), Validators.maxLength(14) ]],
    
   })
   

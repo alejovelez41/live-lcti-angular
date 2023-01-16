@@ -35,6 +35,7 @@ export class ParametresComponent implements OnInit {
     lieu_controle: "",
     inspecteurs_controle: [],
     partenaires_controle: [],
+    autre_partenaire: "",
     entreprises_controle: [],
     individus_controle: [],
     notesCont : this.noteDefault

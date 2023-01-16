@@ -62,7 +62,10 @@
                 <div class="card">
                     <div class="card-body py-1">
                         <h6 class="card-title">{{controle.partenaires_controle.length}} Partenaires associés au contrôle</h6>
-                            <span class="badge bg-secondary rounded-pill mx-1" *ngFor="let item of controle.partenaires_controle ">{{data_partenaires[item].nom}}</span>
+                            <span class="badge bg-secondary rounded-pill mx-1" *ngFor="let item of controle.partenaires_controle ">
+                                <span *ngIf="data_partenaires[item].nom == 'Autre partenaire'" >{{controle.autre_partenaire}}</span>
+                                <span *ngIf="data_partenaires[item].nom != 'Autre partenaire'" >{{data_partenaires[item].nom}}</span>
+                            </span>
                         <div class="d-grid mt-1">
                             <button type="button" class="btn btn-primary btn-sm" (click)="ouvrirModalPartenaires()">
                                 <img class="me-1" src="../assets/associer.png" alt="img associer" width="15" height="15"
@@ -93,7 +96,7 @@
 </div>
 
 
-<!-- <span>Date</span>
+<span>Date</span>
 <pre>{{ date }}</pre>
 <span>Time</span>
 <pre>{{ time }}</pre>
@@ -102,4 +105,4 @@
 <span>Value Controle property</span>
 <pre>{{ controle | json}}</pre>
 <span>Value Data inspecteurs</span>
-<pre>{{ data_inspecteurs | json}}</pre> -->
+<pre>{{ data_inspecteurs | json}}</pre>

@@ -112,6 +112,7 @@ export class DataService {
     "siren_fiche": "",
     "adresse_siege": "",
     "signature_cloture": "",
+    "refus_signature": false,
     "notesInd": this.noteDefault
   };
 

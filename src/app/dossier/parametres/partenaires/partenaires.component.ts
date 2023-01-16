@@ -18,6 +18,7 @@ export class PartenairesComponent implements OnInit {
   data_partenaires!:Partenaire[];
 
   monFormulaire: FormGroup = this.fb.group({
+    autre_partenaire: ['', [Validators.required]],
   })
 
   constructor(private controleService: ControleService,
@@ -27,13 +28,19 @@ export class PartenairesComponent implements OnInit {
   ajouterPartenaires() {
     this.controle.partenaires_controle = [];
     Object.keys(this.monFormulaire.controls).forEach((key, index) => {
-      console.log(this.monFormulaire.get(key)?.value, index);
+      if(index != 0){
+        console.log(this.monFormulaire.get(key)?.value, index);
 
+        if (this.monFormulaire.get(key)?.value == true) {
+          this.controle.partenaires_controle.push(index - 1);
+          console.log(this.controle.partenaires_controle, index);
 
-      if (this.monFormulaire.get(key)?.value == true) {
-        this.controle.partenaires_controle.push(index);
-        console.log(this.controle.partenaires_controle, index)
+          if (this.monFormulaire.get('partenaire13')?.value) {
+            this.controle.autre_partenaire = this.monFormulaire.controls['autre_partenaire'].value;
+          };
+        }
       }
+      
       this.controleService.setControle(this.controle);
     });
   }

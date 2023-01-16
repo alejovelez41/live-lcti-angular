@@ -29,6 +29,23 @@
       <button class="btn btn-secondary" (click)="clearPad()">Effacer</button>
     </div>
 
+        <!-- Case à cocher -->
+        <div class="row">
+          <div class="col-sm">
+            <div class="d-flex justify-content-center">
+              <div class="form-check">
+                <input type="checkbox" value="" formControlName="refus" id="flexCheckDisabled"
+                  (change)="changeVal()" class="form-check-input">
+    
+                <label class="form-check-label h6" for="flexCheckDisabled"
+                  style="color:black; font-size: 12px;font-style:italic">
+                  {{individu.civilite}} {{individu.nom}} {{individu.prenom}} refuse de valider les informations déclarées
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+
 
 
 

@@ -10,6 +10,7 @@ export interface Controle {
     lieu_controle:        string;
     inspecteurs_controle:  any[];
     partenaires_controle:  any[];
+    autre_partenaire:     string;
     entreprises_controle:  any[];
     individus_controle:    any[];
     notesCont:           cardNote[];   

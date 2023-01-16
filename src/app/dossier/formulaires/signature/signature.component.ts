@@ -40,6 +40,7 @@ export class SignatureComponent implements OnInit {
 
   monFormulaire: FormGroup = this.fb.group({
     signature_cloture: ['', [Validators.required]],
+    refus: ['', [Validators.required]],
     cloture: ['', [Validators.required]],
 
   })
@@ -67,6 +68,7 @@ export class SignatureComponent implements OnInit {
     const base64Data = this.signaturePad.toDataURL();
     this.monFormulaire.controls['signature_cloture'].setValue(base64Data);
     this.individu.signature_cloture = this.monFormulaire.controls['signature_cloture'].value;
+    this.individu.refus_signature = this.monFormulaire.controls['refus'].value;
 
     //enregistrer signature clôture?
     // const base64Data = this.signaturePad.toDataURL();

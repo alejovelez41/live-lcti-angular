@@ -77,6 +77,7 @@ export interface Ind {
     siren_fiche:       string;
     adresse_siege:     string;
     signature_cloture: string;
+    refus_signature:    boolean;
     notesInd:          cardNote[];   
     
 }

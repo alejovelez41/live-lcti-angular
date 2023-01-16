@@ -12,7 +12,7 @@
     <div class="modal-body">
         <form class="row g-1" autocomplete="off" [formGroup]="monFormulaire">
             <div class="row">
-                <div class="d-flex flex-column px-5" style="height: 500px;">
+                <div class="d-flex flex-column px-5" style="height: 550px;">
                     <div class="div " *ngFor="let item of data_partenaires ">
                         
                             <div class="form-check form-switch mt-2 " >
@@ -23,14 +23,16 @@
                                 </div>
                             </div>
                     </div>
-                    <!-- Champ statut autre -->
-                    <div class="col-12" *ngIf="monFormulaire.value.inspecteur13">
+
+                    <!-- Champ partenaire autre -->
+                    <div class="col-12" *ngIf="monFormulaire.value.partenaire13">
                         <div class="form-floating">
-                            <input type="text" class="form-control" formControlName="autre_statut" id="floatingInput_autre"
-                                (change)="changeVal()" placeholder="Détail du statut">
-                            <label for="floatingInput_autre">Détail du statut</label>
+                            <input type="text" class="form-control" formControlName="autre_partenaire" id="floatingInput_autre"
+                                (change)="changeVal()" placeholder="Détail du partenaire">
+                            <label for="floatingInput_autre">Détail du partenaire</label>
                         </div>
                     </div>
+                    
 
                 </div>
             </div>
@@ -54,6 +56,7 @@
     </div>
 </div>
 <!-- {{region?.value}}
-{{monFormulaire.value.region}}
+{{monFormulaire.value.region}} -->
 <span> valores</span>
-<pre>{{monFormulaire.value|json}}</pre> -->
+<pre>{{monFormulaire.value|json}}</pre>
+<pre>{{monFormulaire.value.partenaire13}}</pre>
