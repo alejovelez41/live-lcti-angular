@@ -1,3 +1,4 @@
+<!-- Radio Statuts -->
 <div class="d-flex flex-row mb-3 align-items-center justify-content-between">
     <a class="align-self-center me-2" style="color: #122F62;font-weight: bold;"
        (click)="enregistrerIndividu()">
@@ -5,7 +6,13 @@
         <U class="ms-2">Revenir au contrôle</U>
     </a>
     <p class="h3"> <span *ngIf="individu.civilite">{{individu.civilite}} </span> <span *ngIf="individu.nom">{{individu.nom }} </span> <span *ngIf="individu.prenom">{{individu.prenom}}</span></p>
-    <span class="h3 text-center mx-5" >      </span>
+    <div class="d-flex flex-row align-items-center">
+        <span class="h3 text-center mx-5">      </span>
+        <ngb-alert #selfClosingAlert *ngIf="individu.infos.retour_systeme" type="success" (closed)="successMessage = ''">
+            Informations disponibles pour la consultation...
+        </ngb-alert>
+    </div>
+    
 </div>
 <ul class="list-group list-group-horizontal mb-3">
 

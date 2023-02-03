@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Individu } from '../../shared/interfaces/individus.interface';
-import { Ind, horaireJour, notes, cardNote } from '../../shared/interfaces/individu.interface';
+import { Ind, horaireJour, notes, cardNote, informations } from '../../shared/interfaces/individu.interface';
 import { environment } from '../../../environments/environment';
 
 interface DataItem{
@@ -34,6 +34,65 @@ export class DataService {
     "pause" : "",
     "total" : "",
   };
+
+  infosDefault: informations = {
+    "retour_systeme": false,
+    "rei_siren": "",
+    "rei_denomination": "",
+    "rei_code_naf": "",
+    "rei_dt_creation": "",
+    "rei_dt_debut": "",
+    "rei_voie": "",
+    "rei_siret": "",
+    "rei_urssaf": "",
+    "rei_cp": "",
+    "rei_cp_insee": "",
+    "rei_comune": "",
+    "rei_dt_fin": "",
+    "rei_qualite_dir": "",
+    "rei_nom": "",
+    "rei_prenom": "",
+    "rei_dt_naiss": "",
+    "rei_lieu_naiss": "",
+    "rei_titre": "",
+    "rei_num_cext": "",
+    "rei_num_cint": "",
+    "dpae_siret": "",
+    "dpae_nom": "",
+    "dpae_prenom": "",
+    "dpae_dt_naiss": "",
+    "dpae_dt_emb": "",
+    "dpae_hr_emb": "",
+    "dpae_dt_decl": "",
+    "dpae_hr_decl": "",
+    "dsn_adresse": "",
+    "dsn_activite": "",
+    "dsn_contrat": "",
+    "dsn_dt_emb": "",
+    "dsn_duree": "",
+    "dsn_s_brut": "",
+    "dsn_dernier_mois": "",
+    "dsn_total": "",
+    "dsn_nom": "",
+    "dsn_prenom": "",
+    "dsn_dt_naiss": "",
+    "dsn_debut_contrat": "",
+    "dsn_nir": "",
+    "obp7_num_compte": "",
+    "obp7_to": "",
+    "obp7_periode": "",
+    "caae_num_compte": "",
+    "caae_periodes": "",
+    "caae_ca": "",
+    "opc_num_intervention": "",
+    "opc_dt_creation": "",
+    "opc_realisateur": "",
+    "opc_action": "",
+    "opc_pilote": "",
+    "opc_delegue": "",
+    "opc_etat": "",
+    "opc_dt_etat": ""
+  }
 
   individuNew : Ind = {
     "id": "",
@@ -113,7 +172,8 @@ export class DataService {
     "adresse_siege": "",
     "signature_cloture": "",
     "refus_signature": false,
-    "notesInd": this.noteDefault
+    "notesInd": this.noteDefault,
+    "infos": this.infosDefault,
   };
 
   constructor( private http: HttpClient) { }
@@ -130,6 +190,9 @@ export class DataService {
     return this.individu;
   }
   
+  getInfosByNir(individu: Ind){
+    return this.http.get<informations>(`${this.apiUrl}/infos/nir/${individu.nir}`)
+  }
   getIndividus() {
     return this.http.get<Ind[]>(`${this.apiUrl}/individus`)
   }

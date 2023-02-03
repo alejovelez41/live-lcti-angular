@@ -7,7 +7,14 @@
     <span class="h3 text-center mx-5"> </span>
 </div>
 
-<div class="container" id="dataControle">
+<div class="container" id="dataControle" *ngIf="!individu.infos.retour_systeme">
+    <div class="d-flex justify-content-center">
+        <p class="h5 my-3" style="color:#1D458C;">Il n'a pas d'informations à afficher actuellement</p>
+    </div>
+</div>
+
+
+<div class="container" id="dataControle" *ngIf="individu.infos.retour_systeme">
     
     <div class="d-flex flex-column">
 
@@ -22,72 +29,84 @@
 
                 <!-- dt_controle -->
                 <li class="list-group-item">
-                    Siren : 882313042
+                    Siren : {{individu.infos.rei_siren}}
                 </li>
                 <!-- hr_controle -->
                 <li class="list-group-item">
-                    Denomination : LS TRAVAUX
+                    Denomination : {{individu.infos.rei_denomination}}
                 </li>
                 <!-- lieu_controle -->
                 <li class="list-group-item">
-                    Code Naf  : 4399C - MACONNERIE GENERALE, GROS ŒUVRE DE BAT 
+                    Code Naf : 4399C - {{individu.infos.rei_code_naf}}
                 </li>
                                 <!-- dt_controle -->
                 <li class="list-group-item">
-                    Date de création  : 03/03/2020 
+                    Date de création : {{individu.infos.rei_dt_creation}}
                 </li>
                 <!-- hr_controle -->
                 <li class="list-group-item">
-                    Date de début d'activité  : 03/03/2020 
+                    Date de début d'activité : {{individu.infos.rei_dt_debut}}
                 </li>
                 <!-- lieu_controle -->
                 <li class="list-group-item">
-                    Libelle de voie   : ZA MOULIN DES LANDES 
+                    Libelle de voie : {{individu.infos.rei_voie}}
                 </li>
                                 <!-- dt_controle -->
                 <li class="list-group-item">
-                    Siren : 882313042
+                    Siret : {{individu.infos.rei_siret}}
                 </li>
                 <!-- hr_controle -->
                 <li class="list-group-item" >
-                    Urssaf compétente  : 527 
+                    Urssaf compétente  : {{individu.infos.rei_urssaf}}
                 </li>
-                <!-- lieu_controle -->
+                <!-- lieu_cp -->
                 <li class="list-group-item">
-                    Code Postal  : 49480
+                    Code Postal : {{individu.infos.rei_cp}}
+                </li>
+                <!-- lieu_cp insee-->
+                <li class="list-group-item">
+                    Code Postal Insee  : {{individu.infos.rei_cp_insee}}
                 </li>
                 
                 <!-- dt_controle -->
                 <li class="list-group-item">
-                    Libellé commune : VERRIERES EN ANJOU 
+                    Libellé commune : {{individu.infos.rei_comune}}
                 </li>
                 <!-- hr_controle -->
                 <li class="list-group-item">
-                    Date de fin d'activité  : 
+                    Date de fin d'activité : {{individu.infos.rei_dt_fin}}
                 </li>
                 <!-- lieu_controle -->
                 <li class="list-group-item">
-                    Qualité Dirigeant : Président de SAS  
+                    Qualité Dirigeant : {{individu.infos.rei_qualite_dir}}
                 </li>
                                 <!-- dt_controle -->
                 <li class="list-group-item">
-                    Nom patronymique   : AYKUL
+                    Nom patronymique : {{individu.infos.rei_nom}}
                 </li>
                 <!-- hr_controle -->
                 <li class="list-group-item">
-                    Prénoms patronymiques   : ABDULKERIM 
+                    Prénoms patronymiques : {{individu.infos.rei_prenom}}
                 </li>
                 <!-- lieu_controle -->
                 <li class="list-group-item">
-                    Date de naissance    : 03/09/2,,,  
+                    Date de naissance : {{individu.infos.rei_dt_naiss}} 
                 </li>
                                 <!-- dt_controle -->
                 <li class="list-group-item">
-                    Lieu de naissance  : 99202
+                    Lieu de naissance : {{individu.infos.rei_lieu_naiss}}
                 </li>
                 <!-- hr_controle -->
                 <li class="list-group-item">
-                    Titre : SAS 
+                    Titre : {{individu.infos.rei_titre}}
+                </li>
+                <!-- rei_num_cext -->
+                <li class="list-group-item">
+                    Titre : {{individu.infos.rei_num_cext}}
+                </li>
+                <!-- rei_num_cint -->
+                <li class="list-group-item">
+                    Titre : {{individu.infos.rei_num_cint}}
                 </li>
             </ul>
         </div>
@@ -101,47 +120,206 @@
         <div class="d-flex flex-column">
             <ul class="list-group list-group-flush">
 
-                <!-- dt_controle -->
+                <!-- dpae_siret -->
                 <li class="list-group-item">
-                    Siret : 88231304200013
+                    Siret : {{individu.infos.dpae_siret}}
                 </li>
-                <!-- hr_controle -->
+                <!-- dpae_nom -->
                 <li class="list-group-item">
-                    Nom  : CERBAS 
+                    Nom : {{individu.infos.dpae_nom}} 
                 </li>
-                <!-- lieu_controle -->
+                <!-- dpae_prenom -->
                 <li class="list-group-item">
-                    Prénom  : AHMET 
+                    Prénom : {{individu.infos.dpae_prenom}} 
                 </li>
-                                <!-- dt_controle -->
+                                <!-- dpae_dt_naiss -->
                 <li class="list-group-item">
-                    Date de naissance   : 06/05/1967
+                    Date de naissance : {{individu.infos.dpae_dt_naiss}}
                 </li>
-                <!-- hr_controle -->
+                <!-- dpae_dt_emb -->
                 <li class="list-group-item">
-                    Date d'embauche   : 16/03/2020 
+                    Date d'embauche : {{individu.infos.dpae_dt_emb}}
                 </li>
-                <!-- lieu_controle -->
+                <!-- dpae_hr_emb -->
                 <li class="list-group-item">
-                    Heure d'embauche    : 08:00:00 
+                    Heure d'embauche : {{individu.infos.dpae_hr_emb}}
                 </li>
-                                <!-- dt_controle -->
+                                <!-- dpae_dt_decl -->
                 <li class="list-group-item">
-                    Date de déclaration  : 17/03/2020
+                    Date de déclaration : {{individu.infos.dpae_dt_decl}}
                 </li>
-                <!-- hr_controle -->
+                <!-- dpae_hr_decl -->
                 <li class="list-group-item">
-                    Heure de déclaration   : 11:48:21
+                    Heure de déclaration : {{individu.infos.dpae_hr_decl}}
                 </li>
-
-
-                
-
 
             </ul>
 
         </div>
 
+        <!-- Entête des information de l'entreprise -->
+        <div class="d-flex justify-content-center">
+            <p class="h3">Informations DSN :</p>
+        </div>
+
+
+        <div class="d-flex flex-column">
+            <ul class="list-group list-group-flush">
+
+                <!-- dsn_adresse -->
+                <li class="list-group-item">
+                    Adresse de domicile : {{individu.infos.dsn_adresse}}
+                </li>
+                <!-- dsn_activite -->
+                <li class="list-group-item">
+                    Activité : {{individu.infos.dsn_activite}} 
+                </li>
+                <!-- dsn_contrat -->
+                <li class="list-group-item">
+                    Type de contrat : {{individu.infos.dsn_contrat}} 
+                </li>
+                <!-- dsn_dt_emb -->
+                <li class="list-group-item">
+                    Date d'embauche : {{individu.infos.dsn_dt_emb}}
+                </li>
+                <!-- dsn_duree -->
+                <li class="list-group-item">
+                    Durée du travail : {{individu.infos.dsn_duree}}
+                </li>
+                <!-- dsn_s_brut -->
+                <li class="list-group-item">
+                    Salaire brut : {{individu.infos.dsn_s_brut}}
+                </li>
+                <!-- dsn_dernier_mois -->
+                <li class="list-group-item">
+                    Dernier mois ou dernier trimestre de déclaration : {{individu.infos.dsn_dernier_mois}}
+                </li>
+                <!-- dsn_total -->
+                <li class="list-group-item">
+                    Total ( salaires bruts - bases assujetties et remunerations) : {{individu.infos.dsn_total}}
+                </li>
+                <!-- dsn_nom -->
+                <li class="list-group-item">
+                    Nom : {{individu.infos.dsn_nom}}
+                </li>
+                <!-- dsn_prenom -->
+                <li class="list-group-item">
+                    Prénom : {{individu.infos.dsn_prenom}} 
+                </li>
+                <!-- dsn_dt_naiss -->
+                <li class="list-group-item">
+                    Date de naissance : {{individu.infos.dsn_dt_naiss}} 
+                </li>
+                <!-- dsn_debut_contrat -->
+                <li class="list-group-item">
+                    Debut de contrat : {{individu.infos.dsn_debut_contrat}}
+                </li>
+                <!-- dsn_nir -->
+                <li class="list-group-item">
+                    NIR : {{individu.infos.dsn_nir}}
+                </li>
+            </ul>
+
+        </div>
+
+        <!-- Entête des information de l'entreprise -->
+        <div class="d-flex justify-content-center">
+            <p class="h3">Informations OBP7 :</p>
+        </div>
+
+
+        <div class="d-flex flex-column">
+            <ul class="list-group list-group-flush">
+
+                <!-- obp7_num_compte -->
+                <li class="list-group-item">
+                    N° de compte : {{individu.infos.obp7_num_compte}}
+                </li>
+                <!-- obp7_to -->
+                <li class="list-group-item">
+                    Taxation d'office  : {{individu.infos.obp7_to}} 
+                </li>
+                <!-- obp7_periode -->
+                <li class="list-group-item">
+                    Période concernée  : {{individu.infos.obp7_periode}} 
+                </li>
+            </ul>
+
+        </div>
+
+        <!-- Entête des information de l'entreprise -->
+        <div class="d-flex justify-content-center">
+            <p class="h3">Informations CAAE :</p>
+        </div>
+
+
+        <div class="d-flex flex-column">
+            <ul class="list-group list-group-flush">
+
+                <!-- caae_num_compte -->
+                <li class="list-group-item">
+                    N° de compte : {{individu.infos.caae_num_compte}}
+                </li>
+                <!-- caae_periodes -->
+                <li class="list-group-item">
+                    Périodes  : {{individu.infos.caae_periodes}} 
+                </li>
+                <!-- caae_ca -->
+                <li class="list-group-item">
+                    Chiffres d'affaires sur ces périodes : {{individu.infos.caae_ca}} 
+                </li>
+            </ul>
+
+        </div>
+
+                <!-- Entête des information de l'entreprise -->
+                <div class="d-flex justify-content-center">
+                    <p class="h3">Informations OPC :</p>
+                </div>
+        
+        
+                <div class="d-flex flex-column">
+                    <ul class="list-group list-group-flush">
+        
+                        <!-- opc_num_intervention -->
+                        <li class="list-group-item">
+                            N°intervention : {{individu.infos.opc_num_intervention}}
+                        </li>
+                        <!-- opc_dt_creation -->
+                        <li class="list-group-item">
+                            Date création  : {{individu.infos.opc_dt_creation}} 
+                        </li>
+                        <!-- opc_realisateur -->
+                        <li class="list-group-item">
+                            Réalisateur principal  : {{individu.infos.opc_realisateur}} 
+                        </li>
+                        <!-- opc_action -->
+                        <li class="list-group-item">
+                            Action  : {{individu.infos.opc_action}} 
+                        </li>
+                        <!-- opc_pilote -->
+                        <li class="list-group-item">
+                            Pilote du contrôle  : {{individu.infos.opc_pilote}} 
+                        </li>
+                        <!-- opc_delegue -->
+                        <li class="list-group-item">
+                            Délégué : {{individu.infos.opc_delegue}}
+                        </li>
+                        <!-- opc_etat -->
+                        <li class="list-group-item">
+                            État  : {{individu.infos.opc_etat}} 
+                        </li>
+                        <!-- opc_dt_etat -->
+                        <li class="list-group-item">
+                            Date état : {{individu.infos.opc_dt_etat}}
+                        </li>
+                    </ul>
+        
+                </div>
+        
+
     </div>
 
 </div>
+<!-- <span style="font-weight: bold;">Individu Data</span>
+<pre>{{individu | json}}</pre> -->

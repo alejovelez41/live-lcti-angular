@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Ind } from 'src/app/shared/interfaces/individu.interface';
+import { DataService } from '../../services/data.service';
 
 @Component({
   selector: 'app-informations',
@@ -7,14 +9,16 @@ import { Component, OnInit } from '@angular/core';
   ]
 })
 export class InformationsComponent implements OnInit {
-
-  constructor() { }
+  individu!: Ind;
+  
+  constructor(private dataService: DataService) { }
 
   revenirArriere(){
     
   }
 
   ngOnInit(): void {
+    this.individu = this.dataService.getIndividu();
   }
 
 }

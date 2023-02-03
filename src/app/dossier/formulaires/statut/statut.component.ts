@@ -10,6 +10,7 @@ import { Controle } from 'src/app/shared/interfaces/controle.interface';
 import { ControleService } from '../../services/controle.service';
 import { Ind } from 'src/app/shared/interfaces/individu.interface';
 import { DataService } from '../../services/data.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 interface DataItem{
@@ -112,6 +113,25 @@ export class StatutComponent implements OnInit {
           if (this.controle.entreprises_controle.includes(ent.id)) {
             this.entreprises.push(ent);}});
       });
+  }
+
+  nir(){
+    console.log('Get infos by Nir Called');
+
+    this.dataService.getInfosByNir(this.individu)
+      .subscribe(informations => {
+        console.log('reponse: ', informations);
+        if(!informations){
+          console.log('Pas de retour api du tout')
+        } else{
+          this.individu.infos = informations;
+          this.individu.infos.retour_systeme = true;
+          console.log('changement bool retour syst: ', this.individu)
+          this.changeVal();
+        }     
+        
+      });
+
   }
 
   changeStatut(){    

@@ -10,7 +10,7 @@ const routes: Routes = [
     component: NavOutilsComponent,
     children: [
       {path: 'notes', component: NotesComponent},
-      {path: 'informations', component: InformationsComponent},
+      {path: 'informations/:id', component: InformationsComponent},
       {path: '**', redirectTo: 'notes'},
     ]
   }

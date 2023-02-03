@@ -70,7 +70,7 @@
         <div class="col-md-12 mb-1">
             <div class="form-floating mx-1">
                 <input type="text" class="form-control" formControlName="nir" placeholder="Insérer NIR"
-                    (change)="changeVal()" id="floatingInput_nir">
+                    (change)="changeVal(); nir()" id="floatingInput_nir">
                 <label for="floatingInput_nir">NIR</label>
                 <span class="form-text text-info" *ngIf="isValid('nir')">
                     Le Nir doit contenir 13 chiffres

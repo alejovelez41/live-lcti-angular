@@ -7,7 +7,7 @@
     <div class="offcanvas-body" style="background-color: #008088; color: white;">
         <ul class="list-group list-group-flush flex-column mb-auto">
             <li class="list-group-item" style="background-color: #008088; border-color: white">
-                <a routerLink="/outils/informations" class="nav-link link-dark" aria-current="page" style="color: white;" (click)="offcanvas.dismiss('Cross click')">
+                <a [routerLink]="['/outils/informations',individu.id]" class="nav-link link-dark" aria-current="page" style="color: white;" (click)="offcanvas.dismiss('Cross click')">
                     <img src="../assets/infos.svg" alt="" width="25" height="25" display="flex">
                     Consultation des informations
                 </a>
@@ -66,7 +66,7 @@
         <a class="navbar-brand" href="#">
             <img src="../assets/Logo.png" alt="" width="212" height="46" display="flex">
         </a>
-
+        
         <ul class="navbar-nav navbar-right">
             <li class="nav-item">
                 <a class="nav-link h5" style="color: #000000" href="#">Franck CHAUSSON</a>

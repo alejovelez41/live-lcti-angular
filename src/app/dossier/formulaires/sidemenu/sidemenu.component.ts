@@ -1,11 +1,14 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit, ViewChild} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Subject } from 'rxjs';
 import { SharedStatutService } from 'src/app/dossier/shared-statut.service';
 import { Controle } from 'src/app/shared/interfaces/controle.interface';
 import { Ind } from 'src/app/shared/interfaces/individu.interface';
 import { Individu } from '../../../shared/interfaces/individus.interface';
 import { ControleService } from '../../services/controle.service';
 import { DataService } from '../../services/data.service';
+import { debounceTime } from 'rxjs/operators';
+import { NgbAlert } from '@ng-bootstrap/ng-bootstrap';
 
 interface MenuItem{
   texte: string;
@@ -29,6 +32,8 @@ interface DataItem{
 
 
 export class SidemenuComponent implements OnInit {
+  private _success = new Subject<string>();
+  successMessage = '';
   idIndividu !: string|number;
   individu!: Ind;
   individus: Individu[] = [];
@@ -74,6 +79,8 @@ export class SidemenuComponent implements OnInit {
     return this.statutIndividu.blocknav;
   }
 
+  @ViewChild('selfClosingAlert', {static: false}) selfClosingAlert: NgbAlert | undefined;
+
   enregistrerIndividu(){
     this.dataService.editerIndividu(this.individu).subscribe(resp => {
       console.log(resp);
@@ -88,6 +95,12 @@ export class SidemenuComponent implements OnInit {
     this.consentementIndividu = this.statutIndividu.consentementInd;
     this.refusIndividu = this.statutIndividu.refusInd;
     this.blockNavigation = this.statutIndividu.blocknav;
+
+    this._success.pipe(debounceTime(5000)).subscribe(() => {
+      if (this.selfClosingAlert) {
+        this.selfClosingAlert.close();
+      }
+    });
 
     this.activatedRoute.params
       .subscribe( ({id}) => console.log(id))
