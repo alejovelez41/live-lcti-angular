@@ -51,6 +51,9 @@ export class StatutComponent implements OnInit {
     nir: [ '', [ Validators.required, Validators.minLength(13), Validators.maxLength(13) ]],
     siret: [ '', [ Validators.required, Validators.minLength(14), Validators.maxLength(14) ]],
     siren: [ '', [ Validators.required, Validators.minLength(9), Validators.maxLength(14) ]],
+    dt_creation: ['', [Validators.required]],
+    type_statut: ['', [Validators.required]],
+    autre_statut: ['', [Validators.required]],
    
   })
   
@@ -61,6 +64,8 @@ export class StatutComponent implements OnInit {
                private dataService : DataService,
                private entrepriseService: EntrepriseService,
                private controleService: ControleService) {}
+    
+  type_statuts: any = [ 'Co-gérant', 'Entrepreneur individuel', 'Gérant majoritaire', 'Gérant égalitaire ou minoritaire','Autre'];
 
   ouvrirModal() {
     const modalRef = this.modalService.open(AssocierEntrepriseComponent, { size: 'xl' });
@@ -168,10 +173,29 @@ export class StatutComponent implements OnInit {
   
 
   changeVal(){
+    this.individu.statut = this.monFormulaire.controls['statut'].value;
     this.individu.fonction = this.monFormulaire.controls['fonction'].value;
     this.individu.nir = this.monFormulaire.controls['nir'].value;
     this.individu.siret = this.monFormulaire.controls['siret'].value;
     this.individu.siren = this.monFormulaire.controls['siren'].value;
+    this.individu.dt_creation = this.monFormulaire.value.dt_creation;
+    this.individu.type_statut = this.monFormulaire.value.type_statut;
+    this.individu.autre_statut = this.monFormulaire.value.autre_statut;
+
+    //deblocage de la navigation selon le statut et le niveau de remplisage
+
+    if(this.dataService.getnav()[4]){ //si c'est deja debloqué
+      if(this.individu.statut == 'salarie'){
+        this.dataService.setnav([false, false, false, false, false]);
+      }else if( this.individu.statut == 'autre' && this.individu.fonction != ''){
+        this.dataService.setnav([false, false, false, false, false]);
+      }
+    }else if(this.individu.statut == 'ti' && this.individu.idEnt == ''){
+      this.dataService.setnav([false, false, true, true, true]);
+    }else if(this.individu.statut == 'me' && this.individu.idEnt == ''){
+      this.dataService.setnav([false, false, true, true, true]);
+    }
+
     // MaJ valeurs ID entreprise
     // this.individu.idEnt = this.entreprise.id;
     // this.individu.denominationEnt = this.entreprise.denomination;
@@ -190,6 +214,11 @@ export class StatutComponent implements OnInit {
 
   associer() {
     this.router.navigate(['./entreprise/societe']);
+  }
+
+  creationFiche() {
+    this.entrepriseService.setCreationFiche(true);
+    this.router.navigate(['/formulaires/identite', this.individu.id]);
   }
 
   isValid( campo: string ) {
@@ -211,31 +240,31 @@ export class StatutComponent implements OnInit {
     this.monFormulaire.controls['siren'].setValue(this.individu.siren);
 
     //Désactiver champs de saisie
-    if (this.individu.statut == 'salarie') {
-      this.monFormulaire.controls['fonction'].disable();
-      this.monFormulaire.controls['nir'].enable();
-      this.monFormulaire.controls['siret'].disable();
-      this.monFormulaire.controls['siren'].disable();
+    // if (this.individu.statut == 'salarie') {
+    //   this.monFormulaire.controls['fonction'].disable();
+    //   this.monFormulaire.controls['nir'].enable();
+    //   this.monFormulaire.controls['siret'].disable();
+    //   this.monFormulaire.controls['siren'].disable();
       
-    }
-    else if (this.individu.statut == 'ti' || this.statInd == 'me'){
-      this.monFormulaire.controls['fonction'].disable();
-      this.monFormulaire.controls['nir'].enable();
-      this.monFormulaire.controls['siret'].enable();
-      this.monFormulaire.controls['siren'].enable();
-    }
-    else if (this.individu.statut == 'autre'){
-      this.monFormulaire.controls['fonction'].enable();
-      this.monFormulaire.controls['nir'].enable();
-      this.monFormulaire.controls['siret'].enable();
-      this.monFormulaire.controls['siren'].enable();
-    }
-    else {
-      this.monFormulaire.controls['fonction'].disable();
-      this.monFormulaire.controls['nir'].disable();
-      this.monFormulaire.controls['siret'].disable();
-      this.monFormulaire.controls['siren'].disable();
-    }
+    // }
+    // else if (this.individu.statut == 'ti' || this.individu.statut == 'me'){
+    //   this.monFormulaire.controls['fonction'].disable();
+    //   this.monFormulaire.controls['nir'].enable();
+    //   this.monFormulaire.controls['siret'].enable();
+    //   this.monFormulaire.controls['siren'].enable();
+    // }
+    // else if (this.individu.statut == 'autre'){
+    //   this.monFormulaire.controls['fonction'].enable();
+    //   this.monFormulaire.controls['nir'].enable();
+    //   this.monFormulaire.controls['siret'].enable();
+    //   this.monFormulaire.controls['siren'].enable();
+    // }
+    // else {
+    //   this.monFormulaire.controls['fonction'].disable();
+    //   this.monFormulaire.controls['nir'].disable();
+    //   this.monFormulaire.controls['siret'].disable();
+    //   this.monFormulaire.controls['siren'].disable();
+    // }
 
 
     // console.log("identité entreprise est :")

@@ -6,41 +6,40 @@
         <!-- Champ Civilites -->
         <div class="col-lg-2">
             <div class="form-floating">
-            <select class="form-select" (change)="changeVal()" formControlName="civilite" id="floatingInput_civilite">
-                <option value="">Civilité</option>
-                <option *ngFor="let civilite of civs" [value]="civilite">
-                    {{civilite}}
-                </option>>
-            </select>
-            <label for="floatingInput_civilite">Civilite</label>
-                
+                <select class="form-select" (change)="changeVal()" formControlName="civilite"
+                    id="floatingInput_civilite">
+                    <option value="">Civilité</option>
+                    <option *ngFor="let civilite of civs" [value]="civilite">
+                        {{civilite}}
+                    </option>>
+                </select>
+                <label for="floatingInput_civilite">Civilite</label>
             </div>
         </div>
 
-        
+
 
         <!-- Champ Nom -->
         <div class="col-lg-5">
             <div class="form-floating">
-                <input type="text" class="form-control" formControlName="nom" placeholder="Nom" (change)="changeVal()" id="floatingInput_Nom">
-                <label for="floatingInput_Nom"  >Nom<span style="color : red">*</span></label>
+                <input type="text" class="form-control" formControlName="nom" placeholder="Nom" (change)="changeVal()"
+                    id="floatingInput_Nom">
+                <label for="floatingInput_Nom">Nom<span style="color : red">*</span></label>
                 <span class="form-text text-danger" *ngIf="isValid('nom')">
                     Le nom est une information obligatoire
                 </span>
             </div>
-
         </div>
 
         <div class="col-lg-5">
             <div class="form-floating">
                 <input type="text" class="form-control" formControlName="prenom" placeholder="Prénom"
-                (change)="changeVal()" id="floatingInput_prenom">
-                <label for="floatingInput_prenom" >Prénom<span style="color : red">*</span></label>
+                    (change)="changeVal()" id="floatingInput_prenom">
+                <label for="floatingInput_prenom">Prénom<span style="color : red">*</span></label>
                 <span class="form-text text-danger" *ngIf="isValid('prenom')">
                     Le prénom est une information obligatoire
                 </span>
             </div>
-
         </div>
 
         <!-- Champ dt naissance -->
@@ -61,15 +60,14 @@
                     id="floatingInput_lieu_naissance" (change)="changeVal()">
                 <label for="floatingInput_lieu_naissance">Lieu de naissance</label>
             </div>
-
         </div>
 
         <!-- Input Radio  -->
-        <div class="col-lg-3">
+        <div class="col-lg-2">
             <label class="fs-6 col-form-label">Nationalité Française?</label>
         </div>
 
-        <div class="col-lg-1">
+        <div class="col-lg-2">
             <div class="form-check">
                 <input class="form-check-input" (change)="changeVal()" type="radio" value="Oui"
                     formControlName="nationalite_fr" id="flexCheckOui">
@@ -79,7 +77,7 @@
             </div>
         </div>
 
-        <div class="col-lg-1">
+        <div class="col-lg-2">
             <div class="form-check">
                 <input class="form-check-input" (change)="changeVal()" type="radio" value="Non"
                     formControlName="nationalite_fr" id="flexCheckNon">
@@ -87,191 +85,129 @@
                     Non
                 </label>
             </div>
-
         </div>
 
         <!-- Champ Pays de naissance -->
-        <div class="col-lg-3">
-            <!-- <div class="form-floating"> id="floatingInputpays_naissance" <label for="floatingInputpays_naissance">Pays de naissance</label>-->
-                <div class="form-floating" >
-                    
-                    <!-- <div class="ng-autocomplete"> -->
-                    <ng-autocomplete #countryList
-                                     [data]="pays_monde" 
-                                     formControlName="pays_naissance"
-                                     [initialValue]="cle_pays"
-                                     placeholder="Pays de Naissance"
-                                     [searchKeyword]="keyword"
-                                     notFoundText="Non trouvé"
-                                     [itemTemplate]="countryListTemplate"
-                                     [notFoundTemplate]="notFoundTemplate"
-                                     (ngModelChange)="changeVal()"
-                                     id="floating_pays_naissance">                        
-                                     <!-- min-length="1"
-                                     (selected)='selectEventCountry($event)'
-                                     (inputCleared)='onCountryCleared($event, false)' 
-                                     [customFilter]="customFilter" -->
-                    </ng-autocomplete>
-                    <label class="form-check-label" for="floating_pays_naissance"></label>    
-    
-                    <ng-template #countryListTemplate let-item>
-                        <a [innerHTML]="item"></a>
-                    </ng-template>
-    
-                    <ng-template #notFoundTemplate let-notFound>
-                        <div [innerHTML]="notFound"></div>
-                    </ng-template>
-                    <!-- </div> -->
-                </div>
-            <!-- </div> -->
-           
+        <div class="col-lg-6">
+            <div class="form-floating">
+                <ng-autocomplete #countryList [data]="pays_monde" formControlName="pays_naissance"
+                    [initialValue]="cle_pays" placeholder="Pays de Naissance" [searchKeyword]="keyword"
+                    notFoundText="Non trouvé" [itemTemplate]="countryListTemplate" [notFoundTemplate]="notFoundTemplate"
+                    (ngModelChange)="changeVal()" id="floating_pays_naissance">
+
+                </ng-autocomplete>
+                <label class="form-check-label" for="floating_pays_naissance"></label>
+
+                <ng-template #countryListTemplate let-item>
+                    <a [innerHTML]="item"></a>
+                </ng-template>
+
+                <ng-template #notFoundTemplate let-notFound>
+                    <div [innerHTML]="notFound"></div>
+                </ng-template>
+            </div>
         </div>
-
-
-        <!-- <div class="col-md-3">
-            <input type="text" class="form-control" formControlName="pays_naissance" placeholder="Pays de Naissance">
-        </div> -->
 
         <!-- Champ Tel -->
-        <div class="col-lg-4">
-            <div class="form-floating">
-                <input type="text" class="form-control" formControlName="tel" (change)="changeVal()" placeholder="Téléphone"
-                id="floatingInput_tel">
-                <label for="floatingInput_tel">Téléphone</label>
-            <span class="form-text text-info" *ngIf="isValid('tel')">
-                Le numéro doit contenir 10 chiffres
-            </span>
-            </div>
-
-        </div>
-
-        <div class="h5" style="color:#1D458C;">Adresse</div>
-        <!-- Champ Numéro de la voi -->
-        <div class="col-lg-2">
-            <div class="form-floating">
-                <input type="text" class="form-control" (change)="changeVal()" formControlName="n_voie" 
-                placeholder="N° de la voie" id="floatingInputn_voie">
-                <label for="floatingInputn_voie">N° de la voie</label>
-            </div>
-
-        </div>
-
-
-        <!-- Champ Bis -->
-        <div class="col-lg-2">
-            <div class="form-floating">
-                <select class="form-select" (change)="changeVal()" formControlName="bis" id="floatingInputbis">
-                     <option value="">Bis</option>
-                    <option *ngFor="let bis of bises" [value]="bis">
-                        {{bis}}
-                    </option>>
-                </select>
-                <label for="floatingInputbis">Bis</label>
-            </div>
-
-            <!-- <input type="text" class="form-control" formControlName="bis" placeholder="Bis"> -->
-        </div>
-
-
-        <!-- Champ Libellé -->
-        <!-- <div class="col-lg-8">
-            <div class="form-floating">
-                <select class="form-select" (change)="changeVal()" formControlName="libelle" id="floatingInputlibelle">
-                    <option value="">Libellé de la voie ou du lieu dit</option>
-                    <option *ngFor="let libelle of libelles" [value]="libelle">
-                        {{libelle}}
-                    </option>>
-                </select>
-                <label for="floatingInputlibelle">Libelle</label>   
-            </div>
-        </div> -->
-
-        <!-- Champ Libellé -->
-        <div class="col-lg-8">
-            <div class="form-floating">
-                <input type="text" class="form-control" formControlName="libelle" (change)="changeVal()"  id="floatingInputlibelle" placeholder="Libellé de la voie ou du lieu dit">
-                <label for="floatingInputlibelle">Libellé</label>
-            </div>
-
-        </div>
-
-
-        <!-- <div class="col-md-8">
-            <input type="text" class="form-control" formControlName="libelle"
-                placeholder="Libellé de la voie ou de lieu dit">
-        </div> -->
-
-        <!-- Champ Complement -->
         <div class="col-lg-12">
             <div class="form-floating">
-                <input type="text" class="form-control" formControlName="complement" (change)="changeVal()"  id="floatingInputcomplement" placeholder="Complément">
-                <label for="floatingInputcomplement">Complément</label>
-            </div>
-
-        </div>
-
-        <!-- Champ Code Postal -->
-        <div class="col-lg-6">
-            <div class="form-floating">
-                <input type="text" class="form-control" formControlName="cp" (change)="changeVal()" id="floatingInputcp" placeholder="Code Postal">
-                <label for="floatingInputcp">Code Postal</label>
-            </div>
-
-        </div>
-
-        <!-- Champ ville -->
-        <div class="col-lg-6">
-            <div class="form-floating">
-                <input type="text" class="form-control" formControlName="ville" (change)="changeVal()" id="floatingInputVille" placeholder="Ville">
-                <label for="floatingInputVille">Ville</label>
-            </div>
-
-        </div>
-
-        <div class="h5 bt-1" style="color:#1D458C;">Affiliation</div>
-
-        <!-- Champ dt_creation -->
-        <div class="col-lg-6 ">
-            <div class="form-floating">
-                <input type="date" class="form-control" formControlName="dt_creation" id="floatingInputValue"
-                    (change)="changeVal()">
-                <label for="floatingInputValue">Date de création</label>
-            </div>
-
-        </div>
-
-        <!-- Champ Type de statut -->
-
-
-        <div class="col-lg-6" *ngIf="individu.statut != 'me'">
-            <div class="form-floating">
-                <select class="form-select" (change)=" changeVal()" formControlName="type_statut" id="floatingInput_type_statut">
-                    <option value="">Choisissez un type de statut</option>
-                    <option *ngFor="let type_statut of type_statuts" [value]="type_statut">
-                        {{type_statut}}
-                    </option>
-                </select>
-                <label for="floatingInput_type_statut">Type de statut</label>
-                
+                <input type="text" class="form-control" formControlName="tel" (change)="changeVal()"
+                    placeholder="Téléphone" id="floatingInput_tel">
+                <label for="floatingInput_tel">Téléphone</label>
+                <span class="form-text text-info" *ngIf="isValid('tel')">
+                    Le numéro doit contenir 10 chiffres
+                </span>
             </div>
         </div>
 
-        <div class="col-lg-6" *ngIf="individu.statut == 'me'">
-            <div class="form-floating">
-                <input type="text" class="form-control" formControlName="type_statut" id="floatingInput_type_statut2"
-                    (change)="changeVal()">
-                <label for="floatingInput_type_statut2">Type de statut</label>
+        <div class="d-flex flex-column">
+            <div class="h5" style="color:#1D458C;">Adresse personnelle</div>
+
+            <!-- Champ Libellé -->
+            <div class="row g-1 mt-0">
+                <div class="col-lg-12 ">
+                    <div class="form-floating">
+                        <input type="text" class="form-control" formControlName="adresse_perso" (change)="changeVal()"
+                            id="floatingInputlibelle" placeholder="Libellé de la voie ou du lieu dit">
+                        <label for="floatingInputlibelle">Insérer adresse</label>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Champ Code Postal -->
+            <div class="row g-1 mt-0">
+                <div class="col-lg-6">
+                    <div class="form-floating">
+                        <input type="text" class="form-control" formControlName="cp_perso" (change)="changeVal()"
+                            id="floatingInputcp" placeholder="Code Postal">
+                        <label for="floatingInputcp">Code Postal</label>
+                    </div>
+
+                </div>
+
+                <!-- Champ ville -->
+                <div class="col-lg-6">
+                    <div class="form-floating">
+                        <input type="text" class="form-control" formControlName="ville_perso" (change)="changeVal()"
+                            id="floatingInputVille" placeholder="Ville">
+                        <label for="floatingInputVille">Ville</label>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="row g-1 mt-0">
+                <div class="form-check ms-1">
+                    <input type="checkbox" value="" formControlName="difference_adresse" id="flexCheckDisabled"
+                        (change)="changeVal()" class="form-check-input">
+
+                    <label class="form-check-label h6" for="flexCheckDisabled"
+                        style="color:black; font-size: 12px;font-style:italic">
+                        L'individu possede une adresse profesionelle differente de l'adresse personnelle
+                    </label>
+                </div>
             </div>
         </div>
 
-        <!-- Champ statut autre -->
-        <div class="col-lg-12" *ngIf="monFormulaire.value.type_statut == 'Autre'">
-            <div class="form-floating">
-                <input type="text" class="form-control" formControlName="autre_statut" id="floatingInput_autre"
-                    (change)="changeVal()" placeholder="Détail du statut">
-                <label for="floatingInput_autre">Détail du statut</label>
+        <div class="d-flex flex-column" *ngIf="individu.difference_adresse">
+            <div class="h5" style="color:#1D458C;">Adresse profesionelle</div>
+
+            <!-- Champ Libellé -->
+            <div class="row g-1 mt-0">
+                <div class="col-lg-12 ">
+                    <div class="form-floating">
+                        <input type="text" class="form-control" formControlName="adresse_pro" (change)="changeVal()"
+                            id="floatingInputlibelle" placeholder="Libellé de la voie ou du lieu dit">
+                        <label for="floatingInputlibelle">Insérer adresse</label>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Champ Code Postal -->
+            <div class="row g-1 mt-0">
+                <div class="col-lg-6">
+                    <div class="form-floating">
+                        <input type="text" class="form-control" formControlName="cp_pro" (change)="changeVal()"
+                            id="floatingInputcp" placeholder="Code Postal">
+                        <label for="floatingInputcp">Code Postal</label>
+                    </div>
+
+                </div>
+
+                <!-- Champ ville -->
+                <div class="col-lg-6">
+                    <div class="form-floating">
+                        <input type="text" class="form-control" formControlName="ville_pro" (change)="changeVal()"
+                            id="floatingInputVille" placeholder="Ville">
+                        <label for="floatingInputVille">Ville</label>
+                    </div>
+
+                </div>
             </div>
         </div>
+
 
     </form>
 
@@ -281,8 +217,8 @@
     <div class="row">
         <div class="col-lg mb-2">
             <div class="d-grid">
-                <button type="button" class="btn btn-warning" (click)="ouvrirRecap()" 
-                [routerLink]="['/entreprise/recapIndividu', individu.id]">
+                <button type="button" class="btn btn-warning" (click)="ouvrirRecap()"
+                    [routerLink]="['/entreprise/recapIndividu', individu.id]">
                     Sommaire des informations
                 </button>
             </div>
@@ -290,14 +226,17 @@
         <div class="col-lg mb-2">
             <div class="d-grid">
                 <button type="button" class="btn btn-primary" (click)="ouvrirModal()"
-                    [disabled]="this.monFormulaire.controls['nom'].value && this.monFormulaire.controls['prenom'].value 
-                               && this.monFormulaire.controls['dt_naissance'].value != '' ? '' : 'disabled'">
+                    [disabled]="this.minInfo() ? '' : 'disabled'">
                     Signer pour finaliser le contrôle
                 </button>
             </div>
         </div>
 
     </div>
+
+    <ngb-alert #selfClosingAlert *ngIf="successMessage" type="success" (closed)="successMessage = ''">
+        {{ successMessage }}
+    </ngb-alert>
 
 
 
@@ -352,6 +291,5 @@
         border: 1px solid #ced4da;
         border-radius: 0.25rem;
         appearance: none;
-  }
-   
+    }
 </style>

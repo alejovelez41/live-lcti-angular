@@ -7,7 +7,7 @@
         <!-- Champ Salarié -->
         <div class="col-md-3">
             <div class="form-check py-3 ps-5 mx-1">
-                <input class="form-check-input" (change)="changeStatut()" type="radio" value="salarie"
+                <input class="form-check-input" (change)="changeVal()" type="radio" value="salarie"
                     formControlName="statut" id="flexCheckStatutsalarie">
                 <label class="form-check-label" for="flexCheckStatutsalarie">
                     Salarié
@@ -17,7 +17,7 @@
         <!-- Champ TI -->
         <div class="col-md-3">
             <div class="form-check py-3 ps-5 mx-1">
-                <input class="form-check-input" (change)="changeStatut()" type="radio" value="ti"
+                <input class="form-check-input" (change)="changeVal()" type="radio" value="ti"
                     formControlName="statut" id="flexCheckStatutti">
                 <label class="form-check-label" for="flexCheckStatutti">
                     TI
@@ -27,17 +27,18 @@
         <!-- Champ ME -->
         <div class="col-md-3">
             <div class="form-check py-3 ps-5 mx-1">
-                <input class="form-check-input" (change)="changeStatut()" type="radio" value="me"
+                <input class="form-check-input" (change)="changeVal()" type="radio" value="me"
                     formControlName="statut" id="flexCheckStatutme">
                 <label class="form-check-label" for="flexCheckStatutme">
                     ME
                 </label>
             </div>
         </div>
+
         <!-- Champ Autre -->
         <div class="col-md-3">
             <div class="form-check py-3 ps-5 mx-1">
-                <input class="form-check-input" (change)="changeStatut()" type="radio" value="autre"
+                <input class="form-check-input" (change)="changeVal()" type="radio" value="autre"
                     formControlName="statut" id="flexCheckStatutautre">
                 <label class="form-check-label" for="flexCheckStatutautre">
                     Autre
@@ -45,109 +46,365 @@
             </div>
         </div>
 
-        <!-- Champ Fonction - statut autre -->
-        <div class="col-md-12">
-            <div class="form-floating mt-2 mx-1">
-                <input type="text" class="form-control" formControlName="fonction" (change)="changeVal()"
-                    placeholder="Fonction (ex : bénévole, stagiaire..)" id="floatingInput_fonction">
-                <label for="floatingInput_fonction">Fonction</label>
+        <!-- Type de statut SALARIE OU AUTRE -->
+        <div *ngIf="individu.statut == 'salarie' || individu.statut == 'autre'">
+
+
+            <!-- Champ Fonction - statut autre -->
+            <div class="d-flex" *ngIf="individu.statut == 'autre'">
+                <div class="col-md-12">
+                    <div class="form-floating mt-2 mx-1">
+                        <input type="text" class="form-control" formControlName="fonction" (change)="changeVal()"
+                            placeholder="Fonction (ex : bénévole, stagiaire..)" id="floatingInput_fonction">
+                        <label for="floatingInput_fonction">Fonction (ex : bénévole, stagiaire..)</label>
+                    </div>
+
+                </div>
             </div>
 
-        </div>
+            <div class="div" *ngIf="individu.statut == 'salarie' || individu.fonction != ''">
+                <p class="h5 my-1" style="color:#1D458C;">Identification de l'individu</p>
 
+                <div class="d-flex justify-content-start px-3">
+                    <p style="color:black; background-color: #FFF4D2;font-style:italic;font-size: 12px;">Si l'individu
+                        n'a
+                        pas
+                        son
+                        Nir ou
+                        Siren/Siret, alors vous pourrez compléter son profil manuellement sur les pages suivantes</p>
+                </div>
 
-
-        <p class="h5 mb-2 mt-3" style="color:#1D458C;">Identification de l'individu</p>
-        <div class="d-flex justify-content-start px-3">
-            <p style="color:black; background-color: #FFF4D2;font-style:italic;font-size: 12px;">Si l'individu n'a pas
-                son
-                Nir ou
-                Siren/Siret, alors vous pourrez compléter son profil manuellement sur les pages suivantes</p>
-        </div>
-
-
-        <!-- Champ Nir -->
-        <div class="col-md-12 mb-1">
-            <div class="form-floating mx-1">
-                <input type="text" class="form-control" formControlName="nir" placeholder="Insérer NIR"
-                    (change)="changeVal(); nir()" id="floatingInput_nir">
-                <label for="floatingInput_nir">NIR</label>
-                <span class="form-text text-info" *ngIf="isValid('nir')">
-                    Le Nir doit contenir 13 chiffres
-                </span>
-            </div>
-
-        </div>
-
-        <!-- Champ siren / SIRET -->
-        <div class="col-md-12">
-            <div class="form-floating mx-1">
-                <input type="text" class="form-control" formControlName="siren" placeholder="Insérer Siren"
-                    (change)="changeVal()" id="floatingInput_siren">
-                <label for="floatingInput_siren">Siren</label>
-                <span class="form-text text-info" *ngIf="isValid('siren')">
-                    Le Siren doit contenir 9 chiffres ou 14 chiffres pour le Siret
-                </span>
-            </div>
-
-        </div>
-        <!-- Champ siret -->
-        <!-- <div class="col-md-6">
-            <div class="form-floating mx-1">
-                <input type="text" class="form-control" formControlName="siret" placeholder="Insérer Siret"
-                    (change)="changeSiret()" id="floatingInput_siret">
-                <label for="floatingInput_siret">Siret</label>
-                <span class="form-text text-info" *ngIf="isValid('siret')">
-                    Le Siret doit contenir 14 chiffres
-                </span>
-            </div>
-
-        </div> -->
-
-        <p class="h5 mb-3 mt-3" style="color:#1D458C;">Identification de sa société</p>
-
-
-
-
-
-        <!-- Button trigger modal -->
-        <div class="div" [style.display]="(individu.idEnt == '') ? 'block' : 'none'">
-            <div class="d-grid">
-                <button type="button" class="btn btn-outline-secondary" (click)="ouvrirModal()">
-                    <img src="../assets/ajouterEnt.svg" alt="img associer" width="80" height="80">
-                    Associer à une entreprise
-                </button>
-            </div>
-        </div>
-        <div class="div" [style.display]="(individu.idEnt != '') ? 'block' : 'none'">
-            <div class="d-grid">
-                <button type="button" class="btn btn-outline-secondary" (click)="ouvrirModal()">
-                    <div class="d-flex justify-content-center align-items-center">
-                        <img src="../assets/entreprise.png" alt="img associer" width="80" height="60">
-                        <div class="d-flex flex-column">
-                            <span [style.display]="(individu.siren_fiche) ? 'block' : 'none'">
-                                SIREN : {{individu.siren_fiche}}
-                            </span>
-                            <span [style.display]="(individu.denominationEnt) ? 'block' : 'none'">
-                                {{individu.denominationEnt}}
-                            </span>
-                            <span [style.display]="(individu.adresse_siege) ? 'block' : 'none'">
-                                {{individu.adresse_siege}}
+                <div class="d-flex">
+                    <!-- Champ Nir -->
+                    <div class="col-md-12 mb-1">
+                        <div class="form-floating mx-1">
+                            <input type="text" class="form-control" formControlName="nir" placeholder="Insérer NIR"
+                                (change)="changeVal(); nir()" id="floatingInput_nir">
+                            <label for="floatingInput_nir">Insérer NIR</label>
+                            <span class="form-text text-info" *ngIf="isValid('nir')">
+                                Le Nir doit contenir 13 chiffres
                             </span>
                         </div>
                     </div>
+                </div>
+                <div class="d-flex">
 
-                </button>
+                    <!-- Champ siren / SIRET -->
+                    <div class="col-md-12" *ngIf="individu.statut == 'autre'">
+                        <div class="form-floating mx-1">
+                            <input type="text" class="form-control" formControlName="siren" placeholder="Insérer Siren"
+                                (change)="changeVal()" id="floatingInput_siren">
+                            <label for="floatingInput_siren">Siren</label>
+                            <span class="form-text text-info" *ngIf="isValid('siren')">
+                                Le Siren doit contenir 9 chiffres ou 14 chiffres pour le Siret
+                            </span>
+                        </div>
+
+                    </div>
+                </div>
+
+                <p class="h5 mb-3 mt-3" style="color:#1D458C;">Identification de sa société</p>
+
+                <!-- Button trigger modal -->
+                <div class="div" [style.display]="(individu.idEnt == '') ? 'block' : 'none'">
+                    <div class="d-grid">
+                        <button type="button" class="btn btn-outline-secondary" (click)="ouvrirModal()">
+                            <img src="../assets/ajouterEnt.svg" alt="img associer" width="80" height="80">
+                            Associer à une entreprise
+                        </button>
+                    </div>
+                </div>
+                <div class="div" [style.display]="(individu.idEnt != '') ? 'block' : 'none'">
+                    <div class="d-grid">
+                        <button type="button" class="btn btn-outline-secondary" (click)="ouvrirModal()">
+                            <div class="d-flex justify-content-center align-items-center">
+                                <img src="../assets/entreprise.png" alt="img associer" width="80" height="60">
+                                <div class="d-flex flex-column">
+                                    <span [style.display]="(individu.siren_fiche) ? 'block' : 'none'">
+                                        SIREN : {{individu.siren_fiche}}
+                                    </span>
+                                    <span [style.display]="(individu.denominationEnt) ? 'block' : 'none'">
+                                        {{individu.denominationEnt}}
+                                    </span>
+                                    <span [style.display]="(individu.adresse_siege) ? 'block' : 'none'">
+                                        {{individu.adresse_siege}}
+                                    </span>
+                                </div>
+                            </div>
+
+                        </button>
+                    </div>
+                </div>
+
             </div>
+
+
+
+
         </div>
+
+        <!-- Type de statut TI -->
+        <div *ngIf="individu.statut == 'ti'">
+            <p class="h5 my-1" style="color:#1D458C;">Identification de l'individu</p>
+
+            <div class="d-flex">
+                <!-- Champ Nir -->
+                <div class="col-md-4 mb-1">
+                    <div class="form-floating mx-1">
+                        <input type="text" class="form-control" formControlName="nir" placeholder="Insérer NIR"
+                            (change)="changeVal(); nir()" id="floatingInput_nir">
+                        <label for="floatingInput_nir">Insérer NIR</label>
+                        <span class="form-text text-info" *ngIf="isValid('nir')">
+                            Le Nir doit contenir 13 chiffres
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Champ Type de statut -->
+                <div class="col-md-4 mb-1">
+                    <div class="form-floating mx-1">
+                        <select class="form-select" (change)=" changeVal()" formControlName="type_statut"
+                            id="floatingInput_type_statut">
+                            <option value="">Choisissez un type de statut</option>
+                            <option *ngFor="let type_statut of type_statuts" [value]="type_statut">
+                                {{type_statut}}
+                            </option>
+                        </select>
+                        <label for="floatingInput_type_statut">Type de statut</label>
+                    </div>
+                </div>
+
+                <!-- Champ dt_creation -->
+                <div class="col-md-4 mb-1">
+                    <div class="form-floating mx-1">
+                        <input type="date" class="form-control" formControlName="dt_creation" id="floatingInputValue"
+                            (change)="changeVal()">
+                        <label for="floatingInputValue">Date de création</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-flex">
+                <!-- Champ statut autre -->
+                <div class="col-lg-12" *ngIf="monFormulaire.value.type_statut == 'Autre'">
+                    <div class="form-floating">
+                        <input type="text" class="form-control" formControlName="autre_statut" id="floatingInput_autre"
+                            (change)="changeVal()" placeholder="Détail du statut">
+                        <label for="floatingInput_autre">Détail du statut</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Champ siren / SIRET -->
+            <div class="col-md-12">
+                <div class="form-floating mx-1">
+                    <input type="text" class="form-control" formControlName="siren"
+                        placeholder="Insérer Siren ou Siret du TI" (change)="changeVal()" id="floatingInput_siren">
+                    <label for="floatingInput_siren">Insérer Siren ou Siret du TI</label>
+                    <span class="form-text text-info" *ngIf="isValid('siren')">
+                        Le Siren doit contenir 9 chiffres ou 14 chiffres pour le Siret
+                    </span>
+                </div>
+
+            </div>
+
+            <p class="h5 mb-3 mt-3" style="color:#1D458C;">Identification de sa société</p>
+
+            <!-- Button trigger modal -->
+            <div class="div" *ngIf="individu.type_statut != 'Co-gérant' || 'Gérant majoritaire' || 'Autre' || ''">
+                <div class="div" [style.display]="(individu.idEnt == '') ? 'block' : 'none'">
+                    <div class="d-grid">
+                        <button type="button" class="btn btn-outline-secondary" (click)="ouvrirModal()">
+                            <img src="../assets/ajouterEnt.svg" alt="img associer" width="80" height="80">
+                            Associer à une entreprise
+                        </button>
+                    </div>
+                </div>
+                <div class="div" [style.display]="(individu.idEnt != '') ? 'block' : 'none'">
+                    <div class="d-grid">
+                        <button type="button" class="btn btn-outline-secondary" (click)="ouvrirModal()">
+                            <div class="d-flex justify-content-center align-items-center">
+                                <img src="../assets/entreprise.png" alt="img associer" width="80" height="60">
+                                <div class="d-flex flex-column">
+                                    <span [style.display]="(individu.siren_fiche) ? 'block' : 'none'">
+                                        SIREN : {{individu.siren_fiche}}
+                                    </span>
+                                    <span [style.display]="(individu.denominationEnt) ? 'block' : 'none'">
+                                        {{individu.denominationEnt}}
+                                    </span>
+                                    <span [style.display]="(individu.adresse_siege) ? 'block' : 'none'">
+                                        {{individu.adresse_siege}}
+                                    </span>
+                                </div>
+                            </div>
+
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Button trigger modal -->
+            <div class="row" *ngIf="individu.type_statut == 'Co-gérant' || 'Gérant majoritaire' || 'Autre'">
+                <div class="col">
+                    <div class="div" [style.display]="(individu.idEnt == '') ? 'block' : 'none'">
+                        <div class="d-grid">
+                            <button type="button" class="btn btn-outline-secondary" (click)="ouvrirModal()">
+                                <img src="../assets/ajouterEnt.svg" alt="img associer" width="80" height="80">
+                                Associer à une entreprise
+                            </button>
+                        </div>
+                    </div>
+                    <div class="div" [style.display]="(individu.idEnt != '') ? 'block' : 'none'">
+                        <div class="d-grid">
+                            <button type="button" class="btn btn-outline-secondary" (click)="ouvrirModal()">
+                                <div class="d-flex justify-content-center align-items-center">
+                                    <img src="../assets/entreprise.png" alt="img associer" width="80" height="60">
+                                    <div class="d-flex flex-column">
+                                        <span [style.display]="(individu.siren_fiche) ? 'block' : 'none'">
+                                            SIREN : {{individu.siren_fiche}}
+                                        </span>
+                                        <span [style.display]="(individu.denominationEnt) ? 'block' : 'none'">
+                                            {{individu.denominationEnt}}
+                                        </span>
+                                        <span [style.display]="(individu.adresse_siege) ? 'block' : 'none'">
+                                            {{individu.adresse_siege}}
+                                        </span>
+                                    </div>
+                                </div>
+
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <!-- Button trigger modal -->
+                    <div class="div" [style.display]="(individu.idEnt == '') ? 'block' : 'none'">
+                        <div class="d-grid">
+                            <button type="button" class="btn btn-outline-secondary" (click)="creationFiche()">
+                                <img src="../assets/id.svg" alt="img associer" width="80" height="80">
+                                Créer fiche TI
+                            </button>
+                        </div>
+                    </div>
+                    <div class="div" [style.display]="(individu.idEnt != '') ? 'block' : 'none'">
+                        <div class="d-grid">
+                            <button type="button" class="btn btn-outline-secondary" (click)="ouvrirModal()">
+                                <div class="d-flex justify-content-center align-items-center">
+                                    <img src="../assets/entreprise.png" alt="img associer" width="80" height="60">
+                                    <div class="d-flex flex-column">
+                                        <span [style.display]="(individu.siren_fiche) ? 'block' : 'none'">
+                                            SIREN : {{individu.siren_fiche}}
+                                        </span>
+                                        <span [style.display]="(individu.denominationEnt) ? 'block' : 'none'">
+                                            {{individu.denominationEnt}}
+                                        </span>
+                                        <span [style.display]="(individu.adresse_siege) ? 'block' : 'none'">
+                                            {{individu.adresse_siege}}
+                                        </span>
+                                    </div>
+                                </div>
+
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
+
+        <!-- Type statut ME -->
+        <div *ngIf="individu.statut == 'me'">
+            <p class="h5 my-1" style="color:#1D458C;">Identification de l'individu</p>
+            <div class="d-flex">
+                <!-- Champ Nir -->
+                <div class="col-md-6 mb-1">
+                    <div class="form-floating mx-1">
+                        <input type="text" class="form-control" formControlName="nir" placeholder="Insérer NIR"
+                            (change)="changeVal(); nir()" id="floatingInput_nir">
+                        <label for="floatingInput_nir">Insérer NIR</label>
+                        <span class="form-text text-info" *ngIf="isValid('nir')">
+                            Le Nir doit contenir 13 chiffres
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Champ dt_creation -->
+                <div class="col-md-6 mb-1">
+                    <div class="form-floating mx-1">
+                        <input type="date" class="form-control" formControlName="dt_creation" id="floatingInputValue"
+                            (change)="changeVal()">
+                        <label for="floatingInputValue">Date de création</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Champ siren / SIRET -->
+            <div class="col-md-12">
+                <div class="form-floating mx-1">
+                    <input type="text" class="form-control" formControlName="siren" (change)="changeVal()"
+                        placeholder="Insérer le Siren ou Siret du Me" id="floatingInput_siren">
+                    <label for="floatingInput_siren">Insérer le Siren ou Siret du Me</label>
+                    <span class="form-text text-info" *ngIf="isValid('siren')">
+                        Le Siren doit contenir 9 chiffres ou 14 chiffres pour le Siret
+                    </span>
+                </div>
+
+            </div>
+
+            <p class="h5 mb-3 mt-3" style="color:#1D458C;">Identification de sa société</p>
+
+            <!-- Button trigger modal -->
+            <div class="div" [style.display]="(individu.idEnt == '') ? 'block' : 'none'">
+                <div class="d-grid">
+                    <button type="button" class="btn btn-outline-secondary" (click)="creationFiche()">
+                        <img src="../assets/id.svg" alt="img associer" width="80" height="80">
+                        Créer fiche ME
+                    </button>
+                </div>
+            </div>
+            <div class="div" [style.display]="(individu.idEnt != '') ? 'block' : 'none'">
+                <div class="d-grid">
+                    <button type="button" class="btn btn-outline-secondary" (click)="ouvrirModal()">
+                        <div class="d-flex justify-content-center align-items-center">
+                            <img src="../assets/entreprise.png" alt="img associer" width="80" height="60">
+                            <div class="d-flex flex-column">
+                                <span [style.display]="(individu.siren_fiche) ? 'block' : 'none'">
+                                    SIREN : {{individu.siren_fiche}}
+                                </span>
+                                <span [style.display]="(individu.denominationEnt) ? 'block' : 'none'">
+                                    {{individu.denominationEnt}}
+                                </span>
+                                <span [style.display]="(individu.adresse_siege) ? 'block' : 'none'">
+                                    {{individu.adresse_siege}}
+                                </span>
+                            </div>
+                        </div>
+
+                    </button>
+                </div>
+            </div>
+
+        </div>
+
+
+
+
+
+
+
+
+
+
 
         <br>
         <!-- <span style="font-weight: bold;">Service Data</span>
         <pre>{{individu | json}}</pre>
         <span style="font-weight: bold;">Service Ent</span>
-        <pre>{{entreprise | json}}</pre>
+        <pre>{{entreprise | json}}</pre> -->
         <span style="font-weight: bold;">Formulaire</span>
-        <pre>{{monFormulaire.value | json}}</pre> -->
+        <pre>{{monFormulaire.value | json}}</pre>
 
         <!-- <span style="font-weight: bold">Contrôle : </span>
         {{controle |json}}

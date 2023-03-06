@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild} from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { SharedStatutService } from 'src/app/dossier/shared-statut.service';
@@ -9,12 +9,13 @@ import { ControleService } from '../../services/controle.service';
 import { DataService } from '../../services/data.service';
 import { debounceTime } from 'rxjs/operators';
 import { NgbAlert } from '@ng-bootstrap/ng-bootstrap';
+import { EntrepriseService } from '../../services/entreprise.service';
 
-interface MenuItem{
+interface MenuItem {
   texte: string;
   route: string;
 }
-interface DataItem{
+interface DataItem {
   titre: string;
   valeur: any;
 }
@@ -34,15 +35,17 @@ interface DataItem{
 export class SidemenuComponent implements OnInit {
   private _success = new Subject<string>();
   successMessage = '';
-  idIndividu !: string|number;
+  idIndividu !: string | number;
   individu!: Ind;
   individus: Individu[] = [];
   controle!: Controle;
+  fiche !: boolean;
+  menuNav: boolean[] = [];
 
   consentementIndividu: boolean = false;
   refusIndividu: boolean = false;
   blockNavigation: boolean = true;
-  dataIndividu: DataItem[] = []; 
+  dataIndividu: DataItem[] = [];
   formulaireMenu: MenuItem[] = [
     {
       texte: 'Description des tâches',
@@ -66,29 +69,43 @@ export class SidemenuComponent implements OnInit {
     },
   ]
   constructor(public statutIndividu: SharedStatutService,
-              private controleService: ControleService, 
-              private dataService: DataService,
-              private activatedRoute: ActivatedRoute,
-              private router :  Router){}
+    private controleService: ControleService,
+    private entrepriseService: EntrepriseService,
+    private dataService: DataService,
+    private activatedRoute: ActivatedRoute,
+    private router: Router) { }
 
-  get individuFormulaire(): Ind {
-    return this.dataService.getIndividu();
-  }
+  // get individuFormulaire(): Ind {
+  //   return this.dataService.getIndividu();
+  // }
 
-  get navigation():boolean{
-    return this.statutIndividu.blocknav;
-  }
+  // get navigation(): boolean {
+  //   return this.statutIndividu.blocknav;
+  // }
 
-  @ViewChild('selfClosingAlert', {static: false}) selfClosingAlert: NgbAlert | undefined;
+  @ViewChild('selfClosingAlert', { static: false }) selfClosingAlert: NgbAlert | undefined;
 
-  enregistrerIndividu(){
+  enregistrerIndividu() {
     this.dataService.editerIndividu(this.individu).subscribe(resp => {
       console.log(resp);
       this.router.navigate(['/controle/individus', this.controle.id]);
     });
   }
 
-  ngOnInit(){
+  get creationFiche() {
+    this.fiche = this.entrepriseService.getCreationFiche();
+    return this.entrepriseService.getCreationFiche()
+  }
+
+  ngOnInit() {
+    
+    this.dataService.nav$.subscribe(navigation => {
+      console.log('navigations values update: ',navigation );
+      this.menuNav = navigation;
+      
+    })
+    this.dataService.setnav([false, true, true, true, true]);
+    this.fiche = false;
     this.individu = this.dataService.getIndividu();
     this.controle = this.controleService.getControle();
     this.idIndividu = this.statutIndividu.idindividu;
@@ -103,9 +120,10 @@ export class SidemenuComponent implements OnInit {
     });
 
     this.activatedRoute.params
-      .subscribe( ({id}) => console.log(id))
+      .subscribe(({ id }) => console.log(id))
     console.log(this.activatedRoute.params)
+    
   }
-  
+
 
 }

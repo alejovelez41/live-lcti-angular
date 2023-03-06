@@ -16,23 +16,27 @@ export interface Ind {
     statut: string;
     fonction: string;
     nir: string;
+    type_statut: string;
+    dt_creation: string;
+    autre_statut: string;
     siret: string;
     siren: string;
+
     civilite: string;
     dt_naissance: string;
     lieu_naissance: string;
     nationalite_fr: string;
     pays_naissance: string;
     tel: string;
-    n_voie: string;
-    bis: string;
-    libelle: string;
-    complement: string;
-    cp: string;
-    ville: string;
-    dt_creation: string;
-    type_statut: string;
-    autre_statut: string;
+
+    adresse_perso: string;
+    cp_perso: string;
+    ville_perso: string;
+    difference_adresse: boolean;
+    adresse_pro: string;
+    cp_pro: string;
+    ville_pro: string;    
+
     emploi: string;
     contrat: string;
     interimaire: boolean;

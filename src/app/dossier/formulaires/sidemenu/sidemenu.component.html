@@ -14,17 +14,21 @@
     </div>
     
 </div>
+<div class="d-flex">
+    {{fiche}}
+</div>
 <ul class="list-group list-group-horizontal mb-3">
 
-    <li *ngFor="let item of formulaireMenu"
+    <li *ngFor="let item of formulaireMenu; let indexOfelement=index;"
         class="list-group-item flex-fill"
-        [class.disabled]="!individu.refus && !individu.consentement"
+        [class.disabled]="menuNav[indexOfelement]"
         [routerLink]="[ item.route, individu.id ]"
         routerLinkActive="active"
         >
         {{ item.texte}}
     </li>
 </ul>
+{{ menuNav | json}}
 <router-outlet></router-outlet>
 
 

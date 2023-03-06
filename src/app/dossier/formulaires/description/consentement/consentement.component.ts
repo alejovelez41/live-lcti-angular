@@ -106,6 +106,8 @@ export class ConsentementComponent implements OnInit {
       
       // MaJ de la valeur sur le service
       this.dataService.setIndividu(this.individu);
+      // MaJ de la navigation -> deblocage statut
+      this.dataService.setnav([false, false, true, true, true]);
       //close
       this.activeModal.dismiss('Cross click');
 

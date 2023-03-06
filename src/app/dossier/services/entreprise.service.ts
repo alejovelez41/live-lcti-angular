@@ -13,6 +13,8 @@ export class EntrepriseService {
   
   dataEntreprise !: Entreprise ;
   entreprises: Entreprise[] = [];
+  creationFiche : boolean = false;
+  alerteFiche: boolean = false;
 
   noteDefault: cardNote[] =[];
 
@@ -55,6 +57,19 @@ export class EntrepriseService {
 
   getSocietes(){
     return this.entreprises;
+  }
+  getCreationFiche(){
+    return this.creationFiche;
+  }
+  setAlerteFiche(val : boolean){
+    this.alerteFiche = val;
+  }
+  
+  getAlerteFiche(){
+    return this.alerteFiche;
+  }
+  setCreationFiche(val : boolean){
+    this.creationFiche = val;
   }
 
   effacerEntreprise(id: string|number){

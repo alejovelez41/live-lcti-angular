@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { observable, Observable, Subject } from 'rxjs';
 import { Individu } from '../../shared/interfaces/individus.interface';
 import { Ind, horaireJour, notes, cardNote, informations } from '../../shared/interfaces/individu.interface';
 import { environment } from '../../../environments/environment';
@@ -14,6 +15,14 @@ interface DataItem{
 })
 export class DataService {
   private apiUrl: string = environment.apiEndpoint;
+  private _nav: boolean[] = [];
+  private navChange$ = new Subject<boolean[]>();
+  public nav$ = this.navChange$.asObservable();
+
+  navigation = new Observable((observer) =>{
+    console.log('Observable navigation called');
+
+  })
 
   dataIndividu: DataItem[] = []; 
   // newData: Individu[] = this.getHeroes();
@@ -107,9 +116,12 @@ export class DataService {
     "typePI" : "",
     "numeroPI" : "",
     "signature": "",
-    "statut": "salarie",
+    "statut": "",
     "fonction": "",
     "nir": "",
+    "type_statut": "",
+    "dt_creation": "",
+    "autre_statut": "",
     "siret": "",
     "siren": "",
     "civilite": "",
@@ -118,15 +130,13 @@ export class DataService {
     "nationalite_fr": "",
     "pays_naissance": "",
     "tel":"",
-    "n_voie": "",
-    "bis": "",
-    "libelle": "",
-    "complement": "",
-    "cp": "",
-    "ville": "",
-    "dt_creation": "",
-    "type_statut": "",
-    "autre_statut": "",
+    "adresse_perso": "",
+    "cp_perso": "",
+    "ville_perso": "",
+    "difference_adresse": false,
+    "adresse_pro": "",
+    "cp_pro": "",
+    "ville_pro": "",
     "emploi": "",
     "contrat": "",
     "interimaire": false,
@@ -178,12 +188,25 @@ export class DataService {
 
   constructor( private http: HttpClient) { }
 
+  setnav(val : boolean[]){
+    this._nav = val;
+    this.navChange$.next(val);
+  };
+
+  getnav(){
+    return this._nav;
+  };
+
   getNewIndividu(){
     return this.individuNew;
   }
 
   setIndividu(ind : Ind){
     this.individu= ind;
+  }
+
+  setNavigation(val : boolean[]){
+     
   }
 
   getIndividu(){

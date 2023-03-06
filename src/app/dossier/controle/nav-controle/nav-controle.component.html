@@ -18,7 +18,10 @@
     </span>
     <span class="align-self-center me-4">
         <img src="../assets/partenaires.svg" alt="" width="18" height="18" display="flex" style="font-size: 10px">
-        <span *ngFor="let item of controle.partenaires_controle "> {{data_partenaires[item].nom}}<span>, </span> </span>
+        <span *ngFor="let item of controle.partenaires_controle ">
+            <span *ngIf="data_partenaires[item].nom != 'Autre partenaire'">{{data_partenaires[item].nom}}, </span>
+            <span *ngIf="data_partenaires[item].nom == 'Autre partenaire'">{{controle.autre_partenaire}}, </span>  
+        </span>
         
     </span>
     <button class="btn btn-outline-info align-self-center " type="submit" (click)="enregistrerDossier(controle)" [routerLink]="['/parametres/edition', controle.id]" >

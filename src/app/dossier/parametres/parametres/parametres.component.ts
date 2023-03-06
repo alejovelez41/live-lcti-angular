@@ -107,11 +107,11 @@ export class ParametresComponent implements OnInit {
     this.controleService.editerControle(auxCont)
       .subscribe(resp => {
         console.log('reponse', resp);
-        this.router.navigate(['/controle/individus', resp.id]);
         this.controle = resp;
         this.controleService.setControle(resp);
 
       });
+    this.router.navigate(['/controle/individus', this.controle.id]);
   }
 
 

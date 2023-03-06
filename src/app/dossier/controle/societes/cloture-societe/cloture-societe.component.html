@@ -13,11 +13,16 @@
             </div>
         </div>
 
-        <div class="d-flex flex-row justify-content-center mt-2" *ngIf="entreprise.denomination">
+        <div class="d-flex flex-column justify-content-center mt-2" *ngIf="entreprise.denomination">
             <div class="d-flex">
                 <p class="h4 mb-3" style="color:black; text-align: center;">
                     Attention, vous allez archiver la société "{{entreprise.denomination}}".
                     Vous ne pourrez plus modifier votre saisie.
+                </p>
+            </div>
+            <div class="d-flex justify-content-center">
+                <p class="h4 mb-1" style="color:rgb(154, 17, 17); text-align: center;">
+                    Alerte : En plus, vous avez {{individus_manquants.length}} individus sans clôturer !
                 </p>
             </div>
         </div>

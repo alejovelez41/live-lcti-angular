@@ -377,7 +377,9 @@
         </div>
     </div>
 </div>
-
+<ngb-alert #selfClosingAlert *ngIf="successMessage" type="success" (closed)="successMessage = ''">
+    {{ successMessage }}
+</ngb-alert>
 
 <style>
     .btn-associer {

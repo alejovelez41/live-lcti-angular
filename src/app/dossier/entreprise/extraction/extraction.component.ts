@@ -18,6 +18,10 @@ import { Ind } from 'src/app/shared/interfaces/individu.interface';
   ]
 })
 export class ExtractionComponent implements OnInit {
+  dimensionsEnt: any[] = [];
+  dimensionsInd: any[] = [];
+
+  size !: any;
   ch !: any;
   cw !: any;
   individus: Ind[] = [];
@@ -240,8 +244,198 @@ export class ExtractionComponent implements OnInit {
 
   // TEST du pdf --------------------------
   // --------------------------------------
+  calculsPDF() {
+    let sections = ['description', 'consentement', 'statut', 'identite', 'remuneration', 'autres', 'signature', 'notes'];
+
+
+    let DATAent: any = document.getElementById('dataSociete');
+    let DATAinds: any = document.getElementById('dataIndividus');
+    var W = 2480;
+    var H = 3508;
+
+    //Calcul entreprise
+    this.dimensionsEnt = [];
+
+    if (document.getElementById('dataSociete') != null) {
+      let entH = document.getElementById('dataSociete')?.clientHeight;
+      if ((entH! / H) < 1) {
+        console.log('height ent 2', entH)
+        console.log('dim ent', this.dimensionsEnt)
+        this.dimensionsEnt.push(entH!)
+      } else {
+        for (let i = 0; i < (entH! / H); i++) {
+          this.dimensionsEnt.push(entH);
+        };
+        this.dimensionsEnt.push(((entH! % H) * H));
+      }
+    };
+
+    //Calcul individu
+    this.dimensionsInd = [];
+    let dimensionsAutres : any[] = [];
+    this.individus.forEach((ind, index) => {
+      let cumulH: number = 0;
+      let cumulCH: number = 0;
+
+      let cumulNotesH: number = 0;
+      let cumulnotesCH: number = 0;
+
+
+      sections.forEach(section => {
+
+        if (document.getElementById(section.concat(ind.id)) != null) {
+
+          let secH = ((W * document.getElementById(section.concat(ind.id))?.clientHeight!) / document.getElementById(section.concat(ind.id))?.clientWidth!);
+          if (section != 'notes') {
+            if ((secH! + cumulH) < H) {
+              cumulH += secH!;
+              cumulCH += document.getElementById(section.concat(ind.id))?.clientHeight!;
+            } else {
+              this.dimensionsInd.push((cumulH * (document.getElementById(section.concat(ind.id))?.clientWidth!)) / W);
+
+              cumulH = secH;
+              cumulCH = document.getElementById(section.concat(ind.id))?.clientHeight!;
+            }
+          } else {
+            if ((secH! + cumulNotesH) < H) {
+              cumulNotesH += secH!;
+              cumulnotesCH += document.getElementById(section.concat(ind.id))?.clientHeight!;
+            } else {
+              dimensionsAutres.push((cumulNotesH * (document.getElementById(section.concat(ind.id))?.clientWidth!)) / W);
+
+              cumulNotesH = secH;
+              cumulnotesCH = document.getElementById(section.concat(ind.id))?.clientHeight!;
+            }
+          }
+
+
+          console.log('ind', index, ' heigth: ', document.getElementById(section.concat(ind.id))?.clientHeight, ' width: ',
+            document.getElementById(section.concat(ind.id))?.clientWidth, 'adj H', secH, 'cumulCH', cumulCH, 'cumulH', cumulH);
+        };
+      });
+
+      if (cumulH != 0) {
+        this.dimensionsInd.push(cumulCH);
+        cumulH = 0;
+      };
+      if (cumulNotesH != 0) {
+        dimensionsAutres.push(cumulNotesH);
+        cumulNotesH = 0;
+      };
+    });
+
+    if (dimensionsAutres.length != 0){
+      console.log('entered if dimensions autres, length : ', dimensionsAutres, 'd ind:');
+      dimensionsAutres.forEach(sizePage => {
+        this.dimensionsInd.push(sizePage);
+      });
+    }
+
+    console.log('dimension entreprise', this.dimensionsEnt);
+    console.log('dimension individu', this.dimensionsInd);
+
+  };
 
   public testPDF(): void {
+    this.calculsPDF();
+    let DATAent: any = document.getElementById('dataSociete');
+    let DATAind: any = document.getElementById('dataIndividu');
+    let PDF = new jsPDF('p', 'mm', 'a4');
+
+    let fileWidth = 208;
+    let fileHeight = 295;
+
+    let i: number = 1;
+
+    html2canvas(DATAent).then((entCanvas) => {
+      let calculedHeightEnt = (fileHeight * entCanvas.width) / fileWidth;
+      console.log('calulated height ent: ', calculedHeightEnt);
+      console.log('property height ent: ', entCanvas.height, entCanvas.width);
+
+      var srcImg = entCanvas;
+      var sX = 0;
+      var sY = 0; // start 297 pixels down for every new page
+      var sWidth = entCanvas.width;
+      var sHeight = calculedHeightEnt;
+      var dX = 0;
+      var dY = 0;
+      var dWidth = 2480;
+      var dHeight = 3508;
+
+      let onePageCanvas = document.createElement("canvas");
+      onePageCanvas.width = 2480;
+      onePageCanvas.height = 3508;
+
+      var ctx = onePageCanvas.getContext('2d');
+      ctx!.drawImage(srcImg, sX, sY, sWidth, sHeight, dX, dY, dWidth, dHeight);
+
+      var canvasDataURL = onePageCanvas.toDataURL("image/png", 1.0);
+
+      var width = 2480;
+      var height = 3508;
+      PDF.setPage(1);
+
+      console.log('t1');
+
+      PDF.addImage(canvasDataURL, 'PNG', 5, 5, (fileWidth * 0.95), (fileHeight * 0.95));
+      console.log('t2');
+
+      //conversion PDF de l'individu
+      html2canvas(DATAind).then((canvas) => {
+        console.log('Entered in Canvas Ind ');
+        if (fileHeight == 0 || fileWidth == 0) {
+          return;
+        };
+        console.log('canvas sizes', canvas.height, canvas.width);
+
+        let cumulInd: number = 0;
+        this.dimensionsInd.forEach((pageH, index) => {
+
+          console.log('tloop', index, 'cumulInd', cumulInd);
+          let cHeight = (fileHeight * canvas.width) / fileWidth;
+          console.log('cHeight', cHeight);
+          PDF.addPage('a4');
+          PDF.setPage(index + 2);
+
+          let pageCH = ((canvas.height * pageH) / document.getElementById('dataIndividu')?.clientHeight!);
+          console.log('pageH', pageH, 'pageCH', pageCH, 'canvasH', canvas.height, 'clientH', document.getElementById('dataIndividu')?.clientHeight!)
+          let calculedHeightEnt = (fileHeight * entCanvas.width) / fileWidth;
+
+          var srcImg = canvas;
+          var sX = 0;
+          var sY = cumulInd; // start 297 pixels down for every new page
+          var sWidth = canvas.width;
+          var sHeight = pageCH
+          var dX = 0;
+          var dY = 0;
+          var dWidth = 2480;
+          var dHeight = (pageCH * 2480) / canvas.width;
+
+          let onePageCanvas = document.createElement("canvas");
+          onePageCanvas.width = 2480;
+          onePageCanvas.height = 3508;
+
+          var ctx = onePageCanvas.getContext('2d');
+          ctx!.drawImage(srcImg, sX, sY, sWidth, sHeight, dX, dY, dWidth, dHeight);
+
+          var canvasDataURL = onePageCanvas.toDataURL("image/png", 1.0);
+
+          PDF.addImage(canvasDataURL, 'PNG', 5, 5, (fileWidth * 0.95), (fileHeight * 0.95));
+
+
+          console.log('adapted page', pageCH, 'cumulInd', cumulInd);
+          cumulInd += pageCH;
+          if ((index + 1) == this.dimensionsInd.length) {
+            console.log('enregistrement en att');
+            PDF.save('angular-demo.pdf');
+          }
+        });
+      });
+
+    });
+  };
+
+  public testPDFold(): void {
     let DATAent: any = document.getElementById('dataSociete');
     let PDF = new jsPDF('p', 'mm', 'a4');
 
@@ -341,8 +535,8 @@ export class ExtractionComponent implements OnInit {
 
             PDF.addImage(canvasDataURL, 'PNG', 5, 5, (fileWidth * 0.95), (fileHeight * 0.95));
 
-            console.log((this.individus.length-1) , index , section )
-            if((this.individus.length-1) == index && section == 'notes' ){
+            console.log((this.individus.length - 1), index, section)
+            if ((this.individus.length - 1) == index && section == 'notes') {
               console.log('enregistrement en att');
               PDF.save('angular-demo.pdf');
             }
@@ -350,7 +544,7 @@ export class ExtractionComponent implements OnInit {
         });
 
       });
-      
+
     });
 
 
@@ -485,7 +679,7 @@ export class ExtractionComponent implements OnInit {
         this.filtrageIndividusEntreprise()
       ));
 
-    let DATAinds: any = document.getElementById('dataIndividus');
+    let DATAinds: any = document.getElementById('dataIndividu');
     this.ch = DATAinds.clientHeight;
     this.cw = DATAinds.clientWidth;
 
@@ -493,6 +687,7 @@ export class ExtractionComponent implements OnInit {
       console.log(canvas);
       console.log('canvas')
     });
+
 
 
 

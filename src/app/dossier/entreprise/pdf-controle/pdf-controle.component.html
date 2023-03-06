@@ -1,4 +1,3 @@
-
 <div class="container" id="dataControle">
     <div class="d-flex justify-content-between">
         <div class="d-flex ">
@@ -9,8 +8,8 @@
         </div>
         <div class="d-flex ">
             <button class="btn btn-success btn-block" (click)="downloadPDF()">Télécharger PDF</button>
-        </div>       
-        
+        </div>
+
     </div>
 
     <div class="d-flex flex-column">
@@ -121,11 +120,11 @@
                 <!-- notes_controle -->
                 <div class="d-flex flex-column " *ngIf="entreprise.notes_outils.length != 0">
                     <p class="h5 my-2">Notes associés à la societé :</p>
-        
+
                     <li class="list-group-item" *ngFor="let note of entreprise.notes_outils">
                         {{note.titre}} - {{note.heure}}
                         <ul>
-                            <li >
+                            <li>
                                 {{note.note}}
                             </li>
                         </ul>
@@ -187,56 +186,63 @@
 
         </div>
 
-        <!-- statut Individu -->
-        <div class="d-flex flex-column">
-            <p class="h5 my-2">Statut :</p>
+        <div class="container" id="statut{{individu.id}}">
+            <!-- statut Individu -->
+            <div class="d-flex flex-column">
+                <p class="h5 my-2">Statut :</p>
 
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item" *ngIf="individu.statut == 'salarie'">Statut : salarié</li>
-                <li class="list-group-item" *ngIf="individu.statut == 'ti'">Statut : travailleur indépendant</li>
-                <li class="list-group-item" *ngIf="individu.statut == 'me'">Statut : micro-entrepreneur</li>
-                <li class="list-group-item" *ngIf="individu.statut == 'autre'">Statut : autre</li>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item" *ngIf="individu.statut == 'salarie'">Statut : salarié</li>
+                    <li class="list-group-item" *ngIf="individu.statut == 'ti'">Statut : travailleur indépendant</li>
+                    <li class="list-group-item" *ngIf="individu.statut == 'me'">Statut : micro-entrepreneur</li>
+                    <li class="list-group-item" *ngIf="individu.statut == 'autre'">Statut : autre</li>
 
-                <li class="list-group-item" *ngIf="individu.fonction">Fonction : {{individu.fonction}}</li>
-                <li class="list-group-item" *ngIf="individu.nir">NIR : {{individu.nir}}</li>
-                <li class="list-group-item" *ngIf="individu.siret">Siret : {{individu.siret}}</li>
-                <li class="list-group-item" *ngIf="individu.siren">Siren : {{individu.siren}}</li>
-            </ul>
+                    <li class="list-group-item" *ngIf="individu.fonction">Fonction : {{individu.fonction}}</li>
+                    <li class="list-group-item" *ngIf="individu.nir">NIR : {{individu.nir}}</li>
+                    <li class="list-group-item" *ngIf="individu.dt_creation">Code postal : {{individu.dt_creation}}</li>
+                    <li class="list-group-item" *ngIf="individu.type_statut">Type de statut : {{individu.type_statut}}
+                    </li>
+                    <li class="list-group-item" *ngIf="individu.autre_statut">Détail de l'autre statut
+                        :{{individu.autre_statut}}</li>
+                    <li class="list-group-item" *ngIf="individu.siret">Siret : {{individu.siret}}</li>
+                    <li class="list-group-item" *ngIf="individu.siren">Siren : {{individu.siren}}</li>
+                </ul>
 
+            </div>
         </div>
 
-        <!-- Indetité individu -->
-        <div class="d-flex flex-column">
-            <p class="h5 my-2">Identité :</p>
+        <div class="container" id="identite{{individu.id}}">
+            <!-- Indetité individu -->
+            <div class="d-flex flex-column">
+                <p class="h5 my-2">Identité :</p>
 
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item" *ngIf="individu.civilite">Civilité : {{individu.civilite}}</li>
-                <li class="list-group-item" *ngIf="individu.nom">Nom : {{individu.nom}}</li>
-                <li class="list-group-item" *ngIf="individu.prenom">Prénom : {{individu.prenom}}</li>
-                <li class="list-group-item" *ngIf="individu.dt_naissance">Date de naissance : {{individu.dt_naissance |
-                    date : 'dd-M-y'}}</li>
-                <li class="list-group-item" *ngIf="individu.lieu_naissance">Lieu de naissance :
-                    {{individu.lieu_naissance}}</li>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item" *ngIf="individu.civilite">Civilité : {{individu.civilite}}</li>
+                    <li class="list-group-item" *ngIf="individu.nom">Nom : {{individu.nom}}</li>
+                    <li class="list-group-item" *ngIf="individu.prenom">Prénom : {{individu.prenom}}</li>
+                    <li class="list-group-item" *ngIf="individu.dt_naissance">Date de naissance :
+                        {{individu.dt_naissance |
+                        date : 'dd-M-y'}}</li>
+                    <li class="list-group-item" *ngIf="individu.lieu_naissance">Lieu de naissance :
+                        {{individu.lieu_naissance}}</li>
 
-                <li class="list-group-item" *ngIf="individu.nationalite_fr  == 'oui'">Nationalité française</li>
-                <li class="list-group-item" *ngIf="individu.nationalite_fr  == 'non'">Nationalité étrangère</li>
-                <li class="list-group-item" *ngIf="individu.pays_naissance">Pays de naissance :
-                    {{individu.pays_naissance | json}}</li>
-                <li class="list-group-item" *ngIf="individu.tel">Téléphone : {{individu.tel}}</li>
-                <li class="list-group-item"
-                    *ngIf="individu.n_voie != '' || individu.bis != '' || individu.libelle != '' ">
-                    Adresse : {{individu.n_voie}} {{individu.bis}} {{individu.libelle}}
-                </li>
-                <li class="list-group-item" *ngIf="individu.complement">dresse : {{individu.complement}}
-                </li>
-                <li class="list-group-item" *ngIf="individu.cp">Code postal : {{individu.cp}}</li>
-                <li class="list-group-item" *ngIf="individu.ville">Ville : {{individu.ville}}</li>
-                <li class="list-group-item" *ngIf="individu.dt_creation">Code postal : {{individu.dt_creation}}</li>
-                <li class="list-group-item" *ngIf="individu.type_statut">Type de statut : {{individu.type_statut}}</li>
-                <li class="list-group-item" *ngIf="individu.autre_statut">Détail de l'autre statut :
-                    {{individu.autre_statut}}</li>
-            </ul>
+                    <li class="list-group-item" *ngIf="individu.nationalite_fr  == 'oui'">Nationalité française</li>
+                    <li class="list-group-item" *ngIf="individu.nationalite_fr  == 'non'">Nationalité étrangère</li>
+                    <li class="list-group-item" *ngIf="individu.pays_naissance">Pays de naissance :
+                        {{individu.pays_naissance | json}}</li>
+                    <li class="list-group-item" *ngIf="individu.tel">Téléphone : {{individu.tel}}</li>
 
+                    <li class="list-group-item" *ngIf="individu.adresse_perso!= '' "> Adresse :
+                        {{individu.adresse_perso}} </li>
+                    <li class="list-group-item" *ngIf="individu.cp_perso">Code postal : {{individu.cp_perso}}</li>
+                    <li class="list-group-item" *ngIf="individu.ville_perso">Ville : {{individu.ville_perso}}</li>
+                    <li class="list-group-item" *ngIf="individu.adresse_pro!= '' "> Adresse : {{individu.adresse_pro}}
+                    </li>
+                    <li class="list-group-item" *ngIf="individu.cp_pro">Code postal : {{individu.cp_pro}}</li>
+                    <li class="list-group-item" *ngIf="individu.ville_pro">Ville : {{individu.ville_pro}}</li>
+                </ul>
+
+            </div>
         </div>
 
         <!-- remuneration individu -->
@@ -258,11 +264,20 @@
                 <li class="list-group-item" *ngIf="individu.fsalaire">Type de salaire : {{individu.fsalaire}}</li>
                 <li class="list-group-item" *ngIf="individu.montant">Montant du salaire net : {{individu.montant |
                     number:'1.2-2'}} €</li>
+
+                <li class="list-group-item" *ngIf="individu.sirenI">Siren societé interimaire : {{individu.sbrut
+                    |number:'1.2-2'}} €</li>
+                <li class="list-group-item" *ngIf="individu.denominationI">Denomination societé interimaire :
+                    {{individu.fsalaire}}</li>
+                <li class="list-group-item" *ngIf="individu.adresse_siegeI">Adresse societé interimaire :
+                    {{individu.montant |number:'1.2-2'}} €</li>
+
                 <li class="list-group-item" *ngIf="individu.remunere">Est l'idividu rémunéré ? : {{individu.remunere}}
                 </li>
                 <li class="list-group-item" *ngIf="individu.ca">Chiffre d'affaires déclaré sur l'année en cours :
                     {{individu.ca}}</li>
-                <li class="list-group-item" *ngIf="individu.rmensuelle">Rémunération mensuelle : {{individu.rmensuelle | number:'1.2-2'}} €
+                <li class="list-group-item" *ngIf="individu.rmensuelle">Rémunération mensuelle : {{individu.rmensuelle |
+                    number:'1.2-2'}} €
                 </li>
                 <li class="list-group-item" *ngIf="individu.snombre">Nombre de salariés présents lors du contrôle :
                     {{individu.snombre}}</li>
@@ -342,49 +357,49 @@
                             <td>{{individu.dimanche.total}}</td>
                         </tr>
                         <tr [style.display]="individu.lundiSup.active ? '' : 'none'">
-                            <th scope="row">Lun Sup.</th>
+                            <th scope="row">Lun HS</th>
                             <td>{{individu.lundiSup.debut}}</td>
                             <td>{{individu.lundiSup.fin}}</td>
                             <td>{{individu.lundiSup.pause}}</td>
                             <td>{{individu.lundiSup.total}}</td>
                         </tr>
                         <tr [style.display]="individu.mardiSup.active ? '' : 'none'">
-                            <th scope="row">Mar Sup.</th>
+                            <th scope="row">Mar HS</th>
                             <td>{{individu.mardiSup.debut}}</td>
                             <td>{{individu.mardiSup.fin}}</td>
                             <td>{{individu.mardiSup.pause}}</td>
                             <td>{{individu.mardiSup.total}}</td>
                         </tr>
                         <tr [style.display]="individu.mercrediSup.active ? '' : 'none'">
-                            <th scope="row">Mer Sup.</th>
+                            <th scope="row">Mer HS</th>
                             <td>{{individu.mercrediSup.debut}}</td>
                             <td>{{individu.mercrediSup.fin}}</td>
                             <td>{{individu.mercrediSup.pause}}</td>
                             <td>{{individu.mercrediSup.total}}</td>
                         </tr>
                         <tr [style.display]="individu.jeudiSup.active ? '' : 'none'">
-                            <th scope="row">Jeu Sup.</th>
+                            <th scope="row">Jeu HS</th>
                             <td>{{individu.jeudiSup.debut}}</td>
                             <td>{{individu.jeudiSup.fin}}</td>
                             <td>{{individu.jeudiSup.pause}}</td>
                             <td>{{individu.jeudiSup.total}}</td>
                         </tr>
                         <tr [style.display]="individu.vendrediSup.active ? '' : 'none'">
-                            <th scope="row">Ven Sup.</th>
+                            <th scope="row">Ven HS</th>
                             <td>{{individu.vendrediSup.debut}}</td>
                             <td>{{individu.vendrediSup.fin}}</td>
                             <td>{{individu.vendrediSup.pause}}</td>
                             <td>{{individu.vendrediSup.total}}</td>
                         </tr>
                         <tr [style.display]="individu.samediSup.active ? '' : 'none'">
-                            <th scope="row">Sam Sup.</th>
+                            <th scope="row">Sam HS</th>
                             <td>{{individu.samediSup.debut}}</td>
                             <td>{{individu.samediSup.fin}}</td>
                             <td>{{individu.samediSup.pause}}</td>
                             <td>{{individu.samediSup.total}}</td>
                         </tr>
                         <tr [style.display]="individu.dimancheSup.active ? '' : 'none'">
-                            <th scope="row">Dim Sup.</th>
+                            <th scope="row">Dim HS</th>
                             <td>{{individu.dimancheSup.debut}}</td>
                             <td>{{individu.dimancheSup.fin}}</td>
                             <td>{{individu.dimancheSup.pause}}</td>
@@ -397,12 +412,16 @@
         <div class="d-flex flex-column" *ngIf=" individu.statut == 'ti' || individu.statut == 'me' ">
             <p class="h5 my-2">Détail sous-traitance :</p>
             <ul class="list-group list-group-flush">
-                <li class="list-group-item" *ngIf="individu.soustraitant">L'individu est-il un sous-traitant sur le site contrôlé ? : {{individu.soustraitant}}</li>
-                <li class="list-group-item" *ngIf="individu.identite_do">Identité du donneur d'ordre de l'individu : {{individu.identite_do}}</li>
-                <li class="list-group-item" *ngIf="individu.s_partie_activite">L'individu sous-traite une partie de son activité sur ce site ? : {{individu.s_partie_activite}}</li>
-                <li class="list-group-item" *ngIf="individu.id_soustraitants">Identité des sous-traitants de l'individu : {{individu.id_soustraitants}}</li>
+                <li class="list-group-item" *ngIf="individu.soustraitant">L'individu est-il un sous-traitant sur le site
+                    contrôlé ? : {{individu.soustraitant}}</li>
+                <li class="list-group-item" *ngIf="individu.identite_do">Identité du donneur d'ordre de l'individu :
+                    {{individu.identite_do}}</li>
+                <li class="list-group-item" *ngIf="individu.s_partie_activite">L'individu sous-traite une partie de son
+                    activité sur ce site ? : {{individu.s_partie_activite}}</li>
+                <li class="list-group-item" *ngIf="individu.id_soustraitants">Identité des sous-traitants de l'individu
+                    : {{individu.id_soustraitants}}</li>
             </ul>
-            
+
         </div>
 
         <!-- Signature Clôture Individu -->
@@ -430,13 +449,13 @@
             <li class="list-group-item" *ngFor="let note of individu.notesInd">
                 {{note.titre}} - {{note.heure}}
                 <ul>
-                    <li >
+                    <li>
                         {{note.note}}
                     </li>
                 </ul>
             </li>
         </div>
-                        
+
     </div>
 
 </div>

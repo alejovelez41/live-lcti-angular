@@ -1,10 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ControlContainer, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SharedStatutService } from '../../shared-statut.service';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbAlert, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { SignatureComponent } from '../signature/signature.component';
 import { Ind } from 'src/app/shared/interfaces/individu.interface';
 import { DataService } from '../../services/data.service';
+import { EntrepriseService } from '../../services/entreprise.service';
+import { Subject } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
 
 interface DataItem{
   titre: string;
@@ -18,6 +21,9 @@ interface DataItem{
   ]
 })
 export class RemunerationComponent implements OnInit {
+  private _success = new Subject<string>();
+	successMessage = '';
+  
   individu!: Ind;
   
   idIndividu !: string|number;
@@ -30,6 +36,8 @@ export class RemunerationComponent implements OnInit {
   // public tiVisible : boolean = true;
   // public meVisible : boolean = true;
   // public autreVisible : boolean = true;
+
+  @ViewChild('selfClosingAlert', { static: false }) selfClosingAlert: NgbAlert | undefined;
 
   monFormulaire: FormGroup = this.fb.group({
     emploi: [ '', [ Validators.required]],
@@ -57,6 +65,7 @@ export class RemunerationComponent implements OnInit {
   
   constructor(private modalService: NgbModal, 
               private fb: FormBuilder, 
+              private entrepriseService: EntrepriseService,
               private dataService : DataService) { }
 
   changeVal(){
@@ -149,6 +158,11 @@ export class RemunerationComponent implements OnInit {
   //     onlySelf: true,
   //   })
   // }
+  alerteFiche() { 
+    this._success.next('Bravo, votre fiche entreprise a été créée'); 
+    this.entrepriseService.setAlerteFiche(false);
+    console.log('AlerteFiche val ', this.entrepriseService.getAlerteFiche())
+  }
 
   ngOnInit(): void {
     this.individu = this.dataService.getIndividu();
@@ -180,7 +194,6 @@ export class RemunerationComponent implements OnInit {
     
 
     if (this.individu.statut == 'salarie' || this.individu.statut == 'autre' ) {
-
       this.monFormulaire.controls['emploi'].enable();
       this.monFormulaire.controls['contrat'].enable();
       this.monFormulaire.controls['dt_embauche'].enable();
@@ -204,9 +217,7 @@ export class RemunerationComponent implements OnInit {
       :
       (this.monFormulaire.controls['sirenI'].disable(),
       this.monFormulaire.controls['denominationI'].disable(),
-      this.monFormulaire.controls['adresse_siegeI'].disable());
-
-      
+      this.monFormulaire.controls['adresse_siegeI'].disable());      
   
     }else if (this.individu.statut == 'me'|| this.individu.statut == 'ti' ) {
       this.monFormulaire.controls['emploi'].disable()
@@ -227,7 +238,20 @@ export class RemunerationComponent implements OnInit {
       this.monFormulaire.controls['snombre'].enable()
       this.monFormulaire.controls['total'].enable()
       this.monFormulaire.controls['identites'].enable()
+    }
+    
 
+    this._success.subscribe((message) => (this.successMessage = message));
+		this._success.pipe(debounceTime(5000)).subscribe(() => {
+			if (this.selfClosingAlert) {
+				this.selfClosingAlert.close();
+			}
+		});
+
+    if(this.entrepriseService.getAlerteFiche()){
+      console.log('ALERTE FICHE ', this.entrepriseService.getAlerteFiche())
+      this.alerteFiche();
+      
     }
   }
   // changerStatut(e: any){
