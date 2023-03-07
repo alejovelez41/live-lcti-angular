@@ -21,8 +21,8 @@ import { debounceTime } from 'rxjs/operators';
 
 export class IdentiteComponent implements OnInit {
   private _success = new Subject<string>();
-	successMessage = '';
-  
+  successMessage = '';
+
   individu!: Ind;
   controle!: Controle;
 
@@ -33,8 +33,8 @@ export class IdentiteComponent implements OnInit {
 
   date: any;
 
- 
-	@ViewChild('selfClosingAlert', { static: false }) selfClosingAlert: NgbAlert | undefined;
+
+  @ViewChild('selfClosingAlert', { static: false }) selfClosingAlert: NgbAlert | undefined;
 
   monFormulaire: FormGroup = this.fb.group({
     civilite: ['', [Validators.required]],
@@ -49,7 +49,7 @@ export class IdentiteComponent implements OnInit {
     adresse_perso: ['', [Validators.required]],
     cp_perso: ['', [Validators.required]],
     ville_perso: ['', [Validators.required]],
-    difference_adresse: ['', [Validators.required]], 
+    difference_adresse: ['', [Validators.required]],
     adresse_pro: ['', [Validators.required]],
     cp_pro: ['', [Validators.required]],
     ville_pro: ['', [Validators.required]],
@@ -147,7 +147,7 @@ export class IdentiteComponent implements OnInit {
 
     console.log('Change Val Activated');
 
-    
+
 
     this.individu.civilite = this.monFormulaire.value.civilite;
     this.individu.nom = this.monFormulaire.value.nom;
@@ -173,6 +173,7 @@ export class IdentiteComponent implements OnInit {
   ouvrirRecap() {
     return
   }
+
   minInfo() {
     if (this.monFormulaire.controls['nom'].value != '' && this.monFormulaire.controls['prenom'].value != ''
       && this.monFormulaire.controls['dt_naissance'].value != '') {
@@ -209,8 +210,61 @@ export class IdentiteComponent implements OnInit {
     );
   }
 
-  alerteFiche() { 
-    this._success.next('Bravo, votre fiche entreprise a été créée'); 
+  //Pour valider si besoin d'afficher le Button pour créer une fiche à titre personnel
+  checkFiche() {
+    if (this.individu.statut == 'Autre' || this.individu.type_statut == 'Entrepreneur individuel' || this.individu.type_statut == 'Gérant majoritaire' || this.individu.type_statut == 'Co-gérant' || this.individu.statut == 'me') {
+      if (this.individu.denominationEntPerso == '') {
+        return true;
+      } else {
+        return false;
+      }
+    } else {
+      return false;
+    }
+
+  }
+
+  creationFiche() {
+    //Check pour la creation d'une fiche
+
+
+    if (this.minInfo()) {
+
+      let entreprise: Entreprise = this.entrepriseService.getNouvelleEntreprise();
+      if (!entreprise.id_individus.includes(this.individu.id)) {
+        entreprise.id_individus.push(this.individu.id);
+      }
+      this.changeValEnt(entreprise);
+      entreprise.date = this.date;
+
+      this.entrepriseService.ajouterEntreprise(entreprise).
+        subscribe(resp => {
+          console.log('reponse AJ Entreprise creation', resp);
+          this.controle.entreprises_controle.push(resp.id);
+          this.controleService.setControle(this.controle);
+          this.entrepriseService.setEntreprise(resp);
+          if (this.individu.type_statut == 'Co-gérant' || this.individu.type_statut == 'Entrepreneur individuel' || this.individu.type_statut == 'Gérant majoritaire' || this.individu.type_statut == 'Autre' || this.individu.statut == 'me') {
+            this.individu.idEntPerso = resp.id;
+            this.individu.denominationEntPerso = resp.denomination;
+            this.individu.siren_fichePerso = resp.siren_fiche;
+            this.individu.adresse_siegePerso = resp.adresse_siege;
+          }
+          this.controleService.editerControle(this.controle).
+            subscribe(cont => {
+              this.controleService.setControle(cont);
+            })
+          this.dataService.setnav([false, false, false, false, false]);
+        });
+      this.entrepriseService.resetEntreprise();
+    }
+
+
+
+
+  }
+
+  alerteFiche() {
+    this._success.next('Bravo, votre fiche entreprise a été créée');
   }
 
 
@@ -232,59 +286,18 @@ export class IdentiteComponent implements OnInit {
     this.monFormulaire.controls['adresse_perso'].setValue(this.individu.adresse_perso);
     this.monFormulaire.controls['cp_perso'].setValue(this.individu.cp_perso);
     this.monFormulaire.controls['ville_perso'].setValue(this.individu.ville_perso);
-    this.monFormulaire.controls['difference_adresse'].setValue(this.individu.difference_adresse);    
+    this.monFormulaire.controls['difference_adresse'].setValue(this.individu.difference_adresse);
     this.monFormulaire.controls['adresse_pro'].setValue(this.individu.adresse_pro);
     this.monFormulaire.controls['cp_pro'].setValue(this.individu.cp_pro);
     this.monFormulaire.controls['ville_pro'].setValue(this.individu.ville_pro);
 
-    //Check pour la creation d'une fiche
-    if (this.entrepriseService.getCreationFiche()) {
-      const subscription = this.router.events
-        .subscribe(
-          (event: NavigationEvent) => {
-            if (event instanceof NavigationStart) {
-              if (this.minInfo()) {
-                console.log('Event creation fiche');
-                console.log(event);
 
-                let entreprise: Entreprise = this.entrepriseService.getNouvelleEntreprise();
-                if (!entreprise.id_individus.includes(this.individu.id)) {
-                  entreprise.id_individus.push(this.individu.id);
-                }
-                this.changeValEnt(entreprise);
-                entreprise.date = this.date;
-
-                this.entrepriseService.ajouterEntreprise(entreprise).
-                  subscribe(resp => {
-                    console.log('reponse AJ Entreprise creation', resp);
-                    this.controle.entreprises_controle.push(resp.id);
-                    this.controleService.setControle(this.controle);
-                    this.entrepriseService.setEntreprise(resp);
-
-                    this.individu.idEnt = resp.id;
-                    this.individu.denominationEnt = resp.denomination;
-                    this.individu.siren_fiche = resp.siren_fiche;
-                    this.individu.adresse_siege = resp.adresse_siege;
-
-                    
-                  });
-
-                this.entrepriseService.resetEntreprise();
-
-
-              }
-              this.entrepriseService.setCreationFiche(false);
-              this.entrepriseService.setAlerteFiche(true);
-              subscription.unsubscribe();
-            }
-          });
-    }
     this._success.subscribe((message) => (this.successMessage = message));
-		this._success.pipe(debounceTime(5000)).subscribe(() => {
-			if (this.selfClosingAlert) {
-				this.selfClosingAlert.close();
-			}
-		});
+    this._success.pipe(debounceTime(5000)).subscribe(() => {
+      if (this.selfClosingAlert) {
+        this.selfClosingAlert.close();
+      }
+    });
   }
 
 }

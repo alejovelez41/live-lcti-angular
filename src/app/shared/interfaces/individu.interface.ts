@@ -35,7 +35,7 @@ export interface Ind {
     difference_adresse: boolean;
     adresse_pro: string;
     cp_pro: string;
-    ville_pro: string;    
+    ville_pro: string;
 
     emploi: string;
     contrat: string;
@@ -80,6 +80,10 @@ export interface Ind {
     denominationEnt: string;
     siren_fiche: string;
     adresse_siege: string;
+    idEntPerso: string;
+    denominationEntPerso: string;
+    siren_fichePerso: string;
+    adresse_siegePerso: string;
     signature_cloture: string;
     refus_signature: boolean;
     notesInd: cardNote[];
@@ -157,7 +161,7 @@ export interface informations {
     dsn_prenom: string,
     dsn_dt_naiss: string,
     dsn_debut_contrat: string,
-    dsn_nir : string,
+    dsn_nir: string,
     obp7_num_compte: string,
     obp7_to: string,
     obp7_periode: string,

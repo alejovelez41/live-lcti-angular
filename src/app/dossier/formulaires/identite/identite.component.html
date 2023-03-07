@@ -129,7 +129,7 @@
                     <div class="form-floating">
                         <input type="text" class="form-control" formControlName="adresse_perso" (change)="changeVal()"
                             id="floatingInputlibelle" placeholder="Libellé de la voie ou du lieu dit">
-                        <label for="floatingInputlibelle">Insérer adresse</label>
+                        <label for="floatingInputlibelle">Insérer adresse N° + nom de la rue, voie, autre</label>
                     </div>
 
                 </div>
@@ -179,7 +179,7 @@
                     <div class="form-floating">
                         <input type="text" class="form-control" formControlName="adresse_pro" (change)="changeVal()"
                             id="floatingInputlibelle" placeholder="Libellé de la voie ou du lieu dit">
-                        <label for="floatingInputlibelle">Insérer adresse</label>
+                        <label for="floatingInputlibelle">Insérer adresse N° + nom de la rue, voie, autre</label>
                     </div>
 
                 </div>
@@ -223,10 +223,16 @@
                 </button>
             </div>
         </div>
-        <div class="col-lg mb-2">
+        <div class="col-lg mb-2" *ngIf="checkFiche()">
             <div class="d-grid">
-                <button type="button" class="btn btn-primary" (click)="ouvrirModal()"
-                    [disabled]="this.minInfo() ? '' : 'disabled'">
+                <button type="button" class="btn btn-success" (click)="creationFiche(); alerteFiche()" [disabled]="this.minInfo() ? '' : 'disabled'">
+                    Créer fiche entreprise
+                </button>
+            </div>
+        </div>
+        <div class="col-lg mb-2" *ngIf="!checkFiche()">
+            <div class="d-grid">
+                <button type="button" class="btn btn-primary" (click)="ouvrirModal()">
                     Signer pour finaliser le contrôle
                 </button>
             </div>

@@ -126,7 +126,11 @@ export class AssocierEntrepriseComponent implements OnInit {
       subscribe(resp => {
         console.log('reponse AJ Entreprise creation', resp);
         this.controle.entreprises_controle.push(resp.id);
-        this.controleService.setControle(this.controle);
+        this.controleService.editerControle(this.controle).
+            subscribe(cont => {
+              this.controleService.setControle(cont);
+            });
+
 
         this.id = resp.id;
         this.denom = resp.denomination;

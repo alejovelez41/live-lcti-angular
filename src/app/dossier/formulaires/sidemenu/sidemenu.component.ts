@@ -98,15 +98,45 @@ export class SidemenuComponent implements OnInit {
   }
 
   ngOnInit() {
-    
-    this.dataService.nav$.subscribe(navigation => {
-      console.log('navigations values update: ',navigation );
-      this.menuNav = navigation;
-      
-    })
-    this.dataService.setnav([false, true, true, true, true]);
-    this.fiche = false;
     this.individu = this.dataService.getIndividu();
+
+    this.dataService.nav$.subscribe(navigation => {
+      console.log('navigations values update: ', navigation);
+      this.menuNav = navigation;
+
+    })
+    if (this.individu.statut == 'ti') {
+      if (this.individu.denominationEntPerso == '') {
+        this.dataService.setnav([false, false, false, true, true]);
+      } else {
+        this.dataService.setnav([false, false, false, false, false]);
+      }
+    } else if (this.individu.statut == 'salarie') {
+      this.dataService.setnav([false, false, false, false, false]);
+    } else if (this.individu.statut == 'autre') {
+      if (this.individu.fonction == '') {
+        this.dataService.setnav([false, false, true, true, true]);
+      } else {
+        this.dataService.setnav([false, false, false, false, false]);
+      }
+    } else if (this.individu.statut == 'me') {
+      if (this.individu.denominationEntPerso == '') {
+        this.dataService.setnav([false, false, false, true, true]);
+      } else {
+        this.dataService.setnav([false, false, false, false, false]);
+      }
+    } else {
+      if(this.individu.signature == ''){
+        this.dataService.setnav([false, true, true, true, true]);
+      }else{
+        this.dataService.setnav([false, false, true, true, true]);
+      }
+    }
+
+
+
+    this.fiche = false;
+
     this.controle = this.controleService.getControle();
     this.idIndividu = this.statutIndividu.idindividu;
     this.consentementIndividu = this.statutIndividu.consentementInd;
@@ -122,7 +152,7 @@ export class SidemenuComponent implements OnInit {
     this.activatedRoute.params
       .subscribe(({ id }) => console.log(id))
     console.log(this.activatedRoute.params)
-    
+
   }
 
 

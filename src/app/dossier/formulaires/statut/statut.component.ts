@@ -174,6 +174,10 @@ export class StatutComponent implements OnInit {
 
   changeVal(){
     this.individu.statut = this.monFormulaire.controls['statut'].value;
+    if(this.individu.statut != 'ti'){
+      this.individu.type_statut = '';
+      this.monFormulaire.controls['type_statut'].setValue('');
+    }
     this.individu.fonction = this.monFormulaire.controls['fonction'].value;
     this.individu.nir = this.monFormulaire.controls['nir'].value;
     this.individu.siret = this.monFormulaire.controls['siret'].value;
@@ -218,6 +222,7 @@ export class StatutComponent implements OnInit {
 
   creationFiche() {
     this.entrepriseService.setCreationFiche(true);
+    this.dataService.setnav([false, false, false, true, true]);
     this.router.navigate(['/formulaires/identite', this.individu.id]);
   }
 
@@ -226,6 +231,22 @@ export class StatutComponent implements OnInit {
             && this.monFormulaire.controls[campo].touched;
   }
 
+  typeTI(val :string){
+    if(val == 'Co-gérant' || val == 'Gérant majoritaire' ){
+      return true;
+    }else{
+      return false;
+    }
+
+    if(val == 'Entrepreneur individuel'){
+      return true;
+    }else{
+      return false;
+    }
+
+    
+  }
+  
   ngOnInit(): void {
     this.individu = this.dataService.getIndividu();
     this.entreprise =  this.entrepriseService.getDataEntreprise();
