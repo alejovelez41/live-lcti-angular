@@ -9,11 +9,16 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MenuNavComponent } from './shared/menu-nav/menu-nav.component';
 import { SupressionComponent } from './dossier/controle/individus/supression/supression.component';
 import { RouterModule } from '@angular/router';
+import { BoiteOutilsComponent } from './shared/boite-outils/boite-outils.component';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+
+import {MatSidenavModule} from '@angular/material/sidenav';
 
 @NgModule({
   declarations: [
     AppComponent,
     MenuNavComponent,
+    BoiteOutilsComponent,
     SupressionComponent,
   ],
   imports: [
@@ -23,7 +28,9 @@ import { RouterModule } from '@angular/router';
     NgbModule,
     ReactiveFormsModule,
     FormsModule,
-    RouterModule
+    RouterModule,
+    NoopAnimationsModule,
+    MatSidenavModule
   ],
   exports: [
     NgbModule

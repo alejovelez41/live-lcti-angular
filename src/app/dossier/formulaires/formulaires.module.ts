@@ -19,6 +19,7 @@ import { StatutComponent } from './statut/statut.component';
 import { AssocierEntrepriseComponent } from './statut/associer-entreprise/associer-entreprise.component';
 import { JoursComponent } from './autres/jours/jours.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { MatSidenavModule } from '@angular/material/sidenav';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     ReactiveFormsModule,
     AutocompleteLibModule,
     RouterModule,
-    NgbModule
+    NgbModule,
+    MatSidenavModule
   ]
 
 })

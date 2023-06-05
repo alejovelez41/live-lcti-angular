@@ -92,9 +92,9 @@
                     <!-- Champ siren / SIRET -->
                     <div class="col-md-12" *ngIf="individu.statut == 'autre'">
                         <div class="form-floating mx-1">
-                            <input type="text" class="form-control" formControlName="siren" placeholder="Insérer Siren"
-                                (change)="changeVal()" id="floatingInput_siren">
-                            <label for="floatingInput_siren">Siren</label>
+                            <input type="text" class="form-control" formControlName="siret" placeholder="Insérer le Siren ou Siret"
+                                (change)="changeVal()" id="floatingInput_siren" [maxlength]="14">
+                            <label for="floatingInput_siren">Insérer le Siren ou Siret</label>
                             <span class="form-text text-info" *ngIf="isValid('siren')">
                                 Le Siren doit contenir 9 chiffres ou 14 chiffres pour le Siret
                             </span>
@@ -249,7 +249,7 @@
                     <div class="form-floating mx-1">
                         <input type="date" class="form-control" formControlName="dt_creation" id="floatingInputValue"
                             (change)="changeVal()">
-                        <label for="floatingInputValue">Date de création</label>
+                        <label for="floatingInputValue">Date d'immatriculation</label>
                     </div>
                 </div>
             </div>
@@ -260,8 +260,8 @@
                 <!-- Champ siren / SIRET -->
                 <div class="col-md-12 my-1">
                     <div class="form-floating mx-1">
-                        <input type="text" class="form-control" formControlName="siren"
-                            placeholder="Insérer Siren ou Siret du TI" (change)="changeVal()" id="floatingInput_siren">
+                        <input type="text" class="form-control" formControlName="siret"
+                            placeholder="Insérer Siren ou Siret du TI" (change)="changeVal()" id="floatingInput_siren" [maxlength]="14">
                         <label for="floatingInput_siren">Insérer Siren ou Siret du TI</label>
                         <span class="form-text text-info" *ngIf="isValid('siren')">
                             Le Siren doit contenir 9 chiffres ou 14 chiffres pour le Siret
@@ -343,8 +343,8 @@
                 <!-- Champ siren / SIRET -->
                 <div class="col-md-12 my-1">
                     <div class="form-floating mx-1">
-                        <input type="text" class="form-control" formControlName="siren"
-                            placeholder="Insérer Siren ou Siret du TI" (change)="changeVal()" id="floatingInput_siren">
+                        <input type="text" class="form-control" formControlName="siret"
+                            placeholder="Insérer Siren ou Siret du TI" (change)="changeVal()" id="floatingInput_siren" [maxlength]="14">
                         <label for="floatingInput_siren">Insérer Siren ou Siret du TI</label>
                         <span class="form-text text-info" *ngIf="isValid('siren')">
                             Le Siren doit contenir 9 chiffres ou 14 chiffres pour le Siret
@@ -435,9 +435,9 @@
                     <!-- Champ siren / SIRET -->
                     <div class="col-md-6 my-1">
                         <div class="form-floating mx-1">
-                            <input type="text" class="form-control" formControlName="siren"
+                            <input type="text" class="form-control" formControlName="siret"
                                 placeholder="Insérer Siren ou Siret du TI" (change)="changeVal()"
-                                id="floatingInput_siren">
+                                id="floatingInput_siren" [maxlength]="14">
                             <label for="floatingInput_siren">Insérer Siren ou Siret du TI</label>
                             <span class="form-text text-info" *ngIf="isValid('siren')">
                                 Le Siren doit contenir 9 chiffres ou 14 chiffres pour le Siret
@@ -545,7 +545,7 @@
                     <div class="form-floating mx-1">
                         <input type="date" class="form-control" formControlName="dt_creation" id="floatingInputValue"
                             (change)="changeVal()">
-                        <label for="floatingInputValue">Date de création</label>
+                        <label for="floatingInputValue">Date d'immatriculation</label>
                     </div>
                 </div>
             </div>
@@ -553,8 +553,8 @@
             <!-- Champ siren / SIRET -->
             <div class="col-md-12">
                 <div class="form-floating mx-1">
-                    <input type="text" class="form-control" formControlName="siren" (change)="changeVal()"
-                        placeholder="Insérer le Siren ou Siret du Me" id="floatingInput_siren">
+                    <input type="text" class="form-control" formControlName="siret" (change)="changeVal()"
+                        placeholder="Insérer le Siren ou Siret du Me" id="floatingInput_siren" [maxlength]="14">
                     <label for="floatingInput_siren">Insérer le Siren ou Siret du Me</label>
                     <span class="form-text text-info" *ngIf="isValid('siren')">
                         Le Siren doit contenir 9 chiffres ou 14 chiffres pour le Siret
@@ -609,10 +609,10 @@
 
 
         <br>
-        <!-- <span style="font-weight: bold;">Service Data</span>
+        <span style="font-weight: bold;">Service Data</span>
         <pre>{{individu | json}}</pre>
         <span style="font-weight: bold;">Service Ent</span>
-        <pre>{{entreprise | json}}</pre> -->
+        <pre>{{entreprise | json}}</pre>
         <!-- <span style="font-weight: bold;">Formulaire</span>
         <pre>{{individu | json}}</pre> -->
 

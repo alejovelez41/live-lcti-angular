@@ -9,29 +9,24 @@ import { Entreprise } from '../interfaces/entreprises.interface';
 import { Ind } from '../interfaces/individu.interface';
 import { Router } from '@angular/router';
 
-
 @Component({
-  selector: 'app-menu-nav',
-  templateUrl: './menu-nav.component.html',
+  selector: 'app-boite-outils',
+  templateUrl: './boite-outils.component.html',
   styles: [
     `
       li {
         cursor:pointer;
-      }  
-      
+      }    
     `
   ]
 })
-export class MenuNavComponent implements OnInit {
-
+export class BoiteOutilsComponent implements OnInit {
 
   closeResult!: string;
   individu!: Ind;
   entreprise!: Entreprise;
   entreprises: Entreprise[] = [];
   controle!: Controle;
-
-
 
   idCont !: string | number;
   idEnt !: string | number;
@@ -43,7 +38,8 @@ export class MenuNavComponent implements OnInit {
     private entrepriseService: EntrepriseService, 
     private dataService: DataService,
     private controleService: ControleService,
-    private router : Router) { }
+    private router : Router
+  ) { }
 
   openEnd(content: TemplateRef<any>) {
     
@@ -132,11 +128,6 @@ export class MenuNavComponent implements OnInit {
 
   openCustomPanelClass(content: TemplateRef<any>) {
     this.offcanvasService.open(content, { panelClass: 'bg-info' });
-  }
-
-  affichage(){
-    this.dataService.setAffichage(true);
-    this.offcanvasService.dismiss('Cross click')
   }
 
   ngOnInit(): void {

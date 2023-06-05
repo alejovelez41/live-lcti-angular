@@ -212,7 +212,7 @@ export class IdentiteComponent implements OnInit {
 
   //Pour valider si besoin d'afficher le Button pour créer une fiche à titre personnel
   checkFiche() {
-    if (this.individu.statut == 'Autre' || this.individu.type_statut == 'Entrepreneur individuel' || this.individu.type_statut == 'Gérant majoritaire' || this.individu.type_statut == 'Co-gérant' || this.individu.statut == 'me') {
+    if (this.individu.statut == 'autre' || this.individu.type_statut == 'Entrepreneur individuel' || this.individu.type_statut == 'Gérant majoritaire' || this.individu.type_statut == 'Co-gérant' || this.individu.statut == 'me') {
       if (this.individu.denominationEntPerso == '') {
         return true;
       } else {
@@ -236,6 +236,7 @@ export class IdentiteComponent implements OnInit {
       }
       this.changeValEnt(entreprise);
       entreprise.date = this.date;
+      entreprise.siren_fiche = this.individu.siren;
 
       this.entrepriseService.ajouterEntreprise(entreprise).
         subscribe(resp => {

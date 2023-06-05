@@ -12,8 +12,9 @@
                             <!-- Champ Emploi occupé -->
                             <div class="col-lg mb-2">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" formControlName="emploi" placeholder="Emploi occupé"
-                                        id="floatingInputEmploiOccupe" (change)="changeVal()">
+                                    <input type="text" class="form-control" formControlName="emploi"
+                                        placeholder="Emploi occupé" id="floatingInputEmploiOccupe"
+                                        (change)="changeVal()">
                                     <label for="floatingInputEmploiOccupe">Emploi occupé</label>
                                 </div>
                             </div>
@@ -32,8 +33,8 @@
                             <!-- Champ Type de contrat -->
                             <div class="col-lg mb-2">
                                 <div class="form-floating">
-                                    <select class="form-select" (change)="changeVal()"
-                                        formControlName="contrat" id="floatingInput_type_contrat">
+                                    <select class="form-select" (change)="changeVal()" formControlName="contrat"
+                                        id="floatingInput_type_contrat">
                                         <option value="">Sélectionner le type de contrat</option>
                                         <option *ngFor="let contrat of contrats" [value]="contrat">
                                             {{contrat}}
@@ -42,27 +43,26 @@
                                     <label for="floatingInput_type_contrat">Type de contrat</label>
                                 </div>
                             </div>
-                            
+
                         </div>
+
+
 
                         <div class="row">
                             <div class="col-lg mb-2">
-                            <!-- Champ dure de travail -->
+                                <!-- Champ dure de travail -->
                                 <div class="form-floating">
                                     <input type="number" class="form-control" formControlName="duree"
-                                    placeholder="Durée de travail hebdomadaire" id="floatingInput_dure"
-                                    (change)="changeVal()">
+                                        placeholder="Durée de travail hebdomadaire" id="floatingInput_dure"
+                                        (change)="changeVal()">
                                     <label for="floatingInput_dure">Durée de travail hebdomadaire</label>
                                 </div>
                             </div>
-                        </div>
-
-                        <div class="row">
                             <div class="col-lg mb-2">
                                 <!-- Bulletins de salaires ? -->
                                 <div class="form-floating">
-                                    <select class="form-select" (change)="changeVal()"
-                                        formControlName="bullentins" id="floatingInput_bullentins">
+                                    <select class="form-select" (change)="changeVal()" formControlName="bullentins"
+                                        id="floatingInput_bullentins">
                                         <option value="">Réception Bulletins de salaires ?</option>
                                         <option *ngFor="let bulletin of bulletins" [value]="bulletin">
                                             {{bulletin}}
@@ -75,15 +75,15 @@
                             <div class="col-lg mb-2">
                                 <!-- Heures Sup/+ -->
                                 <div class="form-floating">
-                                    <select class="form-select" (change)="changeVal()"
-                                        formControlName="hsup" id="floatingInput_heures">
+                                    <select class="form-select" (change)="changeVal()" formControlName="hsup"
+                                        id="floatingInput_heures">
                                         <option value="">Heures supplémentaires ?</option>
                                         <option *ngFor="let heures of heuresSup" [value]="heures">
                                             {{heures}}
                                         </option>
                                     </select>
                                     <label for="floatingInput_heures">Heures supplémentaires ?</label>
-                                </div>                                
+                                </div>
                             </div>
                         </div>
 
@@ -97,8 +97,9 @@
                                 <div class="form-check">
                                     <input type="checkbox" value="" formControlName="interimaire" id="flexCheckDisabled"
                                         class="form-check-input" (change)="changeVal()">
-        
-                                    <label class="form-check-label h6" for="flexCheckDisabled" style="color:black; font-size: 12px;font-style:italic">
+
+                                    <label class="form-check-label h6" for="flexCheckDisabled"
+                                        style="color:black; font-size: 12px;font-style:italic">
                                         Cliquer ici si l'individu contrôlé est un salarié intérimaire
                                     </label>
                                 </div>
@@ -116,7 +117,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <!-- Siren/ siret societe interim -->
                         <div class="row">
                             <div class="col-lg mb-2">
@@ -126,10 +127,10 @@
                                         (change)="changeVal()">
                                     <label for="floatingDenomination_I">Dénomination société intérimaire</label>
                                 </div>
-                            </div>  
+                            </div>
                         </div>
 
-                        
+
                         <!-- Adresse societe interim -->
                         <div class="row">
                             <div class="col-lg mb-2">
@@ -139,9 +140,9 @@
                                         (change)="changeVal()">
                                     <label for="floatingAdresse_I">Adresse société intérimaire</label>
                                 </div>
-                            </div> 
+                            </div>
                         </div>
-                    
+
 
                     </div>
                 </div>
@@ -157,7 +158,7 @@
 
         <div class="row">
             <!-- Select type de salaire  -->
-            <div class="col-lg-4 mb-3">
+            <div class="col-lg-6 mb-3">
                 <div class="form-floating">
                     <select class="form-select" (change)="changeVal()" formControlName="fsalaire"
                         id="floatingInput_type_salaire">
@@ -169,9 +170,35 @@
                     <label for="floatingInput_type_salaire">Type de salaire</label>
                 </div>
             </div>
-
+            <!-- Select type de salaire  -->
+            <div class="col-lg-6 mb-3">
+                <div class="form-floating">
+                    <select class="form-select" (change)="changeVal()" formControlName="typeVersement"
+                        id="floatingInput_versement_salaire">
+                        <option value="">Versement du salaire</option>
+                        <option *ngFor="let type of versementSalaire" [value]="type">
+                            {{type}}
+                        </option>
+                    </select>
+                    <label for="floatingInput_versement_salaire">Versement du salaire</label>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row" *ngIf="individu.typeVersement == 'Autre'">
             <!-- Champ Montant salaire brut-->
-            <div class="col-lg-4 mb-3">
+            <div class="col-lg-12 mb-3">
+                <div class="form-floating">
+                    <input type="text" class="form-control h-100" formControlName="autreVersement"
+                        placeholder="Autre type de rémunération" (change)="changeVal()" id="floatingInput_autre">
+                    <label for="floatingInput_autre">Autre type de rémunération</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Champ Montant salaire brut-->
+            <div class="col-lg-6 mb-3">
                 <div class="form-floating">
                     <input type="text" class="form-control h-100" formControlName="sbrut"
                         placeholder="Montant du salaire brut" (change)="changeVal()" id="floatingInput_montant">
@@ -180,7 +207,7 @@
             </div>
 
             <!-- Champ Montant salaire net-->
-            <div class="col-lg-4 mb-3">
+            <div class="col-lg-6 mb-3">
                 <div class="form-floating">
                     <input type="text" class="form-control h-100" formControlName="montant"
                         placeholder="Montant du salaire net" (change)="changeVal()" id="floatingInput_net">
@@ -235,7 +262,7 @@
                 <div class="form-floating">
                     <input type="text" class="form-control" formControlName="rmensuelle"
                         placeholder="CA déclaré sur l'année en cours" (change)="changeVal()" id="floatingInput_ca">
-                        <label for="floatingInput_ca">CA déclaré sur l'année en cours</label>
+                    <label for="floatingInput_ca">CA déclaré sur l'année en cours</label>
                 </div>
             </div>
 
@@ -246,7 +273,8 @@
             <div class="col-lg-6">
                 <div class="form-floating">
                     <textarea placeholder="Nombre de salariés présents lors du contrôle" class="form-control mb-4"
-                        rows="3" formControlName="snombre" (change)="changeVal()" id="ff_nSalaries" style="height: 100px"></textarea>
+                        rows="3" formControlName="snombre" (change)="changeVal()" id="ff_nSalaries"
+                        style="height: 100px"></textarea>
                     <label for="ff_nSalaries">Nombre de salariés présents lors du contrôle</label>
                 </div>
             </div>
@@ -256,7 +284,8 @@
             <div class="col-lg-6">
                 <div class="form-floating">
                     <textarea placeholder="Nombre de salariés au total" class="form-control mb-4" rows="3"
-                        formControlName="total" (change)="changeVal()" id="ff_totalSalaries" style="height: 100px"></textarea>
+                        formControlName="total" (change)="changeVal()" id="ff_totalSalaries"
+                        style="height: 100px"></textarea>
                     <label for="ff_totalSalaries">Nombre de salariés au total</label>
                 </div>
             </div>
@@ -266,7 +295,8 @@
             <div class="col-lg-12">
                 <div class="form-floating">
                     <textarea placeholder="Identité des salariés présents lors du contrôle" class="form-control mb-4"
-                        rows="3" formControlName="identites" (change)="changeVal()" id="ff_idSalaries" style="height: 100px"></textarea>
+                        rows="3" formControlName="identites" (change)="changeVal()" id="ff_idSalaries"
+                        style="height: 100px"></textarea>
                     <label for="ff_idSalaries">Identité des salariés présents lors du contrôle</label>
                 </div>
             </div>
@@ -316,7 +346,7 @@
                 <div class="form-floating">
                     <input type="text" class="form-control" formControlName="rmensuelle"
                         placeholder="Rémunération mensuelle" (change)="changeVal()" is="ff_NSalariesAUtOT">
-                <label for="ff_NSalariesAUtOT">Rémunération mensuelle</label>
+                    <label for="ff_NSalariesAUtOT">Rémunération mensuelle</label>
                 </div>
             </div>
 
@@ -327,32 +357,35 @@
             <div class="col-lg-6">
                 <div class="form-floating">
                     <textarea placeholder="Nombre de salariés présents lors du contrôle" class="form-control mb-4"
-                        rows="3" formControlName="snombre" (change)="changeVal()" id="ff_NSalariesPres" style="height: 100px"></textarea>
+                        rows="3" formControlName="snombre" (change)="changeVal()" id="ff_NSalariesPres"
+                        style="height: 100px"></textarea>
                     <label for="ff_NSalariesPres">Nombre de salariés présents lors du contrôle</label>
 
                 </div>
+            </div>
+
+            <!-- Champ nombre de salaries -->
+
+            <div class="col-lg-6">
+                <div class="form-floating">
+                    <textarea placeholder="Nombre de salariés au total" class="form-control mb-4" rows="3"
+                        formControlName="total" (change)="changeVal()" id="ff_NSalariesTot"
+                        style="height: 100px"></textarea>
+                    <label for="ff_NSalariesTot">Nombre de salariés au total</label>
                 </div>
+            </div>
 
-                <!-- Champ nombre de salaries -->
+            <!-- Champ nombre de salaries -->
 
-                <div class="col-lg-6">
-                    <div class="form-floating">
-                        <textarea placeholder="Nombre de salariés au total" class="form-control mb-4" rows="3"
-                            formControlName="total" (change)="changeVal()" id="ff_NSalariesTot" style="height: 100px"></textarea>
-                        <label for="ff_NSalariesTot">Nombre de salariés au total</label>
-                    </div>
+            <div class="col-lg-12">
+                <div class="form-floating">
+                    <textarea placeholder="Identité des salariés présents lors du contrôle" style="height: 100px"
+                        class="form-control mb-4" rows="3" formControlName="identites" (change)="changeVal()"
+                        id="ff_idSalariesPres"></textarea>
+                    <label for="ff_idSalariesPres">Identité des salariés présents lors du contrôle</label>
                 </div>
-
-                    <!-- Champ nombre de salaries -->
-
-                    <div class="col-lg-12">
-                        <div class="form-floating">
-                            <textarea placeholder="Identité des salariés présents lors du contrôle" style="height: 100px"
-                                class="form-control mb-4" rows="3" formControlName="identites" (change)="changeVal()" id="ff_idSalariesPres"></textarea>
-                            <label for="ff_idSalariesPres">Identité des salariés présents lors du contrôle</label>
-                        </div>
-                    </div>
-                </div>
+            </div>
+        </div>
 
 
     </form>

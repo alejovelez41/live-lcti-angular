@@ -49,7 +49,7 @@ export class StatutComponent implements OnInit {
     statut: [ '', [ Validators.required]],
     fonction: [ '', [ Validators.required]],
     nir: [ '', [ Validators.required, Validators.minLength(13), Validators.maxLength(13) ]],
-    siret: [ '', [ Validators.required, Validators.minLength(14), Validators.maxLength(14) ]],
+    siret: [ '', [ Validators.required, Validators.minLength(9), Validators.maxLength(14) ]],
     siren: [ '', [ Validators.required, Validators.minLength(9), Validators.maxLength(14) ]],
     dt_creation: ['', [Validators.required]],
     type_statut: ['', [Validators.required]],
@@ -86,6 +86,7 @@ export class StatutComponent implements OnInit {
         this.individu.siren_fiche = this.entreprise.siren_fiche;
         this.individu.adresse_siege = this.entreprise.adresse_siege;
         this.filtrageEntreprisesControle();
+        this.changeVal();
         // this.statutIndividu.dataIndividu[116].valeur= this.entreprise.id;
         // this.statutIndividu.dataIndividu[117].valeur= this.entreprise.denomination;
         // this.statutIndividu.dataIndividu[118].valeur= this.entreprise.siren_fiche;
@@ -130,7 +131,8 @@ export class StatutComponent implements OnInit {
           console.log('Pas de retour api du tout')
         } else{
           this.individu.infos = informations;
-          this.individu.infos.retour_systeme = true;
+          this.individu.infos.retour_systeme = 'oui';
+          this.dataService.setNotification(true);
           console.log('changement bool retour syst: ', this.individu)
           this.changeVal();
         }     
@@ -173,6 +175,7 @@ export class StatutComponent implements OnInit {
   
 
   changeVal(){
+    console.log('entered changeval');
     this.individu.statut = this.monFormulaire.controls['statut'].value;
     if(this.individu.statut != 'ti'){
       this.individu.type_statut = '';
@@ -180,8 +183,15 @@ export class StatutComponent implements OnInit {
     }
     this.individu.fonction = this.monFormulaire.controls['fonction'].value;
     this.individu.nir = this.monFormulaire.controls['nir'].value;
-    this.individu.siret = this.monFormulaire.controls['siret'].value;
-    this.individu.siren = this.monFormulaire.controls['siren'].value;
+
+    
+    if(this.monFormulaire.controls['siret'].value != ''){
+      this.individu.siret = this.monFormulaire.controls['siret'].value;
+      this.monFormulaire.controls['siret'].invalid ? '' : this.monFormulaire.controls['siren'].setValue((this.monFormulaire.controls['siret'].value).slice(0,9));
+      this.individu.siren = this.monFormulaire.controls['siren'].value;
+    }
+
+    
     this.individu.dt_creation = this.monFormulaire.value.dt_creation;
     this.individu.type_statut = this.monFormulaire.value.type_statut;
     this.individu.autre_statut = this.monFormulaire.value.autre_statut;
@@ -193,11 +203,14 @@ export class StatutComponent implements OnInit {
         this.dataService.setnav([false, false, false, false, false]);
       }else if( this.individu.statut == 'autre' && this.individu.fonction != ''){
         this.dataService.setnav([false, false, false, false, false]);
+      }else if(this.individu.statut == 'ti' && this.individu.idEnt == ''){
+        this.dataService.setnav([false, false, true, true, true]);
+      }else if(this.individu.statut == 'me' && this.individu.idEnt == ''){
+        this.dataService.setnav([false, false, true, true, true]);
+      }else if(this.individu.statut == 'ti' && this.individu.idEnt != ''){ // cas gérant égalitaire ou minoritaire
+        console.log('setnav cogerant')
+        this.dataService.setnav([false, false, false, true, true]);
       }
-    }else if(this.individu.statut == 'ti' && this.individu.idEnt == ''){
-      this.dataService.setnav([false, false, true, true, true]);
-    }else if(this.individu.statut == 'me' && this.individu.idEnt == ''){
-      this.dataService.setnav([false, false, true, true, true]);
     }
 
     // MaJ valeurs ID entreprise
@@ -255,60 +268,12 @@ export class StatutComponent implements OnInit {
 
     //MaJ le formulaire à partir des valeurs du service
     this.monFormulaire.controls['statut'].setValue(this.individu.statut);
-    this.monFormulaire.controls['fonction'].setValue(this.individu.fonction);
     this.monFormulaire.controls['nir'].setValue(this.individu.nir);
+    this.monFormulaire.controls['type_statut'].setValue(this.individu.type_statut);
+    this.monFormulaire.controls['dt_creation'].setValue(this.individu.dt_creation);
+
     this.monFormulaire.controls['siret'].setValue(this.individu.siret);
     this.monFormulaire.controls['siren'].setValue(this.individu.siren);
-
-    //Désactiver champs de saisie
-    // if (this.individu.statut == 'salarie') {
-    //   this.monFormulaire.controls['fonction'].disable();
-    //   this.monFormulaire.controls['nir'].enable();
-    //   this.monFormulaire.controls['siret'].disable();
-    //   this.monFormulaire.controls['siren'].disable();
-      
-    // }
-    // else if (this.individu.statut == 'ti' || this.individu.statut == 'me'){
-    //   this.monFormulaire.controls['fonction'].disable();
-    //   this.monFormulaire.controls['nir'].enable();
-    //   this.monFormulaire.controls['siret'].enable();
-    //   this.monFormulaire.controls['siren'].enable();
-    // }
-    // else if (this.individu.statut == 'autre'){
-    //   this.monFormulaire.controls['fonction'].enable();
-    //   this.monFormulaire.controls['nir'].enable();
-    //   this.monFormulaire.controls['siret'].enable();
-    //   this.monFormulaire.controls['siren'].enable();
-    // }
-    // else {
-    //   this.monFormulaire.controls['fonction'].disable();
-    //   this.monFormulaire.controls['nir'].disable();
-    //   this.monFormulaire.controls['siret'].disable();
-    //   this.monFormulaire.controls['siren'].disable();
-    // }
-
-
-    // console.log("identité entreprise est :")
-    // console.log(this.idEnt)
-    
-    // this.idIndividu = this.statutIndividu.idindividu;
-    // this.dataIndividu = this.statutIndividu.dataind;
-    // this.statInd = this.statutIndividu.statutind;
-
-    //recuperer valeurs service
-    // this.monFormulaire.controls['statut'].setValue(this.statutIndividu.statutind);
-    // this.monFormulaire.controls['fonction'].setValue(this.dataIndividu[7].valeur);
-    // this.monFormulaire.controls['nir'].setValue(this.dataIndividu[8].valeur);
-    // this.monFormulaire.controls['siret'].setValue(this.dataIndividu[9].valeur);
-    // this.monFormulaire.controls['siren'].setValue(this.dataIndividu[10].valeur);
-
-    // this.entreprise.id = this.dataIndividu[116].valeur;
-    // this.entreprise.denomination = this.dataIndividu[117].valeur; 
-    // this.entreprise.siren_fiche = this.dataIndividu[118].valeur;
-    // this.entreprise.adresse_siege = this.dataIndividu[119].valeur;
-    // this.entreprise.denominationI = this.dataIndividu[120].valeur;
-    // this.entreprise.adresse_siegeI = this.dataIndividu[121].valeur;
+    this.monFormulaire.controls['autre_statut'].setValue(this.individu.autre_statut);
   }
-
-
 }

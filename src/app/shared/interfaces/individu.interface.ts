@@ -49,6 +49,8 @@ export interface Ind {
     hsup: string;
     sbrut: string;
     fsalaire: string;
+    typeVersement: string;
+    autreVersement: string;
     montant: string;
     remunere: string;
     ca: string;
@@ -119,8 +121,19 @@ export interface cardNote {
     nom: string
 }
 
+export interface champ {
+    col : string,
+    titre : string,
+}
+export interface data {
+    source : string,
+    vide : boolean,
+    new : boolean,
+    champs : champ[],
+}
+
 export interface informations {
-    retour_systeme: boolean,
+    retour_systeme: string,
     rei_siren: string,
     rei_denomination: string,
     rei_code_naf: string,
@@ -176,6 +189,7 @@ export interface informations {
     opc_delegue: string,
     opc_etat: string,
     opc_dt_etat: string
+    [key: string]: string; // Index signature
 }
 
 export interface totauxHoraires {

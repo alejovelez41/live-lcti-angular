@@ -48,6 +48,8 @@ export class RemunerationComponent implements OnInit {
     hsup: [ '', [ Validators.required]],
     sbrut: [ '', [ Validators.required]],
     fsalaire: [ '', [ Validators.required]],
+    typeVersement: [ '', [ Validators.required]],
+    autreVersement: [ '', [ Validators.required]],
     montant: [ '', [ Validators.required]],
     remunere: [ '', [ Validators.required]],
     ca: [ '', [ Validators.required]],
@@ -77,6 +79,8 @@ export class RemunerationComponent implements OnInit {
     this.individu.hsup = this.monFormulaire.controls['hsup'].value;
     this.individu.sbrut = this.monFormulaire.controls['sbrut'].value;
     this.individu.fsalaire = this.monFormulaire.controls['fsalaire'].value;
+    this.individu.typeVersement =this.monFormulaire.controls['typeVersement'].value;
+    this.individu.autreVersement =this.monFormulaire.controls['autreVersement'].value;
     this.individu.montant = this.monFormulaire.controls['montant'].value;
     this.individu.remunere = this.monFormulaire.controls['remunere'].value;
     this.individu.ca = this.monFormulaire.controls['ca'].value;
@@ -177,6 +181,9 @@ export class RemunerationComponent implements OnInit {
     this.monFormulaire.controls['hsup'].setValue(this.individu.hsup);
     this.monFormulaire.controls['sbrut'].setValue(this.individu.sbrut);
     this.monFormulaire.controls['fsalaire'].setValue(this.individu.fsalaire);
+    this.monFormulaire.controls['typeVersement'].setValue(this.individu.typeVersement);
+    this.monFormulaire.controls['autreVersement'].setValue(this.individu.autreVersement);
+
     this.monFormulaire.controls['montant'].setValue(this.individu.montant);
     this.monFormulaire.controls['remunere'].setValue(this.individu.remunere);
     this.monFormulaire.controls['ca'].setValue(this.individu.ca);
@@ -277,7 +284,8 @@ export class RemunerationComponent implements OnInit {
     "Contrat d'apprentissage", "Contrat de professionnalisation",	"CTT (Contrat de travail temporaire ou intérim)",	"CUI (Contrat unique d'insertion)"];
 
   bulletins: any = ["Oui", "Non"];
-  heuresSup: any = ["Oui", "Non"];
+  heuresSup: any = ["Oui", "Non", "Occasionnellement"];
   typeSalaire: any = ["horaire", "journalier", "hebdomadaire", "mensuel", "annuel" ];
+  versementSalaire: any = ["Espèces", "Chèque", "Virement", "Autre"];
 }
 

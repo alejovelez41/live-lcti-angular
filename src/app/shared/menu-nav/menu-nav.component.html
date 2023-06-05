@@ -2,12 +2,14 @@
 
     <div class="offcanvas-header" style="background-color: #20BFC8; color: white;">
         <h4 class="offcanvas-title">Boite à outils</h4>
-        <button type="button" class="btn-close btn-close-white" aria-label="Close" (click)="offcanvas.dismiss('Cross click')"></button>
+        <button type="button" class="btn-close btn-close-white" aria-label="Close"
+            (click)="offcanvas.dismiss('Cross click')"></button>
     </div>
     <div class="offcanvas-body" style="background-color: #008088; color: white;">
         <ul class="list-group list-group-flush flex-column mb-auto">
             <li class="list-group-item" style="background-color: #008088; border-color: white">
-                <a [routerLink]="['/outils/informations',individu.id]" class="nav-link link-dark" aria-current="page" style="color: white;" (click)="offcanvas.dismiss('Cross click')">
+                <a [routerLink]="['/outils/informations',individu.id]" class="nav-link link-dark" aria-current="page"
+                    style="color: white;" (click)="offcanvas.dismiss('Cross click')">
                     <img src="../assets/infos.svg" alt="" width="25" height="25" display="flex">
                     Consultation des informations
                 </a>
@@ -19,8 +21,9 @@
                 </a>
             </li>
             <li class="list-group-item" style="background-color: #008088; border-color: white">
-                <a routerLink="/outils/notes" class="nav-link link-dark" style="color: white; " (click)="offcanvas.dismiss('Cross click')">
-                    <img src="../assets/notes.svg"  alt="" width="25" height="25" display="flex">
+                <a routerLink="/outils/notes" class="nav-link link-dark" style="color: white; "
+                    (click)="offcanvas.dismiss('Cross click')">
+                    <img src="../assets/notes.svg" alt="" width="25" height="25" display="flex">
                     Mes notes
                 </a>
 
@@ -54,50 +57,76 @@
                     </li>
                 </ul>       -->
             </li>
+            <li class="list-group-item" style="background-color: #008088; border-color: white">
+                <a (click)="affichage()" class="nav-link link-dark" style="color: white; ">
+                    <img src="../assets/camera.svg" alt="" width="25" height="25" display="flex">
+                    Test affichage
+                </a>
+            </li>
         </ul>
     </div>
 </ng-template>
 
 
+<div class="d-flex flex-row my-1 align-items-center justify-content-between">
+    <a class="navbar-brand p-0 m-0" href="#">
+        <img src="../assets/Logo.png" alt="" width="160" height="35" display="flex">
+    </a>    
+    <ul class="navbar-nav navbar-right p-0 m-0">
+        <div class="d-flex flex-row align-items-center">
+        <li class="nav-item p-0 m-0">
+            <a class="nav-link h5 p-0 m-0" style="color: #000000" href="#">Franck CHAUSSON</a>
+        </li>
+        <li class="nav-item" class="sidenav p-0 mx-1">
+            <a class="nav-link h5 p-0 m-0" (click)="openEnd(content)">
+                <img src="../assets/user.png" alt="User image" width="50" height="50"
+                    class="d-inline-block align-text-top p-0 m-0">
+            </a>
+        </li>
+    </div>
+    </ul>
+</div>
 
 
-<nav class="navbar navbar-expand" style="background-color: #ffffff;">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="#">
-            <img src="../assets/Logo.png" alt="" width="212" height="46" display="flex">
+<!-- 
+<nav class="navbar navbar-expand p-0 m-0" style="background-color: #ffffff;">
+    <div class="container-fluid p-0 m-0">
+        <a class="navbar-brand p-0 m-0" href="#">
+            <img src="../assets/Logo.png" alt="" width="160" height="35" display="flex">
         </a>
-        
-        <ul class="navbar-nav navbar-right">
-            <li class="nav-item">
-                <a class="nav-link h5" style="color: #000000" href="#">Franck CHAUSSON</a>
+
+        <ul class="navbar-nav navbar-right p-0 m-0">
+            <li class="nav-item p-0 m-0">
+                <a class="nav-link h5 p-0 m-0" style="color: #000000" href="#">Franck CHAUSSON</a>
             </li>
             <li class="nav-item">
                 <a class="navbar-brand"><img src="../assets/user.png" alt="User image" width="50" height="50"
                         class="d-inline-block align-text-top"></a>
             </li>
-            <li class="nav-item" class="sidenav">
-                <button class="btn btn-lg btn-warning ms-1" (click)="openEnd(content)">
-                    <span class="navbar-toggler-icon">
-                        <div class="text-center m-0">
-                            <img src="../assets/tools.svg" alt="" width="22" height="22" display="flex">
-                        </div>    
-                        
-                    </span>
-                </button>
+            <li class="nav-item" class="sidenav p-0 m-0">
+                <a class="nav-link h5 p-0 m-0" (click)="openEnd(content)">
+
+
+                    <img src="../assets/user.png" alt="User image" width="50" height="50"
+                        class="d-inline-block align-text-top p-0 m-0">
+
+
+
+                </a>
 
             </li>
 
         </ul>
 
-        <!-- <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav align-middle">
                 <a class="nav-link h5" style="color: #000000" href="#">Utilisateur A</a>
                 <a class="navbar-brand"><img src="../assets/user.png" alt="User image" width="50" height="50" class="d-inline-block align-text-top"></a>
 
             </div>
-        </div> -->
+        </div>
     </div>
-</nav>
+</nav> -->
 
 <!-- <span>info individu</span>
 <span>{{individu | json}}</span>
@@ -106,14 +135,15 @@
 <style>
     .btn-warning {
         width: 52px;
-		height: 52px;
-		padding: 0px;
-		border-radius: 80px;
-		font-size: 15px;
-		text-align: center;
+        height: 52px;
+        padding: 0px;
+        border-radius: 80px;
+        font-size: 15px;
+        text-align: center;
     }
+
     .btn-link {
-        text-decoration:none;
+        text-decoration: none;
     }
 </style>
 

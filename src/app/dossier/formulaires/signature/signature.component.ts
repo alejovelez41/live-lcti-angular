@@ -51,7 +51,7 @@ export class SignatureComponent implements OnInit {
               public modalService: NgbActiveModal, 
               private fb: FormBuilder,
               private dataService : DataService,
-              private controleService: ControleService) { }
+              private controleService: ControleService) {} 
 
   
 
@@ -62,11 +62,17 @@ export class SignatureComponent implements OnInit {
     // this.dataIndividu[1].valeur = this.monFormulaire.controls['refus'].value;
 
   }
+  
 
   changeVal() {
-
+    console.log('algo pasa')
     const base64Data = this.signaturePad.toDataURL();
     this.monFormulaire.controls['signature_cloture'].setValue(base64Data);
+
+    if(this.monFormulaire.controls['refus'].value && this.monFormulaire.controls['signature_cloture'].value == ''){
+      this.monFormulaire.controls['refus'].setValue(false);
+    }
+    
     this.individu.signature_cloture = this.monFormulaire.controls['signature_cloture'].value;
     this.individu.refus_signature = this.monFormulaire.controls['refus'].value;
 
@@ -83,11 +89,14 @@ export class SignatureComponent implements OnInit {
     this.signaturePad = new SignaturePad(this.canvasEl.nativeElement);
   }
   startDrawing(event: Event) {
+    
     console.log(event);
+    this.changeVal()
     // works in device not in browser
 
   }
   moved(event: Event) {
+    this.changeVal()
     // works in device not in browser
   }
   clearPad() {
@@ -111,8 +120,6 @@ export class SignatureComponent implements OnInit {
   ngOnInit(): void {
     this.individu = this.dataService.getIndividu();
     this.controle = this.controleService.getControle();
-
-
   }
 
 }

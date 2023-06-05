@@ -19,6 +19,10 @@ export class DataService {
   private navChange$ = new Subject<boolean[]>();
   public nav$ = this.navChange$.asObservable();
 
+  private notification = new Subject<boolean>();
+
+  private affichage = new Subject<boolean>();
+
   navigation = new Observable((observer) =>{
     console.log('Observable navigation called');
 
@@ -45,7 +49,7 @@ export class DataService {
   };
 
   infosDefault: informations = {
-    "retour_systeme": false,
+    "retour_systeme": "",
     "rei_siren": "",
     "rei_denomination": "",
     "rei_code_naf": "",
@@ -149,6 +153,8 @@ export class DataService {
     "hsup": "",
     "sbrut": "",
     "fsalaire": "",
+    "typeVersement": "",
+    "autreVersement": "",  
     "montant": "",
     "remunere": "",
     "ca": "",
@@ -200,6 +206,22 @@ export class DataService {
   getnav(){
     return this._nav;
   };
+
+  setNotification(val : boolean) {
+    this.notification.next(val);
+  }
+
+  getNotification(): Observable<boolean>{ 
+    return this.notification.asObservable();
+  }
+
+  setAffichage(val : boolean) {
+    this.affichage.next(val);
+  }
+
+  getAffichage(): Observable<boolean>{ 
+    return this.affichage.asObservable();
+  }
 
   getNewIndividu(){
     return this.individuNew;

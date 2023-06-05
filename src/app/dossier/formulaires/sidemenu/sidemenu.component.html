@@ -1,35 +1,161 @@
 <!-- Radio Statuts -->
-<div class="d-flex flex-row mb-3 align-items-center justify-content-between">
-    <a class="align-self-center me-2" style="color: #122F62;font-weight: bold;"
-       (click)="enregistrerIndividu()">
+<div class="d-flex flex-row mb-0 align-items-center justify-content-between flex-wrap">
+    <a class="align-self-center me-2" style="color: #122F62;font-weight: bold;" (click)="enregistrerIndividu()">
         <img src="../assets/fleche.svg" alt="" width="18" height="18" display="flex">
         <U class="ms-2">Revenir au contrôle</U>
     </a>
-    <p class="h3"> <span *ngIf="individu.civilite">{{individu.civilite}} </span> <span *ngIf="individu.nom">{{individu.nom }} </span> <span *ngIf="individu.prenom">{{individu.prenom}}</span></p>
+    <p class="h3"> <span *ngIf="individu.civilite">{{individu.civilite}} </span> <span
+            *ngIf="individu.nom">{{individu.nom }} </span> <span *ngIf="individu.prenom">{{individu.prenom}}</span></p>
     <div class="d-flex flex-row align-items-center">
-        <span class="h3 text-center mx-5">      </span>
-        <ngb-alert #selfClosingAlert *ngIf="individu.infos.retour_systeme" type="success" (closed)="successMessage = ''">
-            Informations disponibles pour la consultation...
-        </ngb-alert>
-    </div>
-    
-</div>
-<!-- <div class="d-flex">
-    {{fiche}}
-</div> -->
-<ul class="list-group list-group-horizontal mb-3">
+        <ngb-alert #selfClosingAlert *ngIf="individu.infos.retour_systeme != ''" type="warning"
+            (closed)="successMessage = ''">
+            <div class="d-flex flex-nowrap">
 
-    <li *ngFor="let item of formulaireMenu; let indexOfelement=index;"
-        class="list-group-item flex-fill"
-        [class.disabled]="menuNav[indexOfelement]"
-        [routerLink]="[ item.route, individu.id ]"
-        routerLinkActive="active"
-        >
+                <p style="font-style: italic;font-weight: bold; margin: 0px; font-size: small">
+                    {{ successMessage }}</p>
+                <button type="button" class="btn btn-info" (click)="affichage()">Oui, allons-y !</button>
+                <button type="button" class="btn btn-info" (click)="selfClosingAlert.close()">Non, pas
+                    maintenant..</button>
+            </div>
+
+
+            <!-- Toc, toc... Vous avez reçu de nouvelles informations. Voulez-vous les consulter ? -->
+        </ngb-alert>
+        <span *ngIf="individu.infos.retour_systeme == ''" class="h3 text-center mx-5"> </span>
+
+    </div>
+
+</div>
+
+<ul class="list-group list-group-horizontal mb-0">
+
+    <li *ngFor="let item of formulaireMenu; let indexOfelement=index;" class="list-group-item flex-fill"
+        [class.disabled]="menuNav[indexOfelement]" [routerLink]="[ item.route, individu.id ]" routerLinkActive="active">
         {{ item.texte}}
     </li>
 </ul>
-<!-- {{ menuNav | json}} -->
-<router-outlet></router-outlet>
+
+<mat-drawer-container class="example-container" autosize>
+    <mat-drawer #drawer class="mon_drawer" position="end" mode="side">
+        <div class="div" *ngIf="source == 'all'">
+            <div class="d-flex flex-column m-1">
+                <div class="d-flex flex-row align-items-center justify-content-between">
+                    <div class="d-flex ms-4 align-items-center">
+                        <img src="../assets/urssaf_blue.svg" alt="Urssaf Logo" width="40" height="40" class="p-1 m-0">
+                        <p class="h4 mx-2" style="color: #008088;"> Consulter les informations </p>
+                    </div>
+                    <div class="d-flex">
+                        <button type="button" class="btn-close" aria-label="Close" (click)="drawer.toggle()"></button>
+                    </div>
+
+
+                </div>
+            </div>
+
+            <div class="d-flex flex-row align-items-center justify-content-center flex-wrap m-1">
+                <div class="p-2" *ngFor="let item of infos">
+                    <button type="button" class="btn btn-light position-relative" (click)="changeSource(item.source)"
+                        [disabled]="item.vide">
+                        <div class="h3">{{item.source}}</div>
+                        <span class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle" *ngIf="item.new">
+                            <span class="visually-hidden">New alerts</span>
+                        </span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="div" *ngIf="source == 'REI'">
+            <div class="h5" style="color: #008088;">
+                <button class="btn btn-success" (click)="changeSource('all')">
+                    <img src="../assets/flecheBack.svg" width="30" height="30" class="p-1 mx-1"></button>Informations
+                REI
+            </div>
+            <div class="div mx-5" *ngFor="let data of infos">
+                <div class="div" *ngIf="data.source == 'REI'">
+                    <div class="h6" *ngFor="let champ of data.champs">
+                        {{champ.titre}} : {{ getFormattedInfo(champ.col)}}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="div" *ngIf="source == 'DPAE'">
+            <div class="h5" style="color: #008088;"><button class="btn btn-success" (click)="changeSource('all')">
+                    <img src="../assets/flecheBack.svg" width="30" height="30" class="p-1 mx-1"></button>Informations
+                DPAE</div>
+            <div class="div mx-5" *ngFor="let data of infos">
+                <div class="div" *ngIf="data.source == 'DPAE'">
+                    <div class="h6" *ngFor="let champ of data.champs">
+                        {{champ.titre}} : {{ getFormattedInfo(champ.col)}}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="div" *ngIf="source == 'DSN'">
+            <div class="h5" style="color: #008088;"><button class="btn btn-success" (click)="changeSource('all')">
+                    <img src="../assets/flecheBack.svg" width="30" height="30" class="p-1 mx-1"></button>Informations
+                DSN</div>
+            <div class="div mx-5" *ngFor="let data of infos">
+                <div class="div" *ngIf="data.source == 'DSN'">
+                    <div class="h6" *ngFor="let champ of data.champs">
+                        {{champ.titre}} : {{ getFormattedInfo(champ.col)}}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="div" *ngIf="source == 'OBP7'">
+            <div class="h5" style="color: #008088;"><button class="btn btn-success" (click)="changeSource('all')">
+                    <img src="../assets/flecheBack.svg" width="30" height="30" class="p-1 mx-1"></button>Informations
+                OBP7</div>
+            <div class="div mx-5" *ngFor="let data of infos">
+                <div class="div" *ngIf="data.source == 'OBP7'">
+                    <div class="h6" *ngFor="let champ of data.champs">
+                        {{champ.titre}} : {{ getFormattedInfo(champ.col)}}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="div" *ngIf="source == 'OPC'">
+            <div class="h5" style="color: #008088;"><button class="btn btn-success" (click)="changeSource('all')">
+                    <img src="../assets/flecheBack.svg" width="30" height="30" class="p-1 mx-1"></button>Informations
+                OPC</div>
+            <div class="div mx-5" *ngFor="let data of infos">
+                <div class="div" *ngIf="data.source == 'OPC'">
+                    <div class="h6" *ngFor="let champ of data.champs">
+                        {{champ.titre}} : {{ getFormattedInfo(champ.col)}}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="div" *ngIf="source == 'CAAE'">
+            <div class="h5" style="color: #008088;"><button class="btn btn-success" (click)="changeSource('all')">
+                    <img src="../assets/flecheBack.svg" width="30" height="30" class="p-1 mx-1"></button>Informations
+                CAAE</div>
+            <div class="div mx-5" *ngFor="let data of infos">
+                <div class="div" *ngIf="data.source == 'CAAE'">
+                    <div class="h6" *ngFor="let champ of data.champs">
+                        {{champ.titre}} : {{ getFormattedInfo(champ.col)}}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </mat-drawer>
+    <mat-drawer-content>
+
+        <!-- {{ menuNav | json}} -->
+        <router-outlet></router-outlet>
+        <!-- <button type="button" class="btn btn-primary" (click)="drawer.toggle()">open</button> -->
+    </mat-drawer-content>
+</mat-drawer-container>
+<!-- {{individu |json}} -->
 
 
 <!-- <span style = "font-weight: bold">condition : </span>
@@ -49,13 +175,88 @@
 
 
 <style>
+    .btn-success {
+
+        border: none;
+        cursor: pointer;
+        appearance: none;
+        background-color: inherit;
+
+
+    }
+
+    .alert-dismissible {
+        .btn-close {
+
+            padding: 6px;
+        }
+    }
+
+    .btn-info {
+        color: #000;
+        background-color: #20BFC8;
+        border-color: #20BFC8;
+        line-height: 1;
+        padding: 3px;
+        font-size: small;
+        margin-left: 3px;
+        margin-right: 3px;
+    }
+
+    .alert {
+        position: relative;
+        padding: 3px;
+        margin-bottom: 0.5rem;
+        border: 1px solid transparent;
+        border-radius: 0.25rem;
+        padding-right: 2rem;
+    }
+
+    .btn-light {
+        width: 145px;
+        height: 100px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        margin-left: 20px;
+        margin-right: 20px;
+        background: #FFFFFF;
+        box-shadow: 16px 16px 18px -9px rgba(32, 94, 145, 0.16);
+        border-radius: 20px;
+    }
+
+    .btn-light.disabled,
+    .btn-light:disabled {
+        color: #000;
+        background-color: #E6E9EC;
+        border-color: #E6E9EC;
+    }
+
     .disabled {
-     pointer-events: none;
-     cursor:default;
-     background-color: rgba(245, 245, 245, 0.861);
-     color: rgba(0, 0, 0, 0.3);
- }
-    .list-group-item.active{
+        pointer-events: none;
+        cursor: default;
+        background-color: rgba(245, 245, 245, 0.861);
+        color: rgb(0, 0, 0);
+    }
+
+    .mon_drawer {
+        width: 40%;
+        background-color: #E0FDFF;
+    }
+
+    .mat-drawer-content {
+        width: 100%;
+        padding: 2px;
+    }
+
+    .example-container {
+
+        display: flex;
+        height: 100%;
+        width: 100%;
+        background-color: #fff;
+    }
+
+    .list-group-item.active {
         z-index: 2;
         color: #fff;
         background-color: #0d6efd;

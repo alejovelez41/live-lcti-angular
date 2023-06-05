@@ -183,7 +183,7 @@ export class ControleService {
     'EUTROPE	Lénaïk', 'SART	Joss', 'JEANSON MAURIN	Catherine'];
   regions: string[] = ['Aquitaine', 'Centre-Val de Loire', 'Champagne Ardenne', 'Île-de-France', 'Languedoc-Roussillon', 'Pays de la Loire', 'Rhône-Alpes'];
 
-  partenaires: string[] = ['Bcr', 'Caf', 'Carsat', 'Cpam', 'Dgfip', 'Douane', 'Dreal', 'Dreets', 'Gendarmerie', 'Msa', 'PAF', 'Pôle emploi', 'Police', 'Uraci','Autre partenaire'];
+  partenaires: string[] = ['Bcr', 'Caf', 'Carsat', 'Cpam', 'Dgfip', 'Douane', 'Dreal', 'Dreets', 'Gendarmerie', 'Msa', 'PAF', 'Pôle emploi', 'Police', 'Uracti','Autre partenaire'];
 
   data_partenaires: Partenaire[] = [
     { control: 'partenaire0', nom: 'Bcr' },
@@ -199,7 +199,7 @@ export class ControleService {
     { control: 'partenaire10', nom: 'PAF' },
     { control: 'partenaire11', nom: 'Pôle emploi' },
     { control: 'partenaire12', nom: 'Police' },
-    { control: 'partenaire13', nom: 'Uraci' },
+    { control: 'partenaire13', nom: 'Uracti' },
     { control: 'partenaire14', nom: 'Autre partenaire' }
 
   ];

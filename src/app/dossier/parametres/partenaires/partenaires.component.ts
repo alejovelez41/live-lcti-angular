@@ -35,7 +35,7 @@ export class PartenairesComponent implements OnInit {
           this.controle.partenaires_controle.push(index - 1);
           console.log(this.controle.partenaires_controle, index);
 
-          if (this.monFormulaire.get('partenaire13')?.value) {
+          if (this.monFormulaire.get('partenaire14')?.value) {
             this.controle.autre_partenaire = this.monFormulaire.controls['autre_partenaire'].value;
           };
         }
