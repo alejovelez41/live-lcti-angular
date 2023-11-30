@@ -4,13 +4,13 @@
         <div class="row g-1">
             <p class="h5 mb-3" style="color:#1D458C;">Détails sur l'emploi</p>
 
-            <div class="container-fluid">
+            <div class="container-xxl">
                 <div class="row align-items-center">
-                    <div class="col-lg-8 mb-2">
+                    <div class="col-xxl-8 mb-2">
 
                         <div class="row">
                             <!-- Champ Emploi occupé -->
-                            <div class="col-lg mb-2">
+                            <div class="col-xxl mb-2">
                                 <div class="form-floating">
                                     <input type="text" class="form-control" formControlName="emploi"
                                         placeholder="Emploi occupé" id="floatingInputEmploiOccupe"
@@ -22,7 +22,7 @@
 
                         <div class="row">
                             <!-- Champ dt_emabuche -->
-                            <div class="col-lg mb-2">
+                            <div class="col-xxl mb-2">
                                 <div class="form-floating">
                                     <input type="date" class="form-control" formControlName="dt_embauche"
                                         placeholder="Date d'embauche" id="floatingInputValue" (change)="changeVal()">
@@ -31,7 +31,7 @@
                             </div>
 
                             <!-- Champ Type de contrat -->
-                            <div class="col-lg mb-2">
+                            <div class="col-xxl mb-2">
                                 <div class="form-floating">
                                     <select class="form-select" (change)="changeVal()" formControlName="contrat"
                                         id="floatingInput_type_contrat">
@@ -49,21 +49,22 @@
 
 
                         <div class="row">
-                            <div class="col-lg mb-2">
+                            <div class="col-xxl mb-2">
                                 <!-- Champ dure de travail -->
                                 <div class="form-floating">
                                     <input type="number" class="form-control" formControlName="duree"
                                         placeholder="Durée de travail hebdomadaire" id="floatingInput_dure"
                                         (change)="changeVal()">
-                                    <label for="floatingInput_dure">Durée de travail hebdomadaire</label>
+                                    <label for="floatingInput_dure">Durée hebdomadaire</label>
+                                    <!-- Durée de travail hebdomadaire -->
                                 </div>
                             </div>
-                            <div class="col-lg mb-2">
+                            <div class="col-xxl mb-2">
                                 <!-- Bulletins de salaires ? -->
                                 <div class="form-floating">
                                     <select class="form-select" (change)="changeVal()" formControlName="bullentins"
                                         id="floatingInput_bullentins">
-                                        <option value="">Réception Bulletins de salaires ?</option>
+                                        <!-- <option value="">Réception Bulletins de salaires ?</option> -->
                                         <option *ngFor="let bulletin of bulletins" [value]="bulletin">
                                             {{bulletin}}
                                         </option>
@@ -72,12 +73,12 @@
                                 </div>
                             </div>
 
-                            <div class="col-lg mb-2">
+                            <div class="col-xxl mb-2">
                                 <!-- Heures Sup/+ -->
                                 <div class="form-floating">
                                     <select class="form-select" (change)="changeVal()" formControlName="hsup"
                                         id="floatingInput_heures">
-                                        <option value="">Heures supplémentaires ?</option>
+                                        <!-- <option value="">Heures supplémentaires ?</option> -->
                                         <option *ngFor="let heures of heuresSup" [value]="heures">
                                             {{heures}}
                                         </option>
@@ -90,10 +91,10 @@
 
                     </div>
 
-                    <div class="col-lg-4 mb-2">
+                    <div class="col-xxl-4 mb-2">
 
                         <div class="row">
-                            <div class="col-lg mb-2">
+                            <div class="col-xxl mb-2">
                                 <div class="form-check">
                                     <input type="checkbox" value="" formControlName="interimaire" id="flexCheckDisabled"
                                         class="form-check-input" (change)="changeVal()">
@@ -108,7 +109,7 @@
 
                         <!-- Siren/ siret societe interim -->
                         <div class="row">
-                            <div class="col-lg mb-2">
+                            <div class="col-xxl mb-2">
                                 <div class="form-floating">
                                     <input type="text" class="form-control" formControlName="sirenI"
                                         placeholder="Siren/Siret de la société intérimaire" id="floatingSociete_interim"
@@ -120,7 +121,7 @@
 
                         <!-- Siren/ siret societe interim -->
                         <div class="row">
-                            <div class="col-lg mb-2">
+                            <div class="col-xxl mb-2">
                                 <div class="form-floating">
                                     <input type="text" class="form-control" formControlName="denominationI"
                                         placeholder="Dénomination société intérimaire" id="floatingDenomination_I"
@@ -133,7 +134,7 @@
 
                         <!-- Adresse societe interim -->
                         <div class="row">
-                            <div class="col-lg mb-2">
+                            <div class="col-xxl mb-2">
                                 <div class="form-floating">
                                     <input type="text" class="form-control" formControlName="adresse_siegeI"
                                         placeholder="Adresse société intérimaire" id="floatingAdresse_I"
@@ -158,7 +159,7 @@
 
         <div class="row">
             <!-- Select type de salaire  -->
-            <div class="col-lg-6 mb-3">
+            <div class="col-xxl-6 mb-3">
                 <div class="form-floating">
                     <select class="form-select" (change)="changeVal()" formControlName="fsalaire"
                         id="floatingInput_type_salaire">
@@ -171,7 +172,7 @@
                 </div>
             </div>
             <!-- Select type de salaire  -->
-            <div class="col-lg-6 mb-3">
+            <div class="col-xxl-6 mb-3">
                 <div class="form-floating">
                     <select class="form-select" (change)="changeVal()" formControlName="typeVersement"
                         id="floatingInput_versement_salaire">
@@ -187,7 +188,7 @@
         
         <div class="row" *ngIf="individu.typeVersement == 'Autre'">
             <!-- Champ Montant salaire brut-->
-            <div class="col-lg-12 mb-3">
+            <div class="col-xxl-12 mb-3">
                 <div class="form-floating">
                     <input type="text" class="form-control h-100" formControlName="autreVersement"
                         placeholder="Autre type de rémunération" (change)="changeVal()" id="floatingInput_autre">
@@ -198,7 +199,7 @@
 
         <div class="row">
             <!-- Champ Montant salaire brut-->
-            <div class="col-lg-6 mb-3">
+            <div class="col-xxl-6 mb-3">
                 <div class="form-floating">
                     <input type="text" class="form-control h-100" formControlName="sbrut"
                         placeholder="Montant du salaire brut" (change)="changeVal()" id="floatingInput_montant">
@@ -207,7 +208,7 @@
             </div>
 
             <!-- Champ Montant salaire net-->
-            <div class="col-lg-6 mb-3">
+            <div class="col-xxl-6 mb-3">
                 <div class="form-floating">
                     <input type="text" class="form-control h-100" formControlName="montant"
                         placeholder="Montant du salaire net" (change)="changeVal()" id="floatingInput_net">
@@ -230,11 +231,11 @@
 
             <!-- Input Radio -Remuneration ME -->
 
-            <div class="col-lg-4">
+            <div class="col-xxl-4">
                 <label class="fs-6 col-form-label">Déclarez-vous du CA sur l'année en cours ?</label>
             </div>
 
-            <div class="col-lg-1">
+            <div class="col-xxl-1">
                 <div class="form-check">
                     <input class="form-check-input" type="radio" value="Oui" formControlName="ca" id="flexCheckOui"
                         (change)="changeVal()">
@@ -244,7 +245,7 @@
                 </div>
             </div>
 
-            <div class="col-lg-1">
+            <div class="col-xxl-1">
                 <div class="form-check">
                     <input class="form-check-input" type="radio" value="Non" formControlName="ca" id="flexCheckNon"
                         (change)="changeVal()">
@@ -258,7 +259,7 @@
 
 
             <!-- Champ Remuneration mensuelle -->
-            <div class="col-lg-6">
+            <div class="col-xxl-6">
                 <div class="form-floating">
                     <input type="text" class="form-control" formControlName="rmensuelle"
                         placeholder="CA déclaré sur l'année en cours" (change)="changeVal()" id="floatingInput_ca">
@@ -270,7 +271,7 @@
 
             <!-- Champ nombre de salaries -->
 
-            <div class="col-lg-6">
+            <div class="col-xxl-6">
                 <div class="form-floating">
                     <textarea placeholder="Nombre de salariés présents lors du contrôle" class="form-control mb-4"
                         rows="3" formControlName="snombre" (change)="changeVal()" id="ff_nSalaries"
@@ -281,7 +282,7 @@
 
             <!-- Champ nombre de salaries au total -->
 
-            <div class="col-lg-6">
+            <div class="col-xxl-6">
                 <div class="form-floating">
                     <textarea placeholder="Nombre de salariés au total" class="form-control mb-4" rows="3"
                         formControlName="total" (change)="changeVal()" id="ff_totalSalaries"
@@ -292,7 +293,7 @@
 
             <!-- Champ nombre de salaries -->
 
-            <div class="col-lg-12">
+            <div class="col-xxl-12">
                 <div class="form-floating">
                     <textarea placeholder="Identité des salariés présents lors du contrôle" class="form-control mb-4"
                         rows="3" formControlName="identites" (change)="changeVal()" id="ff_idSalaries"
@@ -317,11 +318,11 @@
             <p class="h5 mb-3" style="color:#1D458C;">Rémunération</p>
             <!-- Input Radio -Remuneration TI -->
 
-            <div class="col-lg-4">
+            <div class="col-xxl-4">
                 <label class="fs-6 col-form-label">Etes-vous rémunéré ?</label>
             </div>
 
-            <div class="col-lg-1">
+            <div class="col-xxl-1">
                 <div class="form-check">
                     <input class="form-check-input" type="radio" value="Oui" formControlName="remunere"
                         id="flexCheckOui" (change)="changeVal()">
@@ -331,7 +332,7 @@
                 </div>
             </div>
 
-            <div class="col-lg-1">
+            <div class="col-xxl-1">
                 <div class="form-check">
                     <input class="form-check-input" type="radio" value="Non" formControlName="remunere"
                         id="flexCheckNon" (change)="changeVal()">
@@ -342,7 +343,7 @@
             </div>
 
             <!-- Champ Remuneration mensuelle -->
-            <div class="col-lg-6">
+            <div class="col-xxl-6">
                 <div class="form-floating">
                     <input type="text" class="form-control" formControlName="rmensuelle"
                         placeholder="Rémunération mensuelle" (change)="changeVal()" is="ff_NSalariesAUtOT">
@@ -354,7 +355,7 @@
 
             <!-- Champ nombre de salaries -->
 
-            <div class="col-lg-6">
+            <div class="col-xxl-6">
                 <div class="form-floating">
                     <textarea placeholder="Nombre de salariés présents lors du contrôle" class="form-control mb-4"
                         rows="3" formControlName="snombre" (change)="changeVal()" id="ff_NSalariesPres"
@@ -366,7 +367,7 @@
 
             <!-- Champ nombre de salaries -->
 
-            <div class="col-lg-6">
+            <div class="col-xxl-6">
                 <div class="form-floating">
                     <textarea placeholder="Nombre de salariés au total" class="form-control mb-4" rows="3"
                         formControlName="total" (change)="changeVal()" id="ff_NSalariesTot"
@@ -377,7 +378,7 @@
 
             <!-- Champ nombre de salaries -->
 
-            <div class="col-lg-12">
+            <div class="col-xxl-12">
                 <div class="form-floating">
                     <textarea placeholder="Identité des salariés présents lors du contrôle" style="height: 100px"
                         class="form-control mb-4" rows="3" formControlName="identites" (change)="changeVal()"
@@ -393,7 +394,7 @@
 </div>
 
 <div class="row">
-    <div class="col-lg mb-2">
+    <div class="col-xxl mb-2">
         <div class="d-grid">
             <button type="button" class="btn btn-warning" (click)="ouvrirRecap()"
                 [routerLink]="['/entreprise/recapIndividu', individu.id]">
@@ -401,7 +402,7 @@
             </button>
         </div>
     </div>
-    <div class="col-lg mb-2">
+    <div class="col-xxl mb-2">
         <div class="d-grid">
             <button type="button" class="btn btn-primary" (click)="ouvrirModal()"
                 [disabled]="this.individu.nom && this.individu.prenom && this.individu.dt_naissance != '' ? '' : 'disabled'">

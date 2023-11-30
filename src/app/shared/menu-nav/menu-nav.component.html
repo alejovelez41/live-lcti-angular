@@ -8,8 +8,8 @@
     <div class="offcanvas-body" style="background-color: #008088; color: white;">
         <ul class="list-group list-group-flush flex-column mb-auto">
             <li class="list-group-item" style="background-color: #008088; border-color: white">
-                <a [routerLink]="['/outils/informations',individu.id]" class="nav-link link-dark" aria-current="page"
-                    style="color: white;" (click)="offcanvas.dismiss('Cross click')">
+                <a class="nav-link link-dark" aria-current="page"
+                    style="color: white;" (click)="affichage()">
                     <img src="../assets/infos.svg" alt="" width="25" height="25" display="flex">
                     Consultation des informations
                 </a>
@@ -26,43 +26,13 @@
                     <img src="../assets/notes.svg" alt="" width="25" height="25" display="flex">
                     Mes notes
                 </a>
-
-                <!-- <button [routerLink]="['/outils/notesInd', idInd]" type="button" class="btn btn-link link-dark ms-3" (click)="offcanvas.dismiss('Cross click')"
-                        [disabled]=" idInd != '' ? '' : 'disabled'">
-                            <img src="../assets/id.svg" class="me-2" alt="" width="25" height="25" display="flex">
-                            Individu contrôlé
-                </button> -->
-
-                <!-- <ul class="list-group list-group-flush">
-                    <li class="list-group-item">
-                        <button [routerLink]="['/outils/notesInd', idInd]" type="button" class="btn btn-link link-dark ms-3" (click)="offcanvas.dismiss('Cross click')"
-                        [disabled]=" idInd != '' ? '' : 'disabled'">
-                            <img src="../assets/id.svg" class="me-2" alt="" width="25" height="25" display="flex">
-                            Individu contrôlé
-                    </button>
-                    </li>
-                    <li class="list-group-item">
-                        <button [routerLink]="['/outils/notesEnt', idEnt]" type="button" class="btn btn-link link-dark ms-3" (click)="offcanvas.dismiss('Cross click')"
-                        [disabled]=" idEnt != '' ? '' : 'disabled'">
-                            <img src="../assets/entrepriseBlack.svg" alt="" width="35" height="35" display="flex">
-                            Entreprise contrôlé
-                        </button>
-                    </li>
-                    <li class="list-group-item">
-                        <button [routerLink]="['/outils/notesEvent', idCont]" type="button" class="btn btn-link link-dark ms-3" (click)="offcanvas.dismiss('Cross click')"
-                        [disabled]=" idCont != '' ? '' : 'disabled'">
-                            <img src="../assets/evenement.svg" class="me-2" alt="" width="25" height="25" display="flex">
-                            Évènement contrôlé
-                        </button>
-                    </li>
-                </ul>       -->
             </li>
-            <li class="list-group-item" style="background-color: #008088; border-color: white">
+            <!-- <li class="list-group-item" style="background-color: #008088; border-color: white">
                 <a (click)="affichage()" class="nav-link link-dark" style="color: white; ">
                     <img src="../assets/camera.svg" alt="" width="25" height="25" display="flex">
                     Test affichage
                 </a>
-            </li>
+            </li> -->
         </ul>
     </div>
 </ng-template>

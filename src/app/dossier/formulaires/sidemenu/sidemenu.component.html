@@ -75,7 +75,9 @@
             <div class="div mx-5" *ngFor="let data of infos">
                 <div class="div" *ngIf="data.source == 'REI'">
                     <div class="h6" *ngFor="let champ of data.champs">
+                        <div class="h6" *ngIf="getFormattedInfo(champ.col) != ''">
                         {{champ.titre}} : {{ getFormattedInfo(champ.col)}}
+                        </div>
                     </div>
                 </div>
             </div>
@@ -88,7 +90,9 @@
             <div class="div mx-5" *ngFor="let data of infos">
                 <div class="div" *ngIf="data.source == 'DPAE'">
                     <div class="h6" *ngFor="let champ of data.champs">
+                        <div class="h6" *ngIf="getFormattedInfo(champ.col) != ''">
                         {{champ.titre}} : {{ getFormattedInfo(champ.col)}}
+                        </div>
                     </div>
                 </div>
             </div>
@@ -101,7 +105,9 @@
             <div class="div mx-5" *ngFor="let data of infos">
                 <div class="div" *ngIf="data.source == 'DSN'">
                     <div class="h6" *ngFor="let champ of data.champs">
+                        <div class="h6" *ngIf="getFormattedInfo(champ.col) != ''">
                         {{champ.titre}} : {{ getFormattedInfo(champ.col)}}
+                        </div>
                     </div>
                 </div>
             </div>
@@ -114,7 +120,9 @@
             <div class="div mx-5" *ngFor="let data of infos">
                 <div class="div" *ngIf="data.source == 'OBP7'">
                     <div class="h6" *ngFor="let champ of data.champs">
+                        <div class="h6" *ngIf="getFormattedInfo(champ.col) != ''">
                         {{champ.titre}} : {{ getFormattedInfo(champ.col)}}
+                        </div>
                     </div>
                 </div>
             </div>
@@ -127,7 +135,9 @@
             <div class="div mx-5" *ngFor="let data of infos">
                 <div class="div" *ngIf="data.source == 'OPC'">
                     <div class="h6" *ngFor="let champ of data.champs">
+                        <div class="h6" *ngIf="getFormattedInfo(champ.col) != ''">
                         {{champ.titre}} : {{ getFormattedInfo(champ.col)}}
+                        </div>
                     </div>
                 </div>
             </div>
@@ -137,13 +147,88 @@
             <div class="h5" style="color: #008088;"><button class="btn btn-success" (click)="changeSource('all')">
                     <img src="../assets/flecheBack.svg" width="30" height="30" class="p-1 mx-1"></button>Informations
                 CAAE</div>
-            <div class="div mx-5" *ngFor="let data of infos">
-                <div class="div" *ngIf="data.source == 'CAAE'">
-                    <div class="h6" *ngFor="let champ of data.champs">
-                        {{champ.titre}} : {{ getFormattedInfo(champ.col)}}
-                    </div>
-                </div>
-            </div>
+                <ul class="list-group list-group-flush">
+
+                    <!-- caae_num_compte -->
+                    <li class="list-group-item">
+                        N° de compte : {{individu.infos.rei_num_cint}}
+                    </li>
+    
+                    <!-- Table des CA par période -->
+                    <table class="table">
+                        <thead>
+                          <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Période</th>
+                            <th scope="col">CA</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <th scope="row">1</th>
+                            <td>{{individu.infos.caae_periode_1}}</td>
+                            <td>{{individu.infos.caae_ca_1}}</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">2</th>
+                            <td>{{individu.infos.caae_periode_2}}</td>
+                            <td>{{individu.infos.caae_ca_2}}</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">3</th>
+                            <td>{{individu.infos.caae_periode_3}}</td>
+                            <td>{{individu.infos.caae_ca_3}}</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">4</th>
+                            <td>{{individu.infos.caae_periode_4}}</td>
+                            <td>{{individu.infos.caae_ca_4}}</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">5</th>
+                            <td>{{individu.infos.caae_periode_5}}</td>
+                            <td>{{individu.infos.caae_ca_5}}</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">6</th>
+                            <td>{{individu.infos.caae_periode_6}}</td>
+                            <td>{{individu.infos.caae_ca_6}}</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">7</th>
+                            <td>{{individu.infos.caae_periode_7}}</td>
+                            <td>{{individu.infos.caae_ca_7}}</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">8</th>
+                            <td>{{individu.infos.caae_periode_8}}</td>
+                            <td>{{individu.infos.caae_ca_8}}</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">9</th>
+                            <td>{{individu.infos.caae_periode_9}}</td>
+                            <td>{{individu.infos.caae_ca_9}}</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">10</th>
+                            <td>{{individu.infos.caae_periode_10}}</td>
+                            <td>{{individu.infos.caae_ca_10}}</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">11</th>
+                            <td>{{individu.infos.caae_periode_11}}</td>
+                            <td>{{individu.infos.caae_ca_11}}</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">12</th>
+                            <td>{{individu.infos.caae_periode_12}}</td>
+                            <td>{{individu.infos.caae_ca_12}}</td>
+                          </tr>
+    
+                        </tbody>
+                      </table>
+                    
+                </ul>
         </div>
 
 

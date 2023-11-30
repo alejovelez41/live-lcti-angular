@@ -82,7 +82,7 @@ export class ControleService {
     dt_controle: "",
     hr_controle: "",
     lieu_controle: "",
-    inspecteurs_controle: [],
+    inspecteurs_controle: [0],
     partenaires_controle: [],
     autre_partenaire: "",
     entreprises_controle: [],

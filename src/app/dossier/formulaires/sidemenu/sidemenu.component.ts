@@ -95,24 +95,25 @@ export class SidemenuComponent implements OnInit {
       champs: [
         { col: "rei_siren", titre: "Siren" },
         { col: "rei_siret", titre: "Siret" },
+        { col: "rei_lib_voie", titre: "Libellé de la voie" },
+        { col: "rei_no_voie", titre: "numéro de la voie" },
+        { col: "rei_rep_voie", titre: "Indice de répétition" },
+        { col: "rei_typ_voie", titre: "Type de voie" },
+        { col: "rei_base_urssaf", titre: "Code Urssaf" },
+        { col: "rei_cp", titre: "Code postal" },
+        { col: "rei_comune", titre: "Libellé commune" },
         { col: "rei_denomination", titre: "Dénomination sociale" },
-        { col: "rei_code_naf", titre: "Code NAF" },
         { col: "rei_dt_creation", titre: "Date de création" },
         { col: "rei_dt_debut", titre: "Date de début d'activité" },
         { col: "rei_dt_fin", titre: "Date de fin d'activité" },
-        { col: "rei_voie", titre: "Libellé de voie" },
-        { col: "rei_urssaf", titre: "Code Urssaf" },
-        { col: "rei_cp", titre: "Code postal cedex" },
-        { col: "rei_cp_insee", titre: "Code Postal Insee" },
-        { col: "rei_comune", titre: "Libellé commune" },
         { col: "rei_qualite_dir", titre: "Qualité du dirigeant" },
         { col: "rei_nom", titre: "Nom du dirigeant" },
         { col: "rei_prenom", titre: "Prénom du dirigeant" },
         { col: "rei_dt_naiss", titre: "Date de naissance du dirigeant" },
         { col: "rei_lieu_naiss", titre: "Commune de naissance du dirigeant" },
         { col: "rei_titre", titre: "Titre" },
-        { col: "rei_num_cext", titre: "No interne de compte" },
-        { col: "rei_num_cint", titre: "No externe de compte" }
+        { col: "rei_num_cint", titre: "No de compte interne" },
+        { col: "rei_num_cext", titre: "No de compte externe" }
       ]
     },
     {
@@ -120,14 +121,12 @@ export class SidemenuComponent implements OnInit {
       vide: true,
       new : false,
       champs: [
-        { col: "dpae_siret", titre: "Siret" },
         { col: "dpae_nom", titre: "Nom" },
-        { col: "dpae_prenom", titre: "Prénom" },
+        { col: "dpae_prenom", titre: "Prénom" },        
+        { col: "nir", titre: "NIR" },
         { col: "dpae_dt_naiss", titre: "Date de naissance" },
-        { col: "dpae_dt_emb", titre: "Date d'embauche" },
-        { col: "dpae_hr_emb", titre: "Heure d'embauche" },
-        { col: "dpae_dt_decl", titre: "Date de déclaration" },
-        { col: "dpae_hr_decl", titre: "Heure de déclaration" },
+        { col: "dpae_dt_emb", titre: "Date et heure d'embauche" },
+        { col: "dpae_dt_decl", titre: "Date et heure de déclaration" },
       ]
     },
     {
@@ -145,7 +144,6 @@ export class SidemenuComponent implements OnInit {
         { col: "dsn_nom", titre: "Nom" },
         { col: "dsn_prenom", titre: "Prénom" },
         { col: "dsn_dt_naiss", titre: "Date de naissance" },
-        { col: "dsn_nir", titre: "NIR" }
       ]
     },
     {
@@ -153,7 +151,6 @@ export class SidemenuComponent implements OnInit {
       vide: true,
       new : false,
       champs: [
-        { col: "obp7_num_compte", titre: "Numéro interne de compte" },
         { col: "obp7_to", titre: "TO" },
         { col: "obp7_periode", titre: "Code période" }
       ]
@@ -178,9 +175,30 @@ export class SidemenuComponent implements OnInit {
       vide: true,
       new : false,
       champs: [
-        { col: "caae_num_compte", titre: "No compte" },
-        { col: "caae_periodes", titre: "Période" },
-        { col: "caae_ca", titre: "Chiffre d'affaires" },
+        { col: "caae_periode_1", titre: "Période 1" },
+        { col: "caae_periode_1", titre: "Période 2" },
+        { col: "caae_periode_1", titre: "Période 3" },
+        { col: "caae_periode_1", titre: "Période 4" },
+        { col: "caae_periode_1", titre: "Période 5" },
+        { col: "caae_periode_1", titre: "Période 6" },
+        { col: "caae_periode_1", titre: "Période 7" },
+        { col: "caae_periode_1", titre: "Période 8" },
+        { col: "caae_periode_1", titre: "Période 9" },
+        { col: "caae_periode_1", titre: "Période 10" },
+        { col: "caae_periode_1", titre: "Période 11" },
+        { col: "caae_periode_1", titre: "Période 12" },
+        { col: "caae_ca_1", titre: "Chiffre d'affaires 1" },
+        { col: "caae_ca_1", titre: "Chiffre d'affaires 2" },
+        { col: "caae_ca_1", titre: "Chiffre d'affaires 3" },
+        { col: "caae_ca_1", titre: "Chiffre d'affaires 4" },
+        { col: "caae_ca_1", titre: "Chiffre d'affaires 5" },
+        { col: "caae_ca_1", titre: "Chiffre d'affaires 6" },
+        { col: "caae_ca_1", titre: "Chiffre d'affaires 7" },
+        { col: "caae_ca_1", titre: "Chiffre d'affaires 8" },
+        { col: "caae_ca_1", titre: "Chiffre d'affaire 9" },
+        { col: "caae_ca_1", titre: "Chiffre d'affaires 10" },
+        { col: "caae_ca_1", titre: "Chiffre d'affaires 11" },
+        { col: "caae_ca_1", titre: "Chiffre d'affaires 12" },
       ]
     },
   ]
@@ -292,7 +310,7 @@ export class SidemenuComponent implements OnInit {
 
     })
     if (this.individu.statut == 'ti') {
-      if (this.individu.denominationEntPerso == '') {
+      if (this.individu.denominationEntPerso == '' && this.individu.type_statut != 'Gérant égalitaire ou minoritaire') {
         this.dataService.setnav([false, false, false, true, true]);
       } else {
         this.dataService.setnav([false, false, false, false, false]);

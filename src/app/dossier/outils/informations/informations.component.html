@@ -31,46 +31,35 @@
                 <li class="list-group-item">
                     Siren : {{individu.infos.rei_siren}}
                 </li>
+                <li class="list-group-item">
+                    Siret : {{individu.infos.rei_siret}}
+                </li>
+                <!-- Adresse_controle -->
+                <li class="list-group-item">
+                    Adresse : {{individu.infos.rei_no_voie}} {{individu.infos.rei_rep_voie}} {{individu.infos.rei_typ_voie}} {{individu.infos.rei_lib_voie}}
+                </li>
                 <!-- hr_controle -->
-                <li class="list-group-item">
-                    Denomination : {{individu.infos.rei_denomination}}
+                <li class="list-group-item" >
+                    Urssaf compétente  : {{individu.infos.rei_base_urssaf}}
                 </li>
-                <!-- lieu_controle -->
+                <!-- lieu_cp -->
                 <li class="list-group-item">
-                    Code Naf : 4399C - {{individu.infos.rei_code_naf}}
+                    Code Postal : {{individu.infos.rei_cp}}
                 </li>
-                                <!-- dt_controle -->
+                <!-- dt_controle -->
+                <li class="list-group-item">
+                    Libellé commune : {{individu.infos.rei_comune}}
+                </li>
+                <li class="list-group-item">
+                    Dénomination sociale : {{individu.infos.rei_denomination}}
+                </li>
+                <!-- dt_controle -->
                 <li class="list-group-item">
                     Date de création : {{individu.infos.rei_dt_creation}}
                 </li>
                 <!-- hr_controle -->
                 <li class="list-group-item">
                     Date de début d'activité : {{individu.infos.rei_dt_debut}}
-                </li>
-                <!-- lieu_controle -->
-                <li class="list-group-item">
-                    Libelle de voie : {{individu.infos.rei_voie}}
-                </li>
-                                <!-- dt_controle -->
-                <li class="list-group-item">
-                    Siret : {{individu.infos.rei_siret}}
-                </li>
-                <!-- hr_controle -->
-                <li class="list-group-item" >
-                    Urssaf compétente  : {{individu.infos.rei_urssaf}}
-                </li>
-                <!-- lieu_cp -->
-                <li class="list-group-item">
-                    Code Postal : {{individu.infos.rei_cp}}
-                </li>
-                <!-- lieu_cp insee-->
-                <li class="list-group-item">
-                    Code Postal Insee  : {{individu.infos.rei_cp_insee}}
-                </li>
-                
-                <!-- dt_controle -->
-                <li class="list-group-item">
-                    Libellé commune : {{individu.infos.rei_comune}}
                 </li>
                 <!-- hr_controle -->
                 <li class="list-group-item">
@@ -80,13 +69,13 @@
                 <li class="list-group-item">
                     Qualité Dirigeant : {{individu.infos.rei_qualite_dir}}
                 </li>
-                                <!-- dt_controle -->
+                <!-- dt_controle -->
                 <li class="list-group-item">
-                    Nom patronymique : {{individu.infos.rei_nom}}
+                    Nom dirigeant : {{individu.infos.rei_nom}}
                 </li>
                 <!-- hr_controle -->
                 <li class="list-group-item">
-                    Prénoms patronymiques : {{individu.infos.rei_prenom}}
+                    Prénom dirigeant : {{individu.infos.rei_prenom}}
                 </li>
                 <!-- lieu_controle -->
                 <li class="list-group-item">
@@ -102,11 +91,11 @@
                 </li>
                 <!-- rei_num_cext -->
                 <li class="list-group-item">
-                    Titre : {{individu.infos.rei_num_cext}}
+                    Numéro de compte externe : {{individu.infos.rei_num_cext}}
                 </li>
                 <!-- rei_num_cint -->
                 <li class="list-group-item">
-                    Titre : {{individu.infos.rei_num_cint}}
+                    Numéro de compte interne : {{individu.infos.rei_num_cint}}
                 </li>
             </ul>
         </div>
@@ -120,10 +109,6 @@
         <div class="d-flex flex-column">
             <ul class="list-group list-group-flush">
 
-                <!-- dpae_siret -->
-                <li class="list-group-item">
-                    Siret : {{individu.infos.dpae_siret}}
-                </li>
                 <!-- dpae_nom -->
                 <li class="list-group-item">
                     Nom : {{individu.infos.dpae_nom}} 
@@ -138,19 +123,11 @@
                 </li>
                 <!-- dpae_dt_emb -->
                 <li class="list-group-item">
-                    Date d'embauche : {{individu.infos.dpae_dt_emb}}
+                    Date et heure d'embauche : {{individu.infos.dpae_dt_emb}}
                 </li>
-                <!-- dpae_hr_emb -->
+                <!-- dpae_dt_decl -->
                 <li class="list-group-item">
-                    Heure d'embauche : {{individu.infos.dpae_hr_emb}}
-                </li>
-                                <!-- dpae_dt_decl -->
-                <li class="list-group-item">
-                    Date de déclaration : {{individu.infos.dpae_dt_decl}}
-                </li>
-                <!-- dpae_hr_decl -->
-                <li class="list-group-item">
-                    Heure de déclaration : {{individu.infos.dpae_hr_decl}}
+                    Date et heure de déclaration : {{individu.infos.dpae_dt_decl}}
                 </li>
 
             </ul>
@@ -165,7 +142,10 @@
 
         <div class="d-flex flex-column">
             <ul class="list-group list-group-flush">
-
+                <!-- dsn_nir -->
+                <li class="list-group-item">
+                    NIR : {{individu.infos.nir}}
+                </li>
                 <!-- dsn_adresse -->
                 <li class="list-group-item">
                     Adresse de domicile : {{individu.infos.dsn_adresse}}
@@ -214,10 +194,7 @@
                 <li class="list-group-item">
                     Debut de contrat : {{individu.infos.dsn_debut_contrat}}
                 </li>
-                <!-- dsn_nir -->
-                <li class="list-group-item">
-                    NIR : {{individu.infos.dsn_nir}}
-                </li>
+                
             </ul>
 
         </div>
@@ -233,7 +210,7 @@
 
                 <!-- obp7_num_compte -->
                 <li class="list-group-item">
-                    N° de compte : {{individu.infos.obp7_num_compte}}
+                    N° de compte : {{individu.infos.rei_num_cint}}
                 </li>
                 <!-- obp7_to -->
                 <li class="list-group-item">
@@ -258,16 +235,83 @@
 
                 <!-- caae_num_compte -->
                 <li class="list-group-item">
-                    N° de compte : {{individu.infos.caae_num_compte}}
+                    N° de compte : {{individu.infos.rei_num_cint}}
                 </li>
-                <!-- caae_periodes -->
-                <li class="list-group-item">
-                    Périodes  : {{individu.infos.caae_periodes}} 
-                </li>
-                <!-- caae_ca -->
-                <li class="list-group-item">
-                    Chiffres d'affaires sur ces périodes : {{individu.infos.caae_ca}} 
-                </li>
+
+                <!-- Table des CA par période -->
+                <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Période</th>
+                        <th scope="col">CA</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th scope="row">1</th>
+                        <td>{{individu.infos.caae_periode_1}}</td>
+                        <td>{{individu.infos.caae_ca_1}}</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">2</th>
+                        <td>{{individu.infos.caae_periode_2}}</td>
+                        <td>{{individu.infos.caae_ca_2}}</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">3</th>
+                        <td>{{individu.infos.caae_periode_3}}</td>
+                        <td>{{individu.infos.caae_ca_3}}</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">4</th>
+                        <td>{{individu.infos.caae_periode_4}}</td>
+                        <td>{{individu.infos.caae_ca_4}}</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">5</th>
+                        <td>{{individu.infos.caae_periode_5}}</td>
+                        <td>{{individu.infos.caae_ca_5}}</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">6</th>
+                        <td>{{individu.infos.caae_periode_6}}</td>
+                        <td>{{individu.infos.caae_ca_6}}</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">7</th>
+                        <td>{{individu.infos.caae_periode_7}}</td>
+                        <td>{{individu.infos.caae_ca_7}}</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">8</th>
+                        <td>{{individu.infos.caae_periode_8}}</td>
+                        <td>{{individu.infos.caae_ca_8}}</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">9</th>
+                        <td>{{individu.infos.caae_periode_9}}</td>
+                        <td>{{individu.infos.caae_ca_9}}</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">10</th>
+                        <td>{{individu.infos.caae_periode_10}}</td>
+                        <td>{{individu.infos.caae_ca_10}}</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">11</th>
+                        <td>{{individu.infos.caae_periode_11}}</td>
+                        <td>{{individu.infos.caae_ca_11}}</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">12</th>
+                        <td>{{individu.infos.caae_periode_12}}</td>
+                        <td>{{individu.infos.caae_ca_12}}</td>
+                      </tr>
+
+                    </tbody>
+                  </table>
+                
             </ul>
 
         </div>
@@ -285,13 +329,13 @@
                         <li class="list-group-item">
                             N°intervention : {{individu.infos.opc_num_intervention}}
                         </li>
-                        <!-- opc_dt_creation -->
-                        <li class="list-group-item">
-                            Date création  : {{individu.infos.opc_dt_creation}} 
-                        </li>
                         <!-- opc_realisateur -->
                         <li class="list-group-item">
                             Réalisateur principal  : {{individu.infos.opc_realisateur}} 
+                        </li>
+                        <!-- opc_dt_creation -->
+                        <li class="list-group-item">
+                            Date création  : {{individu.infos.opc_dt_creation}} 
                         </li>
                         <!-- opc_action -->
                         <li class="list-group-item">

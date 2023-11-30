@@ -56,7 +56,7 @@
                 </li>
 
                 <!-- notes_controle -->
-                <div class="d-flex flex-column " *ngIf="entreprise.notes_outils.length != 0">
+                <div class="d-flex flex-column " *ngIf="entreprise.notes_outils">
                     <p class="h5 my-2">Notes associés à la societé :</p>
 
                     <li class="list-group-item" *ngFor="let note of entreprise.notes_outils">
@@ -395,7 +395,8 @@
 
 
 </div>
-
+<!-- <span style="font-weight: bold;">individu</span> -->
+<!-- <pre>{{individu  | json}}</pre> -->
 <style>
     .list-group-flush>.list-group-item {
         border-width: 0 0 1px;

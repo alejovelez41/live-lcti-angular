@@ -209,7 +209,7 @@ export class StatutComponent implements OnInit {
         this.dataService.setnav([false, false, true, true, true]);
       }else if(this.individu.statut == 'ti' && this.individu.idEnt != ''){ // cas gérant égalitaire ou minoritaire
         console.log('setnav cogerant')
-        this.dataService.setnav([false, false, false, true, true]);
+        this.dataService.setnav([false, false, false, false, false]);
       }
     }
 
